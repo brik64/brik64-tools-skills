@@ -36,9 +36,29 @@ mkdir -p ~/.claude/skills/pcd-developer
 cp skills/pcd-developer/SKILL.md ~/.claude/skills/pcd-developer/
 ```
 
+### Codex CLI
+
+```bash
+# Add to Codex instructions
+for skill in pcd-developer pcd-policy-circuits brikc-compiler pcd-debugger; do
+  mkdir -p ~/.codex/skills/$skill
+  cp skills/$skill/SKILL.md ~/.codex/skills/$skill/
+done
+```
+
+### Gemini CLI
+
+```bash
+# Add to Gemini instructions
+for skill in pcd-developer pcd-policy-circuits brikc-compiler pcd-debugger; do
+  mkdir -p ~/.gemini/skills/$skill
+  cp skills/$skill/SKILL.md ~/.gemini/skills/$skill/
+done
+```
+
 ### Other AI Agents
 
-Copy the `SKILL.md` file content into your agent's system prompt or knowledge base. The skills are plain Markdown — compatible with any agent framework.
+Copy the `SKILL.md` file content into your agent's system prompt or knowledge base. The skills are plain Markdown — compatible with any agent framework that supports system prompt injection.
 
 ## What These Skills Enable
 

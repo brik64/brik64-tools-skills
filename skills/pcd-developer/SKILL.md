@@ -279,6 +279,62 @@ brikc compile src/main.pcd --target py      # Python 3.10+
 brikc compile src/main.pcd --target wasm32  # WebAssembly
 ```
 
+## Complete Example: Word Counter CLI
+
+```pcd
+import "stdlib/string.pcd";
+import "stdlib/array.pcd";
+import "stdlib/io.pcd";
+import "stdlib/fmt.pcd";
+
+fn count_words(text) {
+    let words = split(text, " ");
+    let count = len(words);
+    // Filter empty strings from multiple spaces
+    let real = 0;
+    loop(count) as i {
+        let word = MC_17.LOAD(words, i);
+        let wlen = MC_43.LEN(word);
+        if (wlen > 0) {
+            let real = real + 1;
+        }
+    }
+    return real;
+}
+
+PC word_counter {
+    let cmd = MC_63.ENV("ARGV_1");
+
+    if (cmd == "help") {
+        let _ = MC_58.WRITE("Usage: word_counter <file>\n");
+        OUTPUT 0;
+    }
+
+    if (cmd == "") {
+        let _ = MC_58.WRITE("Error: no file specified\n");
+        OUTPUT 1;
+    }
+
+    try {
+        let text = MC_56.READ(cmd);
+        let count = count_words(text);
+        let _ = MC_58.WRITE("Words: " + from_int(count) + "\n");
+        OUTPUT count;
+    } catch (err) {
+        let _ = MC_58.WRITE("Error: " + err + "\n");
+        OUTPUT 1;
+    }
+}
+```
+
+Compile and run: `brikc compile word_counter.pcd -o wc && ./wc myfile.txt`
+
+## Important Notes
+
+- `try/catch` is a **statement**, not an expression. You cannot write `let x = try { ... }`. Assign inside the block.
+- `MC_24.IF` requires a `bool` operand, not `i64`. Use comparison operators to produce booleans.
+- All monomers return `Value::I64` except `MC_03.DIV8` which returns `Value::Tuple([quotient, remainder])`.
+
 ## Performance Tips
 
 1. Pre-compute `MC_43.LEN()` outside loops
