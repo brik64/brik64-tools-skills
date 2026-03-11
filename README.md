@@ -111,5 +111,6 @@ Full reference at **[docs.brik64.dev](https://docs.brik64.dev)**:
 
 ## License
 
-© 2026 BRIK-64 Inc. All rights reserved. Proprietary license.
-Skills may be used freely with BRIK-64 tooling. Redistribution of modified versions prohibited.
+Apache License 2.0 — see [LICENSE](LICENSE) for details.
+
+© 2026 BRIK-64 Inc.
