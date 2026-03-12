@@ -1,26 +1,32 @@
 ---
 name: brik64-javascript
-description: "Use the @brik64/core npm package to apply Digital Circuitality in JavaScript and TypeScript projects. Covers installation, all 64 monomers, EVA composition, async patterns, Node.js and browser usage. Use when writing JS/TS code with BRIK-64 libraries."
+description: "Use the brik64 npm package (v2.0.0-beta.3) to install the brikc CLI or apply Digital Circuitality in JavaScript/TypeScript projects. Covers installation, all 64 monomers, EVA composition, async patterns, Node.js and browser usage. Use when writing JS/TS code with BRIK-64 libraries."
+version: 2.0.0-beta.3
 ---
 
 # BRIK-64 for JavaScript / TypeScript
 
 Apply Digital Circuitality in your JavaScript and TypeScript projects.
 
-**Docs:** https://docs.brik64.dev/installation
-**Package:** https://www.npmjs.com/package/@brik64/core
+**Docs:** https://brik64.dev/docs
+**Package:** https://www.npmjs.com/package/brik64
 
 ---
 
 ## Installation
 
 ```bash
-npm install @brik64/core
-# pnpm add @brik64/core
-# yarn add @brik64/core
+# Install CLI + SDK (downloads brikc native binary)
+npm install -g brik64        # installs brikc, brikfmt, brikcheck commands
+# pnpm add -g brik64
+# yarn global add brik64
+
+# Or use as a project dependency
+npm install brik64
+npx brikc --version          # → brikc 2.0.0-beta.3
 ```
 
-Works in **Node.js** (≥ 18) and modern **browsers**. Full TypeScript types included. Tree-shakeable ESM + CJS dual build.
+Works in **Node.js** (≥ 16). Downloads native binary for your platform on postinstall.
 
 ---
 
@@ -28,13 +34,13 @@ Works in **Node.js** (≥ 18) and modern **browsers**. Full TypeScript types inc
 
 ```typescript
 // ESM / TypeScript
-import { mc, eva } from '@brik64/core';
+import { mc, eva } from 'brik64';
 
 // CommonJS
-const { mc, eva } = require('@brik64/core');
+const { mc, eva } = require('brik64');
 
 // Browser (CDN)
-import { mc, eva } from 'https://cdn.brik64.dev/core/v2/index.js';
+import { mc, eva } from 'https://cdn.brik64.dev/sdk/v2/index.js';
 ```
 
 ---
@@ -42,7 +48,7 @@ import { mc, eva } from 'https://cdn.brik64.dev/core/v2/index.js';
 ## Arithmetic (saturating — never throws, never overflows)
 
 ```typescript
-import { mc } from '@brik64/core';
+import { mc } from 'brik64';
 
 const sum   = mc.arithmetic.add8(200, 100);    // 255 (saturating)
 const diff  = mc.arithmetic.sub8(10, 20);      // 0 (saturating)
@@ -106,7 +112,7 @@ const valid   = await mc.crypto.verify(keypair.publicKey, data, sig); // true
 ## EVA Composition
 
 ```typescript
-import { eva } from '@brik64/core';
+import { eva } from 'brik64';
 
 // Sequential (⊗): output of A → input of B
 const pipeline = eva.seq(
@@ -182,7 +188,7 @@ function safeParse(json: string): { ok: true; data: unknown } | { ok: false; err
 
 ## Important Distinction
 
-Using `@brik64/core` applies Digital Circuitality **as a methodology** in your JS/TS code:
+Using `brik64` applies Digital Circuitality **as a methodology** in your JS/TS code:
 
 - ✅ Saturating arithmetic (no overflow bugs in bitwise operations)
 - ✅ Formally specified crypto operations

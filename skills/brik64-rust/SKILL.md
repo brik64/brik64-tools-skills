@@ -1,14 +1,15 @@
 ---
 name: brik64-rust
-description: "Use the brik64-core Rust crate to apply Digital Circuitality in Rust projects. Covers installation, all 64 monomers, EVA composition, integration patterns, and the methodology vs. certification distinction. Use when writing Rust code with BRIK-64 libraries."
+description: "Use the brik64 Rust crate (v2.0.0-beta.3) to apply Digital Circuitality in Rust projects. Covers installation, all 64 monomers, EVA composition, integration patterns, and the methodology vs. certification distinction. Use when writing Rust code with BRIK-64 libraries."
+version: 2.0.0-beta.3
 ---
 
 # BRIK-64 for Rust
 
-Apply Digital Circuitality inside your existing Rust projects using the `brik64-core` crate.
+Apply Digital Circuitality inside your existing Rust projects using the `brik64` crate.
 
-**Docs:** https://docs.brik64.dev/installation
-**Crate:** https://crates.io/crates/brik64-core
+**Docs:** https://brik64.dev/docs
+**Crate:** https://crates.io/crates/brik64
 
 ---
 
@@ -16,11 +17,16 @@ Apply Digital Circuitality inside your existing Rust projects using the `brik64-
 
 ```toml
 [dependencies]
-brik64-core = "2.0"
+brik64 = "2.0.0-beta.3"
+```
+
+Or via CLI:
+```bash
+cargo add brik64
 ```
 
 ```bash
-cargo add brik64-core
+cargo add brik64
 ```
 
 ---
@@ -28,7 +34,7 @@ cargo add brik64-core
 ## Core Modules
 
 ```rust
-use brik64_core::{mc, eva};
+use brik64::{mc, eva};
 
 // mc::arithmetic — Family 0
 // mc::logic      — Family 1
@@ -50,7 +56,7 @@ use brik64_core::{mc, eva};
 ## Arithmetic (saturating — never panics, never overflows)
 
 ```rust
-use brik64_core::mc::arithmetic::*;
+use brik64::mc::arithmetic::*;
 
 let sum   = add8(200, 100);      // 255 (saturating)
 let diff  = sub8(10, 20);        // 0 (saturating)
@@ -68,7 +74,7 @@ let p     = pow8(2, 7);          // 128 (saturating)
 ## Logic (bitwise)
 
 ```rust
-use brik64_core::mc::logic::*;
+use brik64::mc::logic::*;
 
 let a = and8(0xFF, 0x0F);    // 15
 let o = or8(0xF0, 0x0F);     // 255
@@ -83,7 +89,7 @@ let r = shr(16, 2);          // 4
 ## String operations
 
 ```rust
-use brik64_core::mc::string::*;
+use brik64::mc::string::*;
 
 let joined  = concat("hello", " world");
 let parts   = split("a,b,c", ",");       // Vec<String>
@@ -100,7 +106,7 @@ let matches = match_pattern("foo", "f*"); // bool
 ## Crypto
 
 ```rust
-use brik64_core::mc::crypto::*;
+use brik64::mc::crypto::*;
 
 let hash  = sha256(b"hello world");    // [u8; 32]
 let hmac  = hmac_sha256(key, b"msg"); // [u8; 32]
@@ -119,7 +125,7 @@ let valid   = verify(keypair.public, b"message", &sig);  // true
 ## System
 
 ```rust
-use brik64_core::mc::system::*;
+use brik64::mc::system::*;
 
 let ts  = time_unix();       // u64 (seconds since epoch)
 let pid = getpid();          // u32
@@ -131,7 +137,7 @@ let env = env_var("PATH");   // Option<String>
 ## EVA Composition
 
 ```rust
-use brik64_core::eva;
+use brik64::eva;
 
 // Sequential (⊗): output of A → input of B
 let pipeline = eva::seq(
@@ -203,7 +209,7 @@ fn process(input: &str) -> Result<String, String> {
 
 ## Important Distinction
 
-Using `brik64-core` applies Digital Circuitality **as a methodology** inside your Rust code. This gives you:
+Using `brik64` applies Digital Circuitality **as a methodology** inside your Rust code. This gives you:
 
 - ✅ Saturating arithmetic (no panics, no overflow)
 - ✅ Formally specified crypto operations

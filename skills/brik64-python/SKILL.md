@@ -1,6 +1,7 @@
 ---
 name: brik64-python
-description: "Use the brik64 Python package to apply Digital Circuitality in Python projects. Covers installation, all 64 monomers, EVA composition, and integration patterns. Use when writing Python code with BRIK-64 libraries."
+description: "Use the brik64 Python package (v2.0.0) to apply Digital Circuitality in Python projects. Covers installation, all 64 monomers, EVA composition, and integration patterns. Use when writing Python code with BRIK-64 libraries."
+version: 2.0.0
 ---
 
 # BRIK-64 for Python
