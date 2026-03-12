@@ -60,6 +60,18 @@ done
 
 Copy the `SKILL.md` file content into your agent's system prompt or knowledge base. The skills are plain Markdown — compatible with any agent framework that supports system prompt injection.
 
+## Methodology vs. Certification
+
+**Digital Circuitality** is a universal methodology — you can apply its principles (finite operations, determinism, closed circuits) in any language.
+
+**Formal certification is exclusive to PCD:**
+- CMF metrics (Φ_c, δ, etc.) are only computed by `brikc check`
+- Registry badges and certificates require BIR compilation and registration
+- Cross-compiled output (Rust, JS, Python, WASM) inherits certification from the PCD source
+- Code written directly in other languages without PCD cannot be CMF-certified
+
+> **Use the principles everywhere. Certify through PCD.**
+
 ## What These Skills Enable
 
 After installing, an AI agent can:

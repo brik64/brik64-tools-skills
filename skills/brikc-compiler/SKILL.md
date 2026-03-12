@@ -138,6 +138,8 @@ brikc cert badge <hash>           # get live badge URL
 
 The CMF runs during the planner phase. If Φ_c ≠ 1, compilation aborts before any backend code generation.
 
+**Certification scope:** Cross-compiled output (Rust, JS, Python, WASM) inherits the Φ_c = 1 certification from the PCD source — the proof happens at compile time. However, formal registry badges and certificates require BIR compilation and registration in the BRIK-64 registry. Code written directly in Rust/JS/Python without PCD cannot be CMF-certified.
+
 ## Self-Compilation Fixpoint
 
 The `brikc` compiler compiles its own source (`brikc.pcd`) and produces an identical hash across 4 generations:

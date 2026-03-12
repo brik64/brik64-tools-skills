@@ -15,6 +15,18 @@ Write, review, and optimize PCD programs with expert-level knowledge of all 64 m
 
 PCD (Printed Circuit Description) is a formally verified programming language where programs are circuits. Every valid PCD program has **Φ_c = 1** — no dead branches, no unreachable code, no undefined flows. Programs that fail certification do not compile.
 
+## Digital Circuitality vs. Formal Certification
+
+**Digital Circuitality** is a universal methodology — its principles (finite operations, determinism, closed circuits) can be applied in any language. You can structure Python, Rust, or JavaScript code following circuit thinking.
+
+**However, formal certification is exclusive to PCD:**
+- **CMF metrics** (Φ_c, δ, e, h, s, c, t) are only computed by `brikc check`
+- **Φ_c = 1 certification** requires compilation through the PCD pipeline (`.pcd → AST → CPF → BIR`)
+- **Registry badges and certificates** are only issued for programs compiled to BIR and registered in the BRIK-64 registry
+- **Cross-compiled output** (Rust, JS, Python, WASM) carries the certification of the original PCD source — the generated code inherits Φ_c = 1 because it was proven at compile time
+
+In short: **use the principles everywhere, but certify through PCD.**
+
 ## Program Structure
 
 Every PCD program is a named circuit block with a mandatory `OUTPUT`:
