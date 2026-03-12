@@ -1,113 +1,95 @@
-# brik64-tools-skills
+# BRIK-64 Agent Skills
 
-Official AI agent skills for developing with **BRIK-64** and **Digital Circuitality**.
-
-These skills give any AI agent (Claude Code, Codex, Gemini CLI, etc.) expert knowledge of circuit-based programming — from pure methodology to full PCD certification.
-
-🌐 [brik64.dev](https://brik64.dev) · 📖 [docs.brik64.dev](https://docs.brik64.dev)
+Five skills covering Digital Circuitality from theory to production.
 
 ---
 
-## Available Skills
+## Which skills do I need?
 
-| Skill | Description | Use When |
-|-------|-------------|----------|
-| **[digital-circuitality](skills/digital-circuitality/)** | Circuit thinking methodology for ANY language — Rust, Python, JS, Go... No PCD required | Designing programs with circuit principles, using brik64 libraries, or applying methodology without changing language |
-| **[pcd-developer](skills/pcd-developer/)** | Complete PCD reference — 64 monomers, EVA algebra, CMF certification, patterns, test generation | Writing or reviewing any `.pcd` program |
-| **[brik64-rust](skills/brik64-rust/)** | brik64-core Rust crate — arithmetic, crypto, EVA composition in Rust | Adding BRIK-64 to a Rust project |
-| **[brik64-javascript](skills/brik64-javascript/)** | @brik64/core npm package — full JS/TS reference with async patterns | Adding BRIK-64 to a JS/TS project |
-| **[brik64-python](skills/brik64-python/)** | brik64 Python package — monomers, EVA pipeline, integration patterns | Adding BRIK-64 to a Python project |
-| **[brikc-compiler](skills/brikc-compiler/)** | brikc CLI — compile, run, check, format, emit tests | Using the `brikc` compiler or choosing targets |
-| **[pcd-debugger](skills/pcd-debugger/)** | CMF error diagnosis — Φ_c failures, type mismatches, SSA bugs | Fixing compilation errors or Φ_c ≠ 1 |
-| **[pcd-policy-circuits](skills/pcd-policy-circuits/)** | AI safety policy circuit design — ALLOW/BLOCK guardrails | Building AI safety guardrails or access control |
+```
+Are you learning the theory / designing with circuit thinking?
+  └─ YES → install: digital-circuitality
+
+Are you using brik64 libraries in an existing codebase?
+  ├─ Rust               → install: brik64-rust
+  ├─ JavaScript / TypeScript → install: brik64-javascript
+  └─ Python             → install: brik64-python
+
+Are you writing PCD programs, using brikc CLI, or building policy circuits?
+  └─ YES → install: pcd-system
+```
+
+Install all 5 for full coverage. Each skill is independent.
 
 ---
 
-## Install
+## Skills
 
-### Claude Code
+### `digital-circuitality`
+**The circuit thinking methodology — language agnostic.**
 
-```bash
-# Install all skills
-for skill in digital-circuitality pcd-developer brik64-rust brik64-javascript brik64-python brikc-compiler pcd-debugger pcd-policy-circuits; do
-  mkdir -p ~/.claude/skills/$skill
-  cp skills/$skill/SKILL.md ~/.claude/skills/$skill/
-done
-```
+Teaches you to think in terms of closed circuits: bounded inputs, verified operations, proven output ranges. No undefined behavior by construction. Use this skill to understand WHY Digital Circuitality exists and how to apply circuit design principles to any language or system.
 
-Or install a single skill:
-
-```bash
-mkdir -p ~/.claude/skills/digital-circuitality
-cp skills/digital-circuitality/SKILL.md ~/.claude/skills/digital-circuitality/
-```
-
-### Codex CLI
-
-```bash
-for skill in digital-circuitality pcd-developer brik64-rust brik64-javascript brik64-python brikc-compiler pcd-debugger pcd-policy-circuits; do
-  mkdir -p ~/.codex/skills/$skill
-  cp skills/$skill/SKILL.md ~/.codex/skills/$skill/
-done
-```
-
-### Gemini CLI
-
-```bash
-for skill in digital-circuitality pcd-developer brik64-rust brik64-javascript brik64-python brikc-compiler pcd-debugger pcd-policy-circuits; do
-  mkdir -p ~/.gemini/skills/$skill
-  cp skills/$skill/SKILL.md ~/.gemini/skills/$skill/
-done
-```
-
-### Other AI Agents
-
-Copy the `SKILL.md` file content into your agent's system prompt or knowledge base. The skills are plain Markdown — compatible with any agent framework that supports system prompt injection.
+Install when: you are designing a system, reviewing architecture, or want to understand the formal model.
 
 ---
 
-## Three Levels of Engagement
+### `pcd-system`
+**The complete PCD + brikc environment.**
 
-```
-Level 1: Methodology (any language, no install)
-         → digital-circuitality skill
-         Apply circuit thinking in Rust, Python, JS without any library.
-         Better code structure. Fewer bugs. No new toolchain.
+Full reference for writing PCD programs, compiling with `brikc`, certifying circuits (Φ_c = 1), debugging CMF errors, building AI safety policy circuits, and targeting multiple backends (native ELF, Rust, JS, Python, WASM).
 
-Level 2: Libraries (your language, install brik64 package)
-         → brik64-rust / brik64-javascript / brik64-python skills
-         cargo add brik64-core  |  npm install @brik64/core  |  pip install brik64
-         Formally verified operations in your existing codebase.
-         No new language. No certification.
+Covers: PCD syntax, all 64 monomers with signatures, CMF metrics, known bugs and workarounds, brikc CLI commands, auto-generated test suites, policy circuit templates.
 
-Level 3: Full Certification (PCD language + brikc compiler)
-         → pcd-developer + brikc-compiler skills
-         curl -fsSL https://brik64.dev/install | sh
-         Φ_c = 1 proof. Auto-generated test suites. Registry badge.
-         Generated code in Rust/JS/Python inherits the proof.
-```
-
-> **Use the principles everywhere. Certify through PCD.**
+Install when: you are writing `.pcd` files, using the brikc compiler, or building ALLOW/BLOCK guardrails for AI agents.
 
 ---
 
-## What These Skills Enable
+### `brik64-rust`
+**Use brik64-core in Rust — no brikc needed.**
 
-After installing, an AI agent can:
+The `brik64-core` crate brings all 64 monomers and EVA algebra operators to native Rust. Use saturating arithmetic, verified crypto, and composable pipelines directly in your Rust code. No PCD files, no compiler invocation.
 
-- **Apply circuit thinking** in any language — design functions as closed circuits, eliminate open branches, reason about composition
-- **Use verified operations** — saturating arithmetic, typed crypto, deterministic string ops
-- **Write idiomatic PCD programs** using all 64 monomers and 6 stdlib modules
-- **Ensure Φ_c = 1 certification** by following the CMF checklist
-- **Generate code + tests together** — `--emit-tests` produces the suite from the formal proof
-- **Avoid known pitfalls** — WhileLoop SSA bug, DIV8 tuple, boolean return pattern
-- **Compile to 5 targets** — native ELF, Rust, JavaScript, Python, WASM
-- **Diagnose and fix** every CMF error type
+Install when: you are working in a Rust project and want verified, formally-proven operations without adopting PCD.
 
 ---
 
-## License
+### `brik64-javascript`
+**Use @brik64/core in JavaScript / TypeScript — no brikc needed.**
 
-Apache License 2.0 — see [LICENSE](LICENSE) for details.
+The `@brik64/core` npm package brings the 64 monomers to Node.js and browsers. Works with Web Crypto API. Full EVA algebra pipeline composition in TypeScript.
 
-© 2026 BRIK-64 Inc.
+Install when: you are working in a JS/TS project and want Digital Circuitality properties without adopting PCD.
+
+---
+
+### `brik64-python`
+**Use brik64 in Python — no brikc needed.**
+
+The `brik64` PyPI package brings the 64 monomers to Python 3.10+. Identical semantics to the Rust and JS versions. Pipeline composition via `eva.pipeline()`.
+
+Install when: you are working in a Python project and want verified, formally-proven operations without adopting PCD.
+
+---
+
+## Skill combinations
+
+| Goal | Skills to install |
+|------|------------------|
+| Understand Digital Circuitality | `digital-circuitality` |
+| Write PCD programs | `pcd-system` |
+| Build AI safety policy circuits | `pcd-system` |
+| BRIK-64 operations in Rust | `brik64-rust` |
+| BRIK-64 operations in JS/TS | `brik64-javascript` |
+| BRIK-64 operations in Python | `brik64-python` |
+| Full stack: theory + PCD + all languages | all 5 |
+| AI agent acting in production | `pcd-system` (policy circuits) |
+
+---
+
+## Repository
+
+`brik64/brik64-tools-skills` — maintained by BRIK-64 Inc.
+
+Documentation: https://docs.brik64.dev  
+Contact: info@brik64.com
