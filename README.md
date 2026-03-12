@@ -1,8 +1,8 @@
 # brik64-tools-skills
 
-Official AI agent skills for developing with **BRIK-64** and **PCD** (Printed Circuit Description).
+Official AI agent skills for developing with **BRIK-64** and **Digital Circuitality**.
 
-These skills transform any AI agent (Claude Code, Codex, Gemini CLI, etc.) into an expert PCD developer — capable of writing formally verified programs with Φ_c = 1 certification.
+These skills give any AI agent (Claude Code, Codex, Gemini CLI, etc.) expert knowledge of circuit-based programming — from pure methodology to full PCD certification.
 
 🌐 [brik64.dev](https://brik64.dev) · 📖 [docs.brik64.dev](https://docs.brik64.dev)
 
@@ -12,10 +12,16 @@ These skills transform any AI agent (Claude Code, Codex, Gemini CLI, etc.) into 
 
 | Skill | Description | Use When |
 |-------|-------------|----------|
-| **[pcd-developer](skills/pcd-developer/)** | Complete PCD programming reference — all 64 monomers, EVA algebra, CMF certification, stdlib, patterns | Writing or reviewing any `.pcd` program |
+| **[digital-circuitality](skills/digital-circuitality/)** | Circuit thinking methodology for ANY language — Rust, Python, JS, Go... No PCD required | Designing programs with circuit principles, using brik64 libraries, or applying methodology without changing language |
+| **[pcd-developer](skills/pcd-developer/)** | Complete PCD reference — 64 monomers, EVA algebra, CMF certification, patterns, test generation | Writing or reviewing any `.pcd` program |
+| **[brik64-rust](skills/brik64-rust/)** | brik64-core Rust crate — arithmetic, crypto, EVA composition in Rust | Adding BRIK-64 to a Rust project |
+| **[brik64-javascript](skills/brik64-javascript/)** | @brik64/core npm package — full JS/TS reference with async patterns | Adding BRIK-64 to a JS/TS project |
+| **[brik64-python](skills/brik64-python/)** | brik64 Python package — monomers, EVA pipeline, integration patterns | Adding BRIK-64 to a Python project |
+| **[brikc-compiler](skills/brikc-compiler/)** | brikc CLI — compile, run, check, format, emit tests | Using the `brikc` compiler or choosing targets |
+| **[pcd-debugger](skills/pcd-debugger/)** | CMF error diagnosis — Φ_c failures, type mismatches, SSA bugs | Fixing compilation errors or Φ_c ≠ 1 |
 | **[pcd-policy-circuits](skills/pcd-policy-circuits/)** | AI safety policy circuit design — ALLOW/BLOCK guardrails | Building AI safety guardrails or access control |
-| **[brikc-compiler](skills/brikc-compiler/)** | brikc CLI — compile, run, check, format PCD programs | Using the `brikc` compiler or choosing targets |
-| **[pcd-debugger](skills/pcd-debugger/)** | Error diagnosis — CMF failures, type mismatches, SSA bugs | Fixing compilation errors or Φ_c ≠ 1 |
+
+---
 
 ## Install
 
@@ -23,7 +29,7 @@ These skills transform any AI agent (Claude Code, Codex, Gemini CLI, etc.) into 
 
 ```bash
 # Install all skills
-for skill in pcd-developer pcd-policy-circuits brikc-compiler pcd-debugger; do
+for skill in digital-circuitality pcd-developer brik64-rust brik64-javascript brik64-python brikc-compiler pcd-debugger pcd-policy-circuits; do
   mkdir -p ~/.claude/skills/$skill
   cp skills/$skill/SKILL.md ~/.claude/skills/$skill/
 done
@@ -32,15 +38,14 @@ done
 Or install a single skill:
 
 ```bash
-mkdir -p ~/.claude/skills/pcd-developer
-cp skills/pcd-developer/SKILL.md ~/.claude/skills/pcd-developer/
+mkdir -p ~/.claude/skills/digital-circuitality
+cp skills/digital-circuitality/SKILL.md ~/.claude/skills/digital-circuitality/
 ```
 
 ### Codex CLI
 
 ```bash
-# Add to Codex instructions
-for skill in pcd-developer pcd-policy-circuits brikc-compiler pcd-debugger; do
+for skill in digital-circuitality pcd-developer brik64-rust brik64-javascript brik64-python brikc-compiler pcd-debugger pcd-policy-circuits; do
   mkdir -p ~/.codex/skills/$skill
   cp skills/$skill/SKILL.md ~/.codex/skills/$skill/
 done
@@ -49,8 +54,7 @@ done
 ### Gemini CLI
 
 ```bash
-# Add to Gemini instructions
-for skill in pcd-developer pcd-policy-circuits brikc-compiler pcd-debugger; do
+for skill in digital-circuitality pcd-developer brik64-rust brik64-javascript brik64-python brikc-compiler pcd-debugger pcd-policy-circuits; do
   mkdir -p ~/.gemini/skills/$skill
   cp skills/$skill/SKILL.md ~/.gemini/skills/$skill/
 done
@@ -60,66 +64,47 @@ done
 
 Copy the `SKILL.md` file content into your agent's system prompt or knowledge base. The skills are plain Markdown — compatible with any agent framework that supports system prompt injection.
 
-## Methodology vs. Certification
+---
 
-**Digital Circuitality** is a universal methodology — you can apply its principles (finite operations, determinism, closed circuits) in any language.
+## Three Levels of Engagement
 
-**Formal certification is exclusive to PCD:**
-- CMF metrics (Φ_c, δ, etc.) are only computed by `brikc check`
-- Registry badges and certificates require BIR compilation and registration
-- Cross-compiled output (Rust, JS, Python, WASM) inherits certification from the PCD source
-- Code written directly in other languages without PCD cannot be CMF-certified
+```
+Level 1: Methodology (any language, no install)
+         → digital-circuitality skill
+         Apply circuit thinking in Rust, Python, JS without any library.
+         Better code structure. Fewer bugs. No new toolchain.
+
+Level 2: Libraries (your language, install brik64 package)
+         → brik64-rust / brik64-javascript / brik64-python skills
+         cargo add brik64-core  |  npm install @brik64/core  |  pip install brik64
+         Formally verified operations in your existing codebase.
+         No new language. No certification.
+
+Level 3: Full Certification (PCD language + brikc compiler)
+         → pcd-developer + brikc-compiler skills
+         curl -fsSL https://brik64.dev/install | sh
+         Φ_c = 1 proof. Auto-generated test suites. Registry badge.
+         Generated code in Rust/JS/Python inherits the proof.
+```
 
 > **Use the principles everywhere. Certify through PCD.**
+
+---
 
 ## What These Skills Enable
 
 After installing, an AI agent can:
 
+- **Apply circuit thinking** in any language — design functions as closed circuits, eliminate open branches, reason about composition
+- **Use verified operations** — saturating arithmetic, typed crypto, deterministic string ops
 - **Write idiomatic PCD programs** using all 64 monomers and 6 stdlib modules
 - **Ensure Φ_c = 1 certification** by following the CMF checklist
-- **Avoid known pitfalls** (WhileLoop SSA bug, DIV8 tuple, boolean return pattern)
-- **Design policy circuits** for AI safety with deny-by-default patterns
-- **Compile to 5 targets** (native ELF, Rust, JavaScript, Python, WASM)
+- **Generate code + tests together** — `--emit-tests` produces the suite from the formal proof
+- **Avoid known pitfalls** — WhileLoop SSA bug, DIV8 tuple, boolean return pattern
+- **Compile to 5 targets** — native ELF, Rust, JavaScript, Python, WASM
 - **Diagnose and fix** every CMF error type
-- **Use EVA composition** correctly (⊗ sequential, ∥ parallel, ⊕ conditional)
 
-## Quick Example
-
-With the `pcd-developer` skill installed, an agent can generate:
-
-```pcd
-import "stdlib/string.pcd";
-import "stdlib/array.pcd";
-
-PC word_counter {
-    let text = MC_56.READ(MC_63.ENV("ARGV_1"));
-    let words = split(text, " ");
-    let count = len(words);
-    let _ = MC_58.WRITE("Words: " + from_int(count) + "\n");
-    OUTPUT count;
-}
-```
-
-The agent knows to:
-- Use `MC_63.ENV("ARGV_1")` for CLI args in native ELF
-- Import stdlib modules for `split`, `len`, `from_int`
-- End with `OUTPUT` for Φ_c = 1
-- Use `MC_58.WRITE` for stdout
-
-## Documentation
-
-Full reference at **[docs.brik64.dev](https://docs.brik64.dev)**:
-
-- [Tutorial](https://docs.brik64.dev/pcd/tutorial) — Step-by-step first program
-- [Syntax Reference](https://docs.brik64.dev/pcd/syntax) — Complete language spec
-- [Monomer Reference](https://docs.brik64.dev/pcd/monomers) — All 64 monomers with signatures
-- [Standard Library](https://docs.brik64.dev/pcd/stdlib) — 6 modules (math, string, array, io, fmt, json)
-- [Patterns](https://docs.brik64.dev/pcd/patterns) — Idiomatic patterns and anti-patterns
-- [Error Guide](https://docs.brik64.dev/pcd/errors) — CMF error diagnosis
-- [Examples](https://docs.brik64.dev/pcd/examples) — 8 complete programs
-- [EVA Algebra](https://docs.brik64.dev/architecture/eva-algebra) — Composition theory
-- [CLI Commands](https://docs.brik64.dev/cli/commands) — Full brikc reference
+---
 
 ## License
 

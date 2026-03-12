@@ -1,356 +1,332 @@
 ---
 name: pcd-developer
-description: "Expert PCD (Printed Circuit Description) developer for BRIK-64. Use when writing, reviewing, or modifying any .pcd program. Covers all 64 monomers, EVA algebra composition, CMF certification (Φ_c = 1), stdlib usage, and idiomatic patterns."
+description: "Complete PCD programming reference — write formally verified programs in Printed Circuit Description (BRIK-64's language). Covers all 64 monomers, EVA algebra, CMF certification, stdlib, patterns, anti-patterns, and auto-generated test suites. Use when writing or reviewing any .pcd program."
 ---
 
-# PCD Developer — BRIK-64
+# PCD Developer — Complete Reference
 
-Write, review, and optimize PCD programs with expert-level knowledge of all 64 monomers, EVA algebra, CMF certification, and idiomatic patterns.
+Write formally verified programs in PCD. Every valid PCD program has Φ_c = 1: structurally impossible to have logic errors, type errors, or undefined behavior.
 
-**Documentation:** https://docs.brik64.dev
+**Full docs:** https://docs.brik64.dev/pcd/tutorial
 
 ---
-
-## What is PCD
-
-PCD (Printed Circuit Description) is a formally verified programming language where programs are circuits. Every valid PCD program has **Φ_c = 1** — no dead branches, no unreachable code, no undefined flows. Programs that fail certification do not compile.
-
-## Digital Circuitality vs. Formal Certification
-
-**Digital Circuitality** is a universal methodology — its principles (finite operations, determinism, closed circuits) can be applied in any language. You can structure Python, Rust, or JavaScript code following circuit thinking.
-
-**However, formal certification is exclusive to PCD:**
-- **CMF metrics** (Φ_c, δ, e, h, s, c, t) are only computed by `brikc check`
-- **Φ_c = 1 certification** requires compilation through the PCD pipeline (`.pcd → AST → CPF → BIR`)
-- **Registry badges and certificates** are only issued for programs compiled to BIR and registered in the BRIK-64 registry
-- **Cross-compiled output** (Rust, JS, Python, WASM) carries the certification of the original PCD source — the generated code inherits Φ_c = 1 because it was proven at compile time
-
-In short: **use the principles everywhere, but certify through PCD.**
 
 ## Program Structure
 
-Every PCD program is a named circuit block with a mandatory `OUTPUT`:
-
 ```pcd
 PC circuit_name {
-    // logic here
-    OUTPUT result;
+    // functions and logic
+    OUTPUT result;   // mandatory — closes the circuit
 }
 ```
 
-Functions are defined with `fn`:
+Every circuit must end with `OUTPUT`. Without it, Φ_c < 1 and the program does not compile.
+
+---
+
+## Variables & Types
 
 ```pcd
-fn add(a, b) {
-    return a + b;
+let x = 42;           // i64
+let s = "hello";      // string
+let b = true;         // bool
+let arr = [1, 2, 3];  // array
+
+// Loop-carried: rebind with SAME name to mutate across iterations
+let count = 0;
+loop(10) as i {
+    let count = count + 1;   // ✅ same name = loop-carried
 }
 ```
 
-## Variables and Types
+---
 
-All bindings are immutable (SSA). Rebinding creates a new slot:
-
-```pcd
-let x = 10;
-let x = x + 1;    // new SSA slot, x is now 11
-```
-
-**Types** (inferred, no annotations needed):
-- `i64` — default integer
-- `bool` — `true`/`false`
-- `string` — UTF-8 immutable text
-- `array` — `[1, 2, 3]` (homogeneous, value semantics)
-- `tuple` — `(a, b)` (heterogeneous, fixed size)
-- `struct` — named fields, value semantics
-- `closure` — `fn(x) { x + 1 }`
-
-## The 64 Monomers — Quick Reference
-
-Call monomers with `MC_XX.NAME(args)`. All return `Value::I64` except `MC_03.DIV8` which returns a tuple.
-
-### Family 0 — Arithmetic (MC_00–MC_07)
+## Functions
 
 ```pcd
-let sum  = MC_00.ADD8(a, b);        // a + b
-let diff = MC_01.SUB8(a, b);        // a - b
-let prod = MC_02.MUL8(a, b);        // a * b
-let (q, r) = MC_03.DIV8(a, b);     // MUST destructure! Returns (quotient, remainder)
-let rem  = MC_04.MOD8(a, b);        // a % b
-let neg  = MC_05.NEG8(a);           // -a
-let abs  = MC_06.ABS8(a);           // |a|
-let pow  = MC_07.POW8(base, exp);   // base^exp
-```
+fn add(a, b) { return a + b; }
 
-### Family 1 — Logic (MC_08–MC_15)
+// Closure
+let double = fn(x) { x * 2 };
 
-```pcd
-let and_r = MC_08.AND8(a, b);      // bitwise AND
-let or_r  = MC_09.OR8(a, b);       // bitwise OR
-let xor_r = MC_10.XOR8(a, b);      // bitwise XOR
-let not_r = MC_11.NOT8(a);          // bitwise NOT
-let shl   = MC_12.SHL8(a, n);      // shift left
-let shr   = MC_13.SHR8(a, n);      // shift right
-let rotl  = MC_14.ROTL8(a, n);     // rotate left
-let rotr  = MC_15.ROTR8(a, n);     // rotate right
-```
-
-### Family 2 — Memory (MC_16–MC_23)
-
-```pcd
-let arr  = MC_16.ALLOC(size);
-let val  = MC_17.LOAD(arr, idx);
-let arr2 = MC_18.STORE(arr, idx, val);
-let len  = MC_19.LEN_MEM(arr);
-```
-
-### Family 3 — Control (MC_24–MC_31)
-
-Control monomers are typically expressed via PCD syntax (`if`, `loop`, `return`) rather than direct calls. `MC_24.IF` requires a `bool`, not `i64`.
-
-### Family 4 — I/O (MC_32–MC_39)
-
-```pcd
-MC_33.WRITE(1, msg, len);          // write to fd (1=stdout)
-```
-
-### Family 5 — String (MC_40–MC_47)
-
-```pcd
-let joined  = MC_40.CONCAT(a, b);
-let parts   = MC_41.SPLIT(text, ",");
-let sub     = MC_42.SUBSTR(text, start, length);
-let slen    = MC_43.LEN(text);
-let upper   = MC_44.UPPER(text);
-let ch      = MC_45.CHAR_AT(text, idx);  // O(1) via as_bytes
-let lower   = MC_46.LOWER(text);
-let trimmed = MC_47.TRIM(text);
-```
-
-### Family 6 — Crypto (MC_48–MC_55)
-
-```pcd
-let hash = MC_48.HASH(data);        // SHA-256
-let hmac = MC_49.HMAC(key, data);   // HMAC-SHA-256
-let enc  = MC_50.ENCRYPT(key, data);
-let dec  = MC_51.DECRYPT(key, data);
-```
-
-### Family 7 — System (MC_56–MC_63)
-
-```pcd
-let data = MC_56.READ(path);         // read file
-let _    = MC_57.WRITE_FILE(path, d);// write file
-let _    = MC_58.WRITE(text);        // write stdout
-let line = MC_59.READ_LINE();        // read stdin line
-let env  = MC_63.ENV("ARGV_1");      // CLI arg in native ELF
-```
-
-## Loops — ALWAYS Use loop(N)
-
-**NEVER use `while`** in production PCD. The `while` loop has a known SSA bug.
-
-```pcd
-// CORRECT: bounded, deterministic
-let sum = 0;
-loop(100) as i {
-    let sum = sum + i;    // same name = loop-carried variable
+// Multiple return via tuple
+fn divmod(a, b) {
+    let (q, r) = MC_03.DIV8(a, b);
+    return (q, r);
 }
+```
 
-// While-equivalent pattern:
+---
+
+## Control Flow
+
+```pcd
+// Conditional
+if (x > 0) { return "pos"; } else { return "non-pos"; }
+
+// Match
+let label = match cmd {
+    "add" => do_add(a, b),
+    "sub" => do_sub(a, b),
+    _ => "unknown"          // wildcard mandatory for Φ_c = 1
+};
+
+// Loop — ALWAYS prefer over while
+loop(10) as i { ... }
+
+// Safe while-equivalent (avoids SSA bug)
 let pos = 0;
-loop(max) as _i {
+loop(max_len) as _i {
     if (pos < max) {
+        let ch = MC_45.CHAR_AT(text, pos);
         let pos = pos + 1;
     }
 }
 ```
 
-**Critical:** Loop-carried variables MUST use the exact same name as the outer binding.
-
-## Conditionals and Pattern Matching
-
-```pcd
-// if/else — all branches must terminate coherently
-if (x > 0) {
-    return "positive";
-} else {
-    return "non-positive";
-}
-
-// match — ALWAYS include wildcard _
-let result = match cmd {
-    "add" => do_add(),
-    "sub" => do_sub(),
-    _ => "unknown"          // required for Φ_c = 1
-};
-```
+---
 
 ## Structs
 
 ```pcd
 struct Point { x: i64, y: i64 }
-
 let p = Point { x: 10, y: 20 };
 let px = p.x;
-
-// "Update" = construct new struct (value semantics)
-let p2 = Point { x: p.x + 1, y: p.y };
 ```
 
-## Error Handling
+---
+
+## Try / Catch
 
 ```pcd
-// try/catch is a STATEMENT, not an expression
-try {
-    let data = MC_56.READ("file.txt");
-    OUTPUT data;
-} catch (err) {
-    OUTPUT "Error: " + err;
+fn safe_read(path) {
+    try {
+        let data = MC_56.READ(path);
+        return data;
+    } catch (err) {
+        return "ERROR: " + err;
+    }
 }
 ```
 
-## Imports and Stdlib
+---
 
-```pcd
-import "stdlib/math.pcd";       // abs, min, max, clamp, pow, sqrt, gcd, lcm
-import "stdlib/string.pcd";     // len, upper, lower, trim, split, join, find, contains, starts_with, ends_with, replace, to_int, from_int
-import "stdlib/array.pcd";      // push, pop, sort, reverse, map, filter, reduce, contains, find_index, slice, concat, zip, flatten
-import "stdlib/io.pcd";         // read_file, write_file, read_line, write_line, exists
-import "stdlib/fmt.pcd";        // format, to_string, pad_left, pad_right, truncate, repeat
-import "stdlib/json.pcd";       // parse, stringify, get, set, keys, values, has, merge
-
-// Selective import
-import "stdlib/math.pcd" { abs, max };
-
-// Aliased import
-import "utils.pcd" as utils;
-```
-
-## EVA Composition (Automatic)
-
-The planner infers EVA operators from data dependencies — never write them explicitly:
-
-1. **Data dependency → Sequential (⊗):** B uses A's output → `A ⊗ B`
-2. **No dependency → Parallel (∥):** Independent computations → `A ∥ B`
-3. **if/else → Conditional (⊕):** Branching → `pred ⊕ (A | B)`
-
-## CMF Certification Checklist
-
-For Φ_c = 1, ensure:
-- [ ] All function parameters are used (or prefixed with `_`)
-- [ ] All control paths end with `OUTPUT` or `return`
-- [ ] All `match` expressions have a `_` wildcard
-- [ ] `MC_03.DIV8` results are destructured as `let (q, r) = ...`
-- [ ] No dead code after `return` or `OUTPUT`
-- [ ] No circular imports
-- [ ] Loop nesting depth < 256
-
-## Critical Anti-Patterns — NEVER Do These
-
-1. **NEVER use `while` loops** — use `loop(N)` with `if` guard
-2. **NEVER use `return (X == Y)` for boolean functions** — use explicit `if/return`:
-   ```pcd
-   // BAD:  return (a == b);
-   // GOOD:
-   if (a == b) { return 1; }
-   return 0;
-   ```
-3. **NEVER forget to destructure DIV8** — it returns a tuple, not i64
-4. **NEVER build strings in tight loops** — use array.push + join
-5. **NEVER use recursion for large data** — MAX_DEPTH=256, use loop(N)
-6. **NEVER omit fallback in match** — always include `_ => default`
-
-## CLI Dispatch Pattern (Canonical)
-
-```pcd
-PC my_tool {
-    let cmd = MC_63.ENV("ARGV_1");
-
-    if (cmd == "build") {
-        // build logic
-        OUTPUT "OK";
-    }
-    if (cmd == "help") {
-        let _ = MC_58.WRITE("Usage: my_tool [build|help]\n");
-        OUTPUT 0;
-    }
-
-    // Fallback — ALWAYS present for Φ_c = 1
-    let _ = MC_58.WRITE("Unknown command: " + cmd + "\n");
-    OUTPUT 1;
-}
-```
-
-## Compilation Targets
-
-```bash
-brikc compile src/main.pcd                  # native x86-64 ELF
-brikc compile src/main.pcd --target rs      # Rust
-brikc compile src/main.pcd --target js      # JavaScript ES2022
-brikc compile src/main.pcd --target py      # Python 3.10+
-brikc compile src/main.pcd --target wasm32  # WebAssembly
-```
-
-## Complete Example: Word Counter CLI
+## Imports & Stdlib
 
 ```pcd
 import "stdlib/string.pcd";
 import "stdlib/array.pcd";
+import "stdlib/math.pcd";
 import "stdlib/io.pcd";
 import "stdlib/fmt.pcd";
+import "stdlib/json.pcd";
+```
 
-fn count_words(text) {
-    let words = split(text, " ");
-    let count = len(words);
-    // Filter empty strings from multiple spaces
-    let real = 0;
-    loop(count) as i {
-        let word = MC_17.LOAD(words, i);
-        let wlen = MC_43.LEN(word);
-        if (wlen > 0) {
-            let real = real + 1;
-        }
-    }
-    return real;
-}
+---
 
-PC word_counter {
+## The 64 Core Monomers
+
+### Family 0 — Arithmetic (saturating, never overflow)
+
+| Monomer | Signature | Returns | Notes |
+|---------|-----------|---------|-------|
+| MC_00.ADD8 | (a: u8, b: u8) → i64 | min(a+b, 255) | Saturating |
+| MC_01.SUB8 | (a: u8, b: u8) → i64 | max(a-b, 0) | Saturating |
+| MC_02.MUL8 | (a: u8, b: u8) → i64 | min(a*b, 255) | Saturating |
+| MC_03.DIV8 | (a: u8, b: u8) → **Tuple(i64, i64)** | (quotient, remainder) | **Always destructure!** |
+| MC_04.MOD8 | (a: u8, b: u8) → i64 | a % b | Guard b≠0 |
+| MC_05.NEG8 | (a: u8) → i64 | 256-a | Two's complement |
+| MC_06.ABS8 | (a: u8) → i64 | identity (u8 ≥ 0) | |
+| MC_07.POW8 | (base: u8, exp: u8) → i64 | min(base^exp, 255) | Saturating |
+
+```pcd
+let (q, r) = MC_03.DIV8(17, 5);   // q=3, r=2 — ALWAYS destructure DIV8
+```
+
+### Family 1 — Logic (bitwise)
+
+| Monomer | Op | Example |
+|---------|----|---------|
+| MC_08.AND8 | bitwise AND | MC_08.AND8(0xFF, 0x0F) → 15 |
+| MC_09.OR8 | bitwise OR | MC_09.OR8(0xF0, 0x0F) → 255 |
+| MC_10.XOR8 | bitwise XOR | MC_10.XOR8(0xFF, 0xFF) → 0 |
+| MC_11.NOT8 | bitwise NOT | MC_11.NOT8(0xFF) → 0 |
+| MC_12.SHL | left shift | MC_12.SHL(1, 3) → 8 |
+| MC_13.SHR | right shift | MC_13.SHR(16, 2) → 4 |
+| MC_14.ROTL | rotate left | MC_14.ROTL(0x80, 1) → 1 |
+| MC_15.ROTR | rotate right | MC_15.ROTR(1, 1) → 0x80 |
+
+### Family 2 — Memory
+
+| Monomer | Purpose |
+|---------|---------|
+| MC_16.LOAD | Load value from address |
+| MC_17.STORE | Store value to address |
+| MC_18.ALLOC | Allocate N bytes, returns pointer |
+| MC_19.FREE | Free allocated memory |
+| MC_20.COPY | Copy N bytes src→dst |
+| MC_21.SWAP | Swap two values |
+| MC_22.CAS | Compare-and-swap (atomic) |
+| MC_23.FENCE | Memory barrier |
+
+### Family 3 — Control
+
+| Monomer | Purpose | Note |
+|---------|---------|------|
+| MC_24.IF | Conditional branch | Requires Bool, not I64 |
+| MC_25.JUMP | Unconditional goto | |
+| MC_26.CALL | Function call | |
+| MC_27.RET | Return | |
+| MC_28.LOOP | Bounded iteration | |
+| MC_29.BREAK | Exit loop | |
+| MC_30.CONT | Continue loop | |
+| MC_31.HALT | Stop execution | |
+
+### Family 4 — I/O
+
+| Monomer | Purpose | Common Usage |
+|---------|---------|--------------|
+| MC_32.READ | Read from fd | Read file/stdin |
+| MC_33.WRITE | Write to fd | MC_33.WRITE(1, data, len) → stdout |
+| MC_34.OPEN | Open file | Returns fd |
+| MC_35.CLOSE | Close fd | |
+| MC_36.SEEK | Seek in file | |
+| MC_37.STAT | File metadata | |
+| MC_38.POLL | Poll fd readiness | |
+| MC_39.FLUSH | Flush buffer | |
+
+**Write to stdout (common pattern):**
+```pcd
+let _ = MC_58.WRITE("Hello\n");   // stdlib wraps MC_33
+// or directly:
+let msg = "Hello\n";
+let n = MC_43.LEN(msg);
+let _ = MC_33.WRITE(1, msg, n);
+```
+
+### Family 5 — String
+
+| Monomer | Signature | Result |
+|---------|-----------|--------|
+| MC_40.CONCAT | (a: str, b: str) → str | a + b |
+| MC_41.SPLIT | (s: str, delim: str) → array | Split by delimiter |
+| MC_42.SUBSTR | (s: str, start: i64, len: i64) → str | Substring |
+| MC_43.LEN | (s: str\|array) → i64 | Length |
+| MC_44.UPPER | (s: str) → str | Uppercase |
+| MC_45.CHAR_AT | (s: str, i: i64) → i64 | Char as int |
+| MC_46.TRIM | (s: str) → str | Strip whitespace |
+| MC_47.MATCH | (s: str, pattern: str) → bool | Pattern match |
+
+### Family 6 — Crypto
+
+| Monomer | Purpose | Output |
+|---------|---------|--------|
+| MC_48.HASH | Generic hash | Hash32 |
+| MC_49.HMAC | HMAC-SHA256 | Hash32 |
+| MC_50.AES_ENC | AES-256 encrypt | Bytes |
+| MC_51.AES_DEC | AES-256 decrypt | Bytes |
+| MC_52.SHA256 | SHA-256 | Hash32 |
+| MC_53.RAND | Secure random N bytes | Bytes |
+| MC_54.SIGN | Ed25519 sign | Sig |
+| MC_55.VERIFY | Ed25519 verify | Bool |
+
+### Family 7 — System
+
+| Monomer | Purpose | Native ELF Note |
+|---------|---------|-----------------|
+| MC_56.READ | Read file → String | |
+| MC_57.WRITE | Write String → file | |
+| MC_58.WRITE | Write to stdout | Most common I/O |
+| MC_59.EXIT | Exit with code | |
+| MC_60.PID | Get process ID | |
+| MC_61.SIGNAL | Signal handling | |
+| MC_62.MMAP | Memory-map file | |
+| MC_63.ENV | Get env var / CLI arg | MC_63.ENV("ARGV_1") = first CLI arg |
+
+---
+
+## CMF Metrics — What Φ_c = 1 Requires
+
+| Metric | Symbol | Requirement | Common Fix |
+|--------|--------|-------------|------------|
+| Operational complexity | e | — | No constraint |
+| Signature distance | h | — | No constraint |
+| Structural entropy | s | — | No constraint |
+| Cyclomatic complexity | c | — | No constraint |
+| Termination depth | t | < 256 | Extract deep nesting into functions |
+| Unused input ratio | δ | = 0 | Remove unused params or prefix with `_` |
+| Circuit closure | **Φ_c** | **= 1.000** | All branches must reach OUTPUT |
+
+---
+
+## Common Patterns
+
+### CLI Dispatch
+```pcd
+PC my_tool {
     let cmd = MC_63.ENV("ARGV_1");
-
-    if (cmd == "help") {
-        let _ = MC_58.WRITE("Usage: word_counter <file>\n");
-        OUTPUT 0;
-    }
-
-    if (cmd == "") {
-        let _ = MC_58.WRITE("Error: no file specified\n");
-        OUTPUT 1;
-    }
-
-    try {
-        let text = MC_56.READ(cmd);
-        let count = count_words(text);
-        let _ = MC_58.WRITE("Words: " + from_int(count) + "\n");
-        OUTPUT count;
-    } catch (err) {
-        let _ = MC_58.WRITE("Error: " + err + "\n");
-        OUTPUT 1;
-    }
+    if (cmd == "build") { /* ... */ OUTPUT 0; }
+    if (cmd == "check") { /* ... */ OUTPUT 0; }
+    let _ = MC_58.WRITE("Unknown: " + cmd + "\n");
+    OUTPUT 1;   // fallback
 }
 ```
 
-Compile and run: `brikc compile word_counter.pcd -o wc && ./wc myfile.txt`
+### Accumulator with loop-carried variable
+```pcd
+let total = 0;
+loop(n) as i {
+    let total = total + arr[i];   // same name = carried
+}
+```
 
-## Important Notes
+### Boolean-returning function (explicit 0/1)
+```pcd
+fn is_valid(x) {
+    if (x > 0) { return 1; }   // ✅ explicit
+    return 0;
+    // ❌ NEVER: return (x > 0);  — BIR comparison not guaranteed 0/1
+}
+```
 
-- `try/catch` is a **statement**, not an expression. You cannot write `let x = try { ... }`. Assign inside the block.
-- `MC_24.IF` requires a `bool` operand, not `i64`. Use comparison operators to produce booleans.
-- All monomers return `Value::I64` except `MC_03.DIV8` which returns `Value::Tuple([quotient, remainder])`.
+---
 
-## Performance Tips
+## Known Bugs & Workarounds
 
-1. Pre-compute `MC_43.LEN()` outside loops
-2. Use tight `loop(N)` bounds — `loop(1000)` when you need 10 wastes cycles
-3. Prefer iterative over recursive — each call saves ~3592 vars
-4. Use `array.push + join` over string concat — O(N) vs O(N²)
-5. Use multi-level division for number→string: 10000→1000→100→10 peeling
+| Issue | Workaround |
+|-------|-----------|
+| `while` SSA bug — loop vars stale | Use `loop(N) as i { if (cond) { ... } }` |
+| `return (X == Y)` comparison | Use `if (X==Y) { return 1; } return 0;` |
+| DIV8 used as integer | Always destructure: `let (q, r) = MC_03.DIV8(a, b);` |
+| MAX_DEPTH=256 exceeded | Extract deeply nested logic into functions |
+| No binary literals | Use hex (0xFF) or decimal instead of 0b11111111 |
+
+---
+
+## Auto-Generated Test Suite
+
+```bash
+brikc compile src/main.pcd --target rs --emit-tests
+# build/main.rs          ← certified implementation
+# build/main_spec.rs     ← property tests + boundary tests + regression anchors
+```
+
+The test suite is generated from the formal proof. It covers all input/output ranges, boundary conditions, and EVA composition invariants. Tests always pass on the certified code — and fail if the generated code is later modified manually.
+
+→ Full testing reference: https://docs.brik64.dev/pcd/testing
+
+---
+
+## Quick Compile Reference
+
+```bash
+brikc compile src/main.pcd                # Native x86-64 ELF
+brikc compile src/main.pcd --target rs   # Rust
+brikc compile src/main.pcd --target js   # JavaScript ES2022
+brikc compile src/main.pcd --target py   # Python 3.10+
+brikc compile src/main.pcd --target wasm32  # WebAssembly
+brikc compile src/main.pcd --emit-tests  # + auto-generated test suite
+brikc check src/main.pcd                 # CMF verify only (no compile)
+brikc check src/main.pcd --json          # Machine-readable for CI
+brikc fmt src/main.pcd                   # Format in place
+```
