@@ -1,7 +1,7 @@
 ---
 name: brik64-rust
 description: "Use the brik64 Rust crate (v2.0.0-beta.3) to apply Digital Circuitality in Rust projects. Covers installation, all 64 monomers, EVA composition, integration patterns, and the methodology vs. certification distinction. Use when writing Rust code with BRIK-64 libraries."
-version: 2.0.0-beta.3
+version: 2.0.0-beta.4
 ---
 
 # BRIK-64 for Rust

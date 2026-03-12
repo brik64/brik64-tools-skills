@@ -7,7 +7,7 @@ triggers:
   - building AI safety policy circuits
   - debugging CMF errors
   - compiling to BIR/Rust/JS/Python/native/wasm32
-version: 2.0.0-beta.3
+version: 2.0.0-beta.4
 ---
 
 # PCD System — BRIK-64 BETA 2.0.0-beta.3
@@ -223,15 +223,15 @@ import "stdlib/io.pcd";
 | MC_40 | CONCAT | (a:String, b:String) → String | ✅ verified |
 | MC_41 | SPLIT | (s:String, delim:String) → Array(String) | ✅ returns list; access with `parts[i]` |
 | MC_42 | SUBSTR | (s:String, start:U64, len:U64) → String | ✅ use for CHAR_AT |
-| MC_43 | LEN | (s:String) → U64 | ✅ verified — **String only, NOT Array** |
+| MC_43 | LEN | (s:String|Array) → U64 | ✅ verified — works on String (byte length) AND Array (element count) |
 | MC_44 | UPPER | (s:String) → String | ✅ verified |
 | MC_45 | LOWER | (s:String) → String | ✅ verified — NOT CHAR_AT |
 | MC_46 | TRIM | (s:String) → String | ✅ verified |
-| MC_47 | MATCH | (s:String, pattern:String) → Bool | ✅ verified |
+| MC_47 | MATCH | (s:String, pattern:String) → Bool | ✅ verified — uses regex; falls back to substring if invalid regex |
 
 > ⚠️ **CHAR_AT does not exist as a monomer.** Use `MC_42.SUBSTR(s, i, 1)` to get char at index i.
 >
-> ⚠️ **MC_43.LEN only works with String.** Using it on an Array causes `Domain violation: LEN arg 1 must be String`.
+> ✅ **MC_43.LEN works on String (byte length) and Array (element count).**
 >
 > ⚠️ **MC_41.SPLIT returns a list.** Access elements with `parts[i]` (square bracket indexing), NOT `.get(i)`.
 
@@ -462,7 +462,7 @@ xattr -d com.apple.quarantine brikc
 
 1. **ADD8/MUL8 are 8-bit wrapping** — Use native `+`, `*` for accumulation >255
 2. **DIV8 returns Tuple** — Access with `qr[0]`/`qr[1]`, NOT `let (q,r) = ...`
-3. **MC_43.LEN is String-only** — Do NOT use on arrays
+3. **MC_43.LEN works on String and Array** — returns byte count for String, element count for Array
 4. **MC_48.HASH takes String** — NOT Array(U8); returns hex String NOT Array(U8,32)
 5. **native target generates ELF x86-64** — Not usable directly on macOS arm64
 6. **wasm32 target generates WAT text** — Needs wat2wasm to convert to binary
