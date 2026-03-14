@@ -1,6 +1,6 @@
 # BRIK-64 Agent Skills
 
-Five skills covering Digital Circuitality from theory to production.
+Five skills covering Digital Circuitality from theory to production, including the Registry platform and minimalist MCP interface.
 
 ---
 
@@ -17,6 +17,9 @@ Are you using brik64 libraries in an existing codebase?
 
 Are you writing PCD programs, using brikc CLI, or building policy circuits?
   └─ YES → install: pcd-system
+
+Are you working with the BRIK-64 Registry, MCP, or Marketplace?
+  └─ YES → install: pcd-system (includes Registry/MCP section)
 ```
 
 Install all 5 for full coverage. Each skill is independent.
@@ -35,13 +38,15 @@ Install when: you are designing a system, reviewing architecture, or want to und
 ---
 
 ### `pcd-system`
-**The complete PCD + brikc environment.**
+**The complete PCD + brikc + Registry environment.**
 
 Full reference for writing PCD programs, compiling with `brikc`, certifying circuits (Φ_c = 1), debugging CMF errors, building AI safety policy circuits, and targeting multiple backends (native ELF, Rust, JS, Python, WASM).
 
-Covers: PCD syntax, all 64 monomers with signatures, CMF metrics, known bugs and workarounds, brikc CLI commands, auto-generated test suites, policy circuit templates.
+**NEW in v4.0:** Includes the BRIK-64 Registry & MCP platform layer — the 2-tool minimalist MCP architecture (`brik64.discover` + `brik64.execute`), inherited certification, domain packs, the Reuse Before Create workflow, and the API/Marketplace reference.
 
-Install when: you are writing `.pcd` files, using the brikc compiler, or building ALLOW/BLOCK guardrails for AI agents.
+Covers: PCD syntax, all 64 monomers with signatures, CMF metrics, known bugs and workarounds, brikc CLI commands, auto-generated test suites, policy circuit templates, Registry MCP tools, domain packs, composition API.
+
+Install when: you are writing `.pcd` files, using the brikc compiler, building ALLOW/BLOCK guardrails for AI agents, or working with the BRIK-64 Registry/MCP/Marketplace.
 
 ---
 
@@ -79,11 +84,27 @@ Install when: you are working in a Python project and want verified, formally-pr
 | Understand Digital Circuitality | `digital-circuitality` |
 | Write PCD programs | `pcd-system` |
 | Build AI safety policy circuits | `pcd-system` |
+| Use BRIK-64 Registry / MCP | `pcd-system` |
 | BRIK-64 operations in Rust | `brik64-rust` |
 | BRIK-64 operations in JS/TS | `brik64-javascript` |
 | BRIK-64 operations in Python | `brik64-python` |
 | Full stack: theory + PCD + all languages | all 5 |
-| AI agent acting in production | `pcd-system` (policy circuits) |
+| AI agent with Registry access | `pcd-system` (Registry + MCP section) |
+
+---
+
+## MCP Architecture (Minimalist)
+
+The BRIK-64 MCP server follows 2026 best practices: **2 tools, not 10.**
+
+| Tool | Type | Purpose |
+|------|------|--------|
+| `brik64.discover` | Read-only | Search, compare, compatibility, lineage — all server-side |
+| `brik64.execute` | Write | Compose, register, publish, acquire, export compliance |
+
+**~800 tokens** total schema (vs 12K+ for 10 tools). Preserves **98% of context window** for reasoning.
+
+Procedural knowledge lives in **skills** loaded on-demand, not in tool schemas.
 
 ---
 
@@ -91,5 +112,5 @@ Install when: you are working in a Python project and want verified, formally-pr
 
 `brik64/brik64-tools-skills` — maintained by BRIK-64 Inc.
 
-Documentation: https://docs.brik64.dev  
+Documentation: https://docs.brik64.dev
 Contact: info@brik64.com
