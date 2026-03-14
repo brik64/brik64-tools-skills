@@ -1,7 +1,7 @@
 ---
 name: brik64-rust
-description: "Use the brik64 Rust crate (v2.0.0-beta.3) to apply Digital Circuitality in Rust projects. Covers installation, all 64 monomers, EVA composition, integration patterns, and the methodology vs. certification distinction. Use when writing Rust code with BRIK-64 libraries."
-version: 2.0.0-beta.4
+description: "Use the brik64 Rust crate (v3.0.0-beta.1) to apply Digital Circuitality in Rust projects. Covers installation, all 64 monomers, EVA composition, integration patterns, and the methodology vs. certification distinction. Use when writing Rust code with BRIK-64 libraries."
+version: 3.0.0-beta.1
 ---
 
 # BRIK-64 for Rust
@@ -17,7 +17,7 @@ Apply Digital Circuitality inside your existing Rust projects using the `brik64`
 
 ```toml
 [dependencies]
-brik64 = "2.0.0-beta.3"
+brik64 = "3.0.0-beta.1"
 ```
 
 Or via CLI:

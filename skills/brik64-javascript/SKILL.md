@@ -1,7 +1,7 @@
 ---
 name: brik64-javascript
-description: "Use the brik64 npm package (v2.0.0-beta.3) to install the brikc CLI or apply Digital Circuitality in JavaScript/TypeScript projects. Covers installation, all 64 monomers, EVA composition, async patterns, Node.js and browser usage. Use when writing JS/TS code with BRIK-64 libraries."
-version: 2.0.0-beta.4
+description: "Use the brik64 npm package (v3.0.0-beta.1) to install the brikc CLI or apply Digital Circuitality in JavaScript/TypeScript projects. Covers installation, all 64 monomers, EVA composition, async patterns, Node.js and browser usage. Use when writing JS/TS code with BRIK-64 libraries."
+version: 3.0.0-beta.1
 ---
 
 # BRIK-64 for JavaScript / TypeScript
@@ -23,7 +23,7 @@ npm install -g brik64        # installs brikc, brikfmt, brikcheck commands
 
 # Or use as a project dependency
 npm install brik64
-npx brikc --version          # → brikc 2.0.0-beta.3
+npx brikc --version          # → brikc 3.0.0-beta.1
 ```
 
 Works in **Node.js** (≥ 16). Downloads native binary for your platform on postinstall.

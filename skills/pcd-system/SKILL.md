@@ -1,6 +1,6 @@
 ---
 name: pcd-system
-description: Complete PCD language reference + brikc CLI for BRIK-64 BETA 2.0.0-beta.3. Covers syntax, all 64 monomers (verified signatures), CMF debug, policy circuits, multi-target compilation, and the Registry/MCP platform layer (2-tool minimalist architecture). Use when writing .pcd files, using the brikc compiler, building policy circuits, or working with the BRIK-64 Registry/MCP.
+description: Complete PCD language reference + brikc CLI for BRIK-64 BETA 3.0.0-beta.1. Covers syntax, all 64 monomers (verified signatures), CMF debug, policy circuits, multi-target compilation, and the Registry/MCP platform layer (2-tool minimalist architecture). Use when writing .pcd files, using the brikc compiler, building policy circuits, or working with the BRIK-64 Registry/MCP.
 triggers:
   - writing PCD programs
   - using brikc CLI
@@ -13,7 +13,7 @@ triggers:
 version: 4.0.0
 ---
 
-# PCD System — BRIK-64 BETA 2.0.0-beta.3
+# PCD System — BRIK-64 BETA 3.0.0-beta.1
 
 Complete reference for writing PCD programs, using the brikc compiler, and working with the BRIK-64 Registry platform.
 
@@ -292,7 +292,7 @@ npm install -g brik64
 pip install brik64
 
 # Manual — Linux x86-64
-curl -L https://github.com/brik64/brik64-dist-releases/releases/download/beta-2.0.0-beta.3/brikc-beta-linux-x86_64 -o brikc && chmod +x brikc
+curl -L https://github.com/brik64/brik64-dist-releases/releases/download/beta-3.0.0-beta.1/brikc-beta-linux-x86_64 -o brikc && chmod +x brikc
 
 # Manual — macOS Apple Silicon (M1/M2/M3/M4)
 curl -L .../brikc-beta-macos-arm64 -o brikc && chmod +x brikc
@@ -303,7 +303,7 @@ curl -L .../brikc-beta-macos-intel -o brikc && chmod +x brikc
 xattr -d com.apple.quarantine brikc
 ```
 
-**Platform support in BETA 2.0.0-beta.3:**
+**Platform support in BETA 3.0.0-beta.1:**
 - ✅ Linux x86-64 (fully tested — ECO server)
 - ✅ macOS Apple Silicon (ARM64)
 - ✅ macOS Intel (x86-64)
