@@ -1,7 +1,7 @@
 ---
 name: brik64-python
-description: "Use the brik64 Python package (v4.0.0-beta.1) to apply Digital Circuitality in Python projects. Covers installation, all 128 monomers (64 core + 64 extended), EVA composition, and integration patterns. Use when writing Python code with BRIK-64 libraries."
-version: 4.0.0-beta.1
+description: "Use the brik64 Python package (v4.0.0-beta.2) to apply Digital Circuitality in Python projects. Covers installation, all 128 monomers (64 core + 64 extended), EVA composition, and integration patterns. Use when writing Python code with BRIK-64 libraries."
+version: 4.0.0-beta.2
 ---
 
 # BRIK-64 for Python
@@ -186,7 +186,7 @@ For formal certification → write in PCD and compile to Python: `brikc compile 
 
 ---
 
-## Extended Monomers (MC_64–MC_127) — v4.0.0-beta.1+
+## Extended Monomers (MC_64–MC_127) — v4.0.0-beta.2+
 
 Extended monomers add 64 new operations across 8 families: Float64, Math, Network, Graphics, Audio, Filesystem+, Concurrency, and Interop/FFI. They operate under **CONTRACT closure (Φ_c = CONTRACT)** rather than static Coq proofs.
 

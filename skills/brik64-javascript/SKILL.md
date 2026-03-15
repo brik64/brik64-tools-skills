@@ -1,7 +1,7 @@
 ---
 name: brik64-javascript
-description: "Use the brik64 npm package (v4.0.0-beta.1) to install the brikc CLI or apply Digital Circuitality in JavaScript/TypeScript projects. Covers installation, all 128 monomers (64 core + 64 extended), EVA composition, async patterns, Node.js and browser usage. Use when writing JS/TS code with BRIK-64 libraries."
-version: 4.0.0-beta.1
+description: "Use the brik64 npm package (v4.0.0-beta.2) to install the brikc CLI or apply Digital Circuitality in JavaScript/TypeScript projects. Covers installation, all 128 monomers (64 core + 64 extended), EVA composition, async patterns, Node.js and browser usage. Use when writing JS/TS code with BRIK-64 libraries."
+version: 4.0.0-beta.2
 ---
 
 # BRIK-64 for JavaScript / TypeScript
@@ -23,7 +23,7 @@ npm install -g brik64        # installs brikc, brikfmt, brikcheck commands
 
 # Or use as a project dependency
 npm install @brik64/core
-npx brikc --version          # → brikc 4.0.0-beta.1
+npx brikc --version          # → brikc 4.0.0-beta.2
 ```
 
 Works in **Node.js** (≥ 16). Downloads native binary for your platform on postinstall.
@@ -206,7 +206,7 @@ For formal certification → write in PCD and compile to JS: `brikc compile src/
 
 ---
 
-## Extended Monomers (MC_64–MC_127) — v4.0.0-beta.1+
+## Extended Monomers (MC_64–MC_127) — v4.0.0-beta.2+
 
 Extended monomers add 64 new operations across 8 families: Float64, Math, Network, Graphics, Audio, Filesystem+, Concurrency, and Interop/FFI. They operate under **CONTRACT closure (Φ_c = CONTRACT)** rather than static Coq proofs.
 
