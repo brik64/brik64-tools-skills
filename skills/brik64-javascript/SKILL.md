@@ -22,7 +22,7 @@ npm install -g brik64        # installs brikc, brikfmt, brikcheck commands
 # yarn global add brik64
 
 # Or use as a project dependency
-npm install brik64
+npm install @brik64/core
 npx brikc --version          # → brikc 4.0.0-beta.1
 ```
 
@@ -34,10 +34,10 @@ Works in **Node.js** (≥ 16). Downloads native binary for your platform on post
 
 ```typescript
 // ESM / TypeScript
-import { mc, eva } from 'brik64';
+import { mc, eva } from '@brik64/core';
 
 // CommonJS
-const { mc, eva } = require('brik64');
+const { mc, eva } = require('@brik64/core');
 
 // Browser (CDN)
 import { mc, eva } from 'https://cdn.brik64.dev/sdk/v2/index.js';
@@ -48,7 +48,7 @@ import { mc, eva } from 'https://cdn.brik64.dev/sdk/v2/index.js';
 ## Arithmetic (saturating — never throws, never overflows)
 
 ```typescript
-import { mc } from 'brik64';
+import { mc } from '@brik64/core';
 
 const sum   = mc.arithmetic.add8(200, 100);    // 255 (saturating)
 const diff  = mc.arithmetic.sub8(10, 20);      // 0 (saturating)
@@ -112,7 +112,7 @@ const valid   = await mc.crypto.verify(keypair.publicKey, data, sig); // true
 ## EVA Composition
 
 ```typescript
-import { eva } from 'brik64';
+import { eva } from '@brik64/core';
 
 // Sequential (⊗): output of A → input of B
 const pipeline = eva.seq(
@@ -213,7 +213,7 @@ Extended monomers add 64 new operations across 8 families: Float64, Math, Networ
 ### Float64 & Math
 
 ```typescript
-import { mc } from 'brik64';
+import { mc } from '@brik64/core';
 
 // Float64 (F8)
 const sum  = mc.float64.fadd(1.5, 2.3);     // 3.8
