@@ -1,6 +1,6 @@
 ---
 name: brik64-python
-description: "Use the brik64 Python package (v2.0.0) to apply Digital Circuitality in Python projects. Covers installation, all 64 monomers, EVA composition, and integration patterns. Use when writing Python code with BRIK-64 libraries."
+description: "Use the brik64 Python package (v3.0.0-beta.1) to apply Digital Circuitality in Python projects. Covers installation, all 128 monomers (64 core + 64 extended), EVA composition, and integration patterns. Use when writing Python code with BRIK-64 libraries."
 version: 3.0.0-beta.1
 ---
 
@@ -183,3 +183,47 @@ It does **not** give you:
 
 For formal certification → write in PCD and compile to Python: `brikc compile src/main.pcd --target py --emit-tests`
 → https://docs.brik64.dev/pcd/tutorial
+
+---
+
+## Extended Monomers (MC_64–MC_127) — v3.0.0-beta.1+
+
+Extended monomers add 64 new operations across 8 families: Float64, Math, Network, Graphics, Audio, Filesystem+, Concurrency, and Interop/FFI. They operate under **CONTRACT closure (Φ_c = CONTRACT)** rather than static Coq proofs.
+
+### Float64 & Math
+
+```python
+from brik64.mc import float64, math as bmath
+
+# Float64 (F8)
+total = float64.fadd(1.5, 2.3)        # 3.8
+root  = float64.fsqrt(16.0)           # 4.0
+fabs  = float64.fabs(-3.14)           # 3.14
+
+# Math (F9)
+import math
+sine   = bmath.sin(math.pi / 2)       # 1.0
+cosine = bmath.cos(0.0)               # 1.0
+power  = bmath.pow(2.0, 10.0)         # 1024.0
+log    = bmath.ln(math.e)             # 1.0
+ceil   = bmath.ceil(3.2)              # 4.0
+```
+
+### Other Extended Families
+
+```python
+from brik64.mc import network, fs, interop
+
+# Network (F10)
+resp = network.http_req("GET", "https://api.example.com/data", "")
+
+# Filesystem+ (F13)
+exists = fs.fs_exists("/tmp/data.json")
+files  = fs.fs_list("/var/log")
+
+# Interop/FFI (F15)
+json_str = interop.json_encode(value)
+obj      = interop.json_decode('{"key": 42}')
+```
+
+> **Note:** Core monomers (MC_00–MC_63) have Φ_c = 1 (Coq-proven). Extended monomers (MC_64–MC_127) use Φ_c = CONTRACT — runtime contracts enforce correctness for external-facing operations.

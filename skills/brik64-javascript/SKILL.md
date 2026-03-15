@@ -1,6 +1,6 @@
 ---
 name: brik64-javascript
-description: "Use the brik64 npm package (v3.0.0-beta.1) to install the brikc CLI or apply Digital Circuitality in JavaScript/TypeScript projects. Covers installation, all 64 monomers, EVA composition, async patterns, Node.js and browser usage. Use when writing JS/TS code with BRIK-64 libraries."
+description: "Use the brik64 npm package (v3.0.0-beta.1) to install the brikc CLI or apply Digital Circuitality in JavaScript/TypeScript projects. Covers installation, all 128 monomers (64 core + 64 extended), EVA composition, async patterns, Node.js and browser usage. Use when writing JS/TS code with BRIK-64 libraries."
 version: 3.0.0-beta.1
 ---
 
@@ -203,3 +203,44 @@ It does **not** give you:
 
 For formal certification → write in PCD and compile to JS: `brikc compile src/main.pcd --target js --emit-tests`
 → https://docs.brik64.dev/pcd/tutorial
+
+---
+
+## Extended Monomers (MC_64–MC_127) — v3.0.0-beta.1+
+
+Extended monomers add 64 new operations across 8 families: Float64, Math, Network, Graphics, Audio, Filesystem+, Concurrency, and Interop/FFI. They operate under **CONTRACT closure (Φ_c = CONTRACT)** rather than static Coq proofs.
+
+### Float64 & Math
+
+```typescript
+import { mc } from 'brik64';
+
+// Float64 (F8)
+const sum  = mc.float64.fadd(1.5, 2.3);     // 3.8
+const root = mc.float64.fsqrt(16.0);         // 4.0
+const abs  = mc.float64.fabs(-3.14);         // 3.14
+
+// Math (F9)
+const sine   = mc.math.sin(Math.PI / 2);    // 1.0
+const cosine = mc.math.cos(0.0);            // 1.0
+const power  = mc.math.pow(2.0, 10.0);      // 1024.0
+const log    = mc.math.ln(Math.E);           // 1.0
+const ceil   = mc.math.ceil(3.2);            // 4.0
+```
+
+### Other Extended Families
+
+```typescript
+// Network (F10)
+const resp = await mc.network.httpReq("GET", "https://api.example.com/data", "");
+
+// Filesystem+ (F13)
+const exists = mc.fs.fsExists("/tmp/data.json");
+const files  = mc.fs.fsList("/var/log");
+
+// Interop/FFI (F15)
+const json = mc.interop.jsonEncode(value);
+const obj  = mc.interop.jsonDecode('{"key": 42}');
+```
+
+> **Note:** Core monomers (MC_00–MC_63) have Φ_c = 1 (Coq-proven). Extended monomers (MC_64–MC_127) use Φ_c = CONTRACT — runtime contracts enforce correctness for external-facing operations.

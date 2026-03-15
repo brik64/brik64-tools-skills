@@ -1,6 +1,6 @@
 ---
 name: brik64-rust
-description: "Use the brik64 Rust crate (v3.0.0-beta.1) to apply Digital Circuitality in Rust projects. Covers installation, all 64 monomers, EVA composition, integration patterns, and the methodology vs. certification distinction. Use when writing Rust code with BRIK-64 libraries."
+description: "Use the brik64 Rust crate (v3.0.0-beta.1) to apply Digital Circuitality in Rust projects. Covers installation, all 128 monomers (64 core + 64 extended), EVA composition, integration patterns, and the methodology vs. certification distinction. Use when writing Rust code with BRIK-64 libraries."
 version: 3.0.0-beta.1
 ---
 
@@ -224,3 +224,47 @@ It does **not** give you:
 - ❌ Φ_c = 1 compiler enforcement
 
 For formal certification → write in PCD: https://docs.brik64.dev/pcd/tutorial
+
+---
+
+## Extended Monomers (MC_64–MC_127) — v3.0.0-beta.1+
+
+Extended monomers add 64 new operations across 8 families: Float64, Math, Network, Graphics, Audio, Filesystem+, Concurrency, and Interop/FFI. They operate under **CONTRACT closure (Φ_c = CONTRACT)** rather than static Coq proofs.
+
+### Float64 & Math
+
+```rust
+use brik64::mc::float64;
+use brik64::mc::math;
+
+// Float64 (F8)
+let sum  = float64::fadd(1.5, 2.3);      // 3.8
+let root = float64::fsqrt(16.0);          // 4.0
+let abs  = float64::fabs(-3.14);          // 3.14
+
+// Math (F9)
+let sine   = math::sin(std::f64::consts::FRAC_PI_2);  // 1.0
+let cosine = math::cos(0.0);                           // 1.0
+let power  = math::pow(2.0, 10.0);                     // 1024.0
+let log    = math::ln(std::f64::consts::E);             // 1.0
+let ceil   = math::ceil(3.2);                           // 4.0
+```
+
+### Other Extended Families
+
+```rust
+use brik64::mc::{network, fs, interop};
+
+// Network (F10)
+let resp = network::http_req("GET", "https://api.example.com/data", "");
+
+// Filesystem+ (F13)
+let exists = fs::fs_exists("/tmp/data.bin");
+let files  = fs::fs_list("/var/log");
+
+// Interop/FFI (F15)
+let json = interop::json_encode(value);
+let obj  = interop::json_decode(r#"{"key": 42}"#);
+```
+
+> **Note:** Core monomers (MC_00–MC_63) have Φ_c = 1 (Coq-proven). Extended monomers (MC_64–MC_127) use Φ_c = CONTRACT — runtime contracts enforce correctness for external-facing operations.

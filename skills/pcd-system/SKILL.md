@@ -1,6 +1,6 @@
 ---
 name: pcd-system
-description: Complete PCD language reference + brikc CLI for BRIK-64 BETA 3.0.0-beta.1. Covers syntax, all 64 monomers (verified signatures), CMF debug, policy circuits, multi-target compilation, and the Registry/MCP platform layer (2-tool minimalist architecture). Use when writing .pcd files, using the brikc compiler, building policy circuits, or working with the BRIK-64 Registry/MCP.
+description: Complete PCD language reference + brikc CLI for BRIK-64 BETA 3.0.0-beta.1. Covers syntax, all 128 monomers (64 core + 64 extended, verified signatures), CMF debug, policy circuits, multi-target compilation, and the Registry/MCP platform layer (2-tool minimalist architecture). Use when writing .pcd files, using the brikc compiler, building policy circuits, or working with the BRIK-64 Registry/MCP.
 triggers:
   - writing PCD programs
   - using brikc CLI
@@ -92,7 +92,7 @@ let result = if (check) { path_a(x) } else { path_b(x) };
 
 ---
 
-## The 64 Monomers
+## The 128 Monomers (64 Core + 64 Extended)
 
 ### F0 — Arithmetic (MC_00–MC_07)
 
@@ -198,6 +198,136 @@ let result = if (check) { path_a(x) } else { path_b(x) };
 | 62 | UID | () → i64 | User ID |
 | 63 | ENV | String → String | Environment variable |
 
+### Extended Monomers (Φ_c = CONTRACT)
+
+Extended monomers interact with external systems (network, filesystem, hardware). They operate under **CONTRACT closure** — runtime contracts enforce correctness rather than static Coq proofs. Use `MC_NN.NAME(args)` syntax in PCD.
+
+### F8 — Float64 (MC_64–MC_71)
+
+| MC | Name | Signature | Notes |
+|----|------|-----------|-------|
+| 64 | FADD | (f64, f64) → f64 | Floating-point addition |
+| 65 | FSUB | (f64, f64) → f64 | Floating-point subtraction |
+| 66 | FMUL | (f64, f64) → f64 | Floating-point multiplication |
+| 67 | FDIV | (f64, f64) → f64 | Floating-point division (returns NaN on /0) |
+| 68 | FABS | f64 → f64 | Absolute value |
+| 69 | FNEG | f64 → f64 | Negate |
+| 70 | FSQRT | f64 → f64 | Square root |
+| 71 | FMOD | (f64, f64) → f64 | Floating-point modulo |
+
+### F9 — Math (MC_72–MC_79)
+
+| MC | Name | Signature | Notes |
+|----|------|-----------|-------|
+| 72 | SIN | f64 → f64 | Sine (radians) |
+| 73 | COS | f64 → f64 | Cosine (radians) |
+| 74 | TAN | f64 → f64 | Tangent (radians) |
+| 75 | EXP | f64 → f64 | e^x |
+| 76 | LN | f64 → f64 | Natural logarithm |
+| 77 | LOG2 | f64 → f64 | Base-2 logarithm |
+| 78 | POW | (f64, f64) → f64 | Power |
+| 79 | CEIL | f64 → f64 | Ceiling |
+
+### F10 — Network (MC_80–MC_87)
+
+| MC | Name | Signature | Notes |
+|----|------|-----------|-------|
+| 80 | TCP_CONN | (String, i64) → i64 | Connect to host:port, returns handle |
+| 81 | TCP_SEND | (i64, String) → bool | Send data on handle |
+| 82 | TCP_RECV | (i64, i64) → String | Receive up to N bytes |
+| 83 | TCP_CLOSE | i64 → bool | Close connection |
+| 84 | UDP_SEND | (String, i64, String) → bool | Send UDP datagram |
+| 85 | UDP_RECV | (i64, i64) → String | Receive UDP datagram |
+| 86 | DNS_RESOLVE | String → String | Resolve hostname to IP |
+| 87 | HTTP_REQ | (String, String, String) → String | HTTP request (method, url, body) |
+
+### F11 — Graphics (MC_88–MC_95)
+
+| MC | Name | Signature | Notes |
+|----|------|-----------|-------|
+| 88 | FB_CREATE | (i64, i64) → i64 | Create framebuffer (w, h) |
+| 89 | FB_SET_PX | (i64, i64, i64, i64) → bool | Set pixel (fb, x, y, color) |
+| 90 | FB_GET_PX | (i64, i64, i64) → i64 | Get pixel (fb, x, y) |
+| 91 | FB_CLEAR | (i64, i64) → bool | Clear framebuffer to color |
+| 92 | FB_BLIT | (i64, i64, i64, i64) → bool | Blit region |
+| 93 | FB_LINE | (i64, i64, i64, i64, i64, i64) → bool | Draw line |
+| 94 | FB_RECT | (i64, i64, i64, i64, i64, i64) → bool | Draw rectangle |
+| 95 | FB_DIMS | i64 → Tuple(i64, i64) | Get framebuffer dimensions |
+
+### F12 — Audio (MC_96–MC_103)
+
+| MC | Name | Signature | Notes |
+|----|------|-----------|-------|
+| 96 | AUD_CREATE | (i64, i64) → i64 | Create audio buffer (rate, channels) |
+| 97 | AUD_WRITE | (i64, Array(f64)) → bool | Write samples |
+| 98 | AUD_READ | (i64, i64) → Array(f64) | Read N samples |
+| 99 | AUD_MIX | (i64, i64) → i64 | Mix two buffers |
+| 100 | AUD_GAIN | (i64, f64) → bool | Apply gain |
+| 101 | AUD_LEN | i64 → i64 | Buffer length in samples |
+| 102 | AUD_RATE | i64 → i64 | Sample rate |
+| 103 | AUD_CHANS | i64 → i64 | Channel count |
+
+### F13 — Filesystem+ (MC_104–MC_111)
+
+| MC | Name | Signature | Notes |
+|----|------|-----------|-------|
+| 104 | FS_STAT | String → Tuple(i64, i64, i64) | File stat (size, mtime, mode) |
+| 105 | FS_MKDIR | String → bool | Create directory |
+| 106 | FS_RMDIR | String → bool | Remove directory |
+| 107 | FS_DELETE | String → bool | Delete file |
+| 108 | FS_RENAME | (String, String) → bool | Rename file |
+| 109 | FS_LIST | String → Array(String) | List directory entries |
+| 110 | FS_EXISTS | String → bool | Check existence |
+| 111 | FS_COPY | (String, String) → bool | Copy file |
+
+### F14 — Concurrency (MC_112–MC_119)
+
+| MC | Name | Signature | Notes |
+|----|------|-----------|-------|
+| 112 | SPAWN | i64 → i64 | Spawn task, returns handle |
+| 113 | JOIN | i64 → i64 | Join task, returns result |
+| 114 | CHAN_NEW | () → i64 | Create channel |
+| 115 | CHAN_SEND | (i64, i64) → bool | Send value on channel |
+| 116 | CHAN_RECV | i64 → i64 | Receive value from channel |
+| 117 | MUTEX_NEW | () → i64 | Create mutex |
+| 118 | MUTEX_LOCK | i64 → bool | Lock mutex |
+| 119 | MUTEX_UNLOCK | i64 → bool | Unlock mutex |
+
+### F15 — Interop/FFI (MC_120–MC_127)
+
+| MC | Name | Signature | Notes |
+|----|------|-----------|-------|
+| 120 | JSON_ENCODE | i64 → String | Encode value to JSON |
+| 121 | JSON_DECODE | String → i64 | Decode JSON to value |
+| 122 | FFI_CALL | (i64, String, Array(i64)) → i64 | Call foreign function |
+| 123 | FFI_LOAD | String → i64 | Load shared library |
+| 124 | FFI_FREE | i64 → bool | Free library handle |
+| 125 | WASM_LOAD | String → i64 | Load WASM module |
+| 126 | WASM_CALL | (i64, String, Array(i64)) → i64 | Call WASM export |
+| 127 | WASM_FREE | i64 → bool | Free WASM module |
+
+### PCD Syntax for Extended Monomers
+
+```pcd
+// Float64 operations
+let sum = MC_64.FADD(1.0, 2.0);        // 3.0
+let root = MC_70.FSQRT(16.0);          // 4.0
+
+// Math operations
+let angle = MC_72.SIN(3.14159);        // ≈ 0.0
+let power = MC_78.POW(2.0, 10.0);      // 1024.0
+
+// Network
+let conn = MC_80.TCP_CONN("example.com", 443);
+let resp = MC_87.HTTP_REQ("GET", "https://api.example.com/data", "");
+
+// Filesystem+
+let exists = MC_110.FS_EXISTS("/tmp/data.bin");
+let files = MC_109.FS_LIST("/var/log");
+```
+
+> **Note:** Core monomers (MC_00–MC_63) are verified with Φ_c = 1 (Coq proofs). Extended monomers (MC_64–MC_127) operate under Φ_c = CONTRACT — runtime contracts enforce correctness for operations that interact with external systems.
+
 ---
 
 ## brikc CLI Commands
@@ -223,7 +353,7 @@ brikc fmt program.pcd                       # Format PCD source
 brikc repl                                  # Interactive mode
 
 # Self-verify
-brikc self-verify                           # Verify all 64 monomers
+brikc self-verify                           # Verify all 128 monomers
 
 # LSP
 brikc lsp                                   # Start Language Server
