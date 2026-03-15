@@ -1,7 +1,7 @@
 ---
 name: brik64-rust
-description: "Use the brik64 Rust crate (v3.0.0-beta.1) to apply Digital Circuitality in Rust projects. Covers installation, all 128 monomers (64 core + 64 extended), EVA composition, integration patterns, and the methodology vs. certification distinction. Use when writing Rust code with BRIK-64 libraries."
-version: 3.0.0-beta.1
+description: "Use the brik64 Rust crate (v4.0.0-beta.1) to apply Digital Circuitality in Rust projects. Covers installation, all 128 monomers (64 core + 64 extended), EVA composition, integration patterns, and the methodology vs. certification distinction. Use when writing Rust code with BRIK-64 libraries."
+version: 4.0.0-beta.1
 ---
 
 # BRIK-64 for Rust
@@ -17,7 +17,7 @@ Apply Digital Circuitality inside your existing Rust projects using the `brik64`
 
 ```toml
 [dependencies]
-brik64 = "3.0.0-beta.1"
+brik64 = "4.0.0-beta.1"
 ```
 
 Or via CLI:
@@ -227,7 +227,7 @@ For formal certification → write in PCD: https://docs.brik64.dev/pcd/tutorial
 
 ---
 
-## Extended Monomers (MC_64–MC_127) — v3.0.0-beta.1+
+## Extended Monomers (MC_64–MC_127) — v4.0.0-beta.1+
 
 Extended monomers add 64 new operations across 8 families: Float64, Math, Network, Graphics, Audio, Filesystem+, Concurrency, and Interop/FFI. They operate under **CONTRACT closure (Φ_c = CONTRACT)** rather than static Coq proofs.
 

@@ -147,7 +147,7 @@ The BRIK-64 Core Monomers define 64 formally verified atomic operations (Φ_c = 
 
 ### Extended Families (Φ_c = CONTRACT)
 
-In v3.0.0-beta.1, BRIK-64 adds 64 extended monomers (MC_64–MC_127) across 8 new families that interact with external systems. These operate under **CONTRACT closure** — runtime contracts enforce correctness rather than static proofs, since external I/O cannot be statically verified.
+In v4.0.0-beta.1, BRIK-64 adds 64 extended monomers (MC_64–MC_127) across 8 new families that interact with external systems. These operate under **CONTRACT closure** — runtime contracts enforce correctness rather than static proofs, since external I/O cannot be statically verified.
 
 | Family | Operations | Circuit Design Principle |
 |--------|-----------|--------------------------|

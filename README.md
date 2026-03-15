@@ -108,7 +108,7 @@ Procedural knowledge lives in **skills** loaded on-demand, not in tool schemas.
 
 ---
 
-## Extended Monomer Families (v3.0.0-beta.1+)
+## Extended Monomer Families (v4.0.0-beta.1+)
 
 In addition to the 64 core monomers (F0–F7, Φ_c = 1), BRIK-64 now includes 64 extended monomers across 8 new families. Extended monomers operate under **CONTRACT closure (Φ_c = CONTRACT)** — they interact with external systems and require runtime contracts rather than static proofs.
 
@@ -123,7 +123,7 @@ In addition to the 64 core monomers (F0–F7, Φ_c = 1), BRIK-64 now includes 64
 | F14: Concurrency | MC_112–MC_119 | SPAWN, JOIN, CHAN_NEW, CHAN_SEND, CHAN_RECV, MUTEX_NEW, MUTEX_LOCK, MUTEX_UNLOCK |
 | F15: Interop/FFI | MC_120–MC_127 | JSON_ENCODE, JSON_DECODE, FFI_CALL, FFI_LOAD, FFI_FREE, WASM_LOAD, WASM_CALL, WASM_FREE |
 
-All language SDKs (Rust, JavaScript, Python) expose extended monomers in v3.0.0-beta.1+.
+All language SDKs (Rust, JavaScript, Python) expose extended monomers in v4.0.0-beta.1+.
 
 ---
 
