@@ -130,9 +130,9 @@ A function is a **closed circuit** when:
 
 ---
 
-## The 64 Core Operations
+## The 128 Operations (64 Core + 64 Extended)
 
-The BRIK-64 Core Monomers define 64 formally verified atomic operations — the circuit components. Even without using the library, **model your design after these operations**:
+The BRIK-64 Core Monomers define 64 formally verified atomic operations (Φ_c = 1) — the circuit components. Even without using the library, **model your design after these operations**:
 
 | Family | Operations | Circuit Design Principle |
 |--------|-----------|--------------------------|
@@ -144,6 +144,23 @@ The BRIK-64 Core Monomers define 64 formally verified atomic operations — the 
 | F5: String | concat, split, substr, len, upper, char_at, trim, match | Immutable, always returns valid string |
 | F6: Crypto | hash, hmac, aes_enc, aes_dec, sha256, rand, sign, verify | Typed inputs/outputs, no silent failures |
 | F7: System | time, sleep, env, exit, pid, signal, mmap, sysinfo | Explicit system calls, typed results |
+
+### Extended Families (Φ_c = CONTRACT)
+
+In v4.0.0-beta.1, BRIK-64 adds 64 extended monomers (MC_64–MC_127) across 8 new families that interact with external systems. These operate under **CONTRACT closure** — runtime contracts enforce correctness rather than static proofs, since external I/O cannot be statically verified.
+
+| Family | Operations | Circuit Design Principle |
+|--------|-----------|--------------------------|
+| F8: Float64 | FADD, FSUB, FMUL, FDIV, FABS, FNEG, FSQRT, FMOD | IEEE 754 — defined behavior for NaN/Inf |
+| F9: Math | SIN, COS, TAN, EXP, LN, LOG2, POW, CEIL | Bounded transcendentals, defined domain |
+| F10: Network | TCP_CONN, TCP_SEND, TCP_RECV, TCP_CLOSE, UDP_*, DNS, HTTP | Explicit handles, paired connect/close |
+| F11: Graphics | FB_CREATE, FB_SET_PX, FB_GET_PX, FB_CLEAR, FB_BLIT, FB_LINE, FB_RECT, FB_DIMS | Bounded framebuffers, explicit lifecycle |
+| F12: Audio | AUD_CREATE, AUD_WRITE, AUD_READ, AUD_MIX, AUD_GAIN, AUD_LEN, AUD_RATE, AUD_CHANS | Typed buffers, explicit sample rates |
+| F13: Filesystem+ | FS_STAT, FS_MKDIR, FS_RMDIR, FS_DELETE, FS_RENAME, FS_LIST, FS_EXISTS, FS_COPY | Explicit existence checks, typed results |
+| F14: Concurrency | SPAWN, JOIN, CHAN_NEW, CHAN_SEND, CHAN_RECV, MUTEX_NEW, MUTEX_LOCK, MUTEX_UNLOCK | Structured concurrency, paired lock/unlock |
+| F15: Interop/FFI | JSON_ENCODE, JSON_DECODE, FFI_CALL, FFI_LOAD, FFI_FREE, WASM_LOAD, WASM_CALL, WASM_FREE | Explicit load/free lifecycle |
+
+The same circuit thinking applies: bound your domains, pair your resources, handle all branches.
 
 Install the libraries to use these operations with formal guarantees:
 
