@@ -253,6 +253,15 @@ If a result falls outside the declared domain, the circuit does not close (Φ_c 
 **Normal software:** calculates velocity = 100,000 km/s, stores it, crashes later.
 **Digital Circuitality:** the program does not compile. The circuit is open.
 
+### Precision Engineering
+
+Domains are numeric ranges, not physical units. Precision depends on monomer choice:
+- **U8/I64 (core):** exact integer arithmetic, no rounding, Φ_c = 1
+- **F64 (extended):** IEEE 754 floats, has rounding errors, Φ_c = CONTRACT
+- **Fixed-point pattern:** scale to integers (3.14 → 3140), compute exactly, scale back
+
+Choose the right type for each calculation. If the result exceeds the range, the circuit doesn't close.
+
 ## Extended Monomers (MC_64–MC_127) — v4.0.0-beta.1+
 
 Extended monomers add 64 new operations across 8 families: Float64, Math, Network, Graphics, Audio, Filesystem+, Concurrency, and Interop/FFI. They operate under **CONTRACT closure (Φ_c = CONTRACT)** rather than static Coq proofs.

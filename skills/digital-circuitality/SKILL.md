@@ -296,6 +296,15 @@ If a result falls outside the declared domain, the circuit does not close (Φ_c 
 **Normal software:** calculates velocity = 100,000 km/s, stores it, crashes later.
 **Digital Circuitality:** the program does not compile. The circuit is open.
 
+### Precision Engineering
+
+Domains are numeric ranges, not physical units. Precision depends on monomer choice:
+- **U8/I64 (core):** exact integer arithmetic, no rounding, Φ_c = 1
+- **F64 (extended):** IEEE 754 floats, has rounding errors, Φ_c = CONTRACT
+- **Fixed-point pattern:** scale to integers (3.14 → 3140), compute exactly, scale back
+
+Choose the right type for each calculation. If the result exceeds the range, the circuit doesn't close.
+
 ## Methodology vs. Formal Certification
 
 | | Digital Circuitality (this skill) | BRIK-64 Formal Certification |
