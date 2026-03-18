@@ -220,6 +220,18 @@ This is what makes Φ_c = 1 possible.
 Without bounded domains, the circuit is open and cannot be certified.
 The domain IS the circuit boundary.
 
+### You Are the Circuit Designer
+
+The programmer defines domain bounds based on their problem context:
+- Flight computer: velocity `[0, 900]` km/h, altitude `[0, 15000]` m
+- Banking: transaction amount `[0.01, 1000000]`, account balance `[0, MAX_I64]`
+- Temperature sensor: reading `[-273, 1000]` °C (absolute zero to furnace)
+
+If a result falls outside the declared domain, the circuit does not close (Φ_c ≠ 1) and the program does not compile. This is not a bug — it is physics.
+
+**Normal software:** calculates velocity = 100,000 km/s, stores it, crashes later.
+**Digital Circuitality:** the program does not compile. The circuit is open.
+
 ## Extended Monomers (MC_64–MC_127) — v4.0.0-beta.1+
 
 Extended monomers add 64 new operations across 8 families: Float64, Math, Network, Graphics, Audio, Filesystem+, Concurrency, and Interop/FFI. They operate under **CONTRACT closure (Φ_c = CONTRACT)** rather than static Coq proofs.
