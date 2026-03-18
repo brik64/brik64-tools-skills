@@ -305,6 +305,21 @@ Domains are numeric ranges, not physical units. Precision depends on monomer cho
 
 Choose the right type for each calculation. If the result exceeds the range, the circuit doesn't close.
 
+### Certified Math at Any Precision
+
+Any mathematical function — logarithms, trigonometry, square roots — can be implemented as a certified polymer (Φ_c = 1) using only core monomers with scaled integers.
+
+The designer declares the precision:
+```
+domain pi_3:  Range [3141, 3142];           // π with 3 decimals
+domain pi_6:  Range [3141592, 3141593];     // π with 6 decimals
+domain pi_15: Range [3141592653589793, ...]; // π with 15 decimals
+```
+
+Like choosing a 12-bit vs 16-bit ADC — the engineer decides the resolution. The "error" is not accidental IEEE 754 rounding. It's the precision you declared in your domain.
+
+**Result:** ln(), sin(), cos(), sqrt() — all certifiable. All deterministic. Same input → same output on every platform, every time.
+
 ## Methodology vs. Formal Certification
 
 | | Digital Circuitality (this skill) | BRIK-64 Formal Certification |
