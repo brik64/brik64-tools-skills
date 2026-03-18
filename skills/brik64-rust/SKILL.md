@@ -227,6 +227,20 @@ For formal certification → write in PCD: https://docs.brik64.dev/pcd/tutorial
 
 ---
 
+
+## Closure Domains
+
+Every monomer declares its domain — the bounded set of valid inputs and outputs.
+This is what makes Φ_c = 1 possible.
+
+- **Range**: `[0, 255]` for u8 operations
+- **Set**: `{true, false}` for boolean operations  
+- **Bounded**: predicate on finite domain (e.g., even numbers in [0,100])
+- **Product**: cartesian product for multi-input operations
+
+Without bounded domains, the circuit is open and cannot be certified.
+The domain IS the circuit boundary.
+
 ## Extended Monomers (MC_64–MC_127) — v4.0.0-beta.1+
 
 Extended monomers add 64 new operations across 8 families: Float64, Math, Network, Graphics, Audio, Filesystem+, Concurrency, and Interop/FFI. They operate under **CONTRACT closure (Φ_c = CONTRACT)** rather than static Coq proofs.
