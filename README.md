@@ -42,7 +42,7 @@ Install when: you are designing a system, reviewing architecture, or want to und
 
 Full reference for writing PCD programs, compiling with `brikc`, certifying circuits (Φ_c = 1), debugging CMF errors, building AI safety policy circuits, and targeting multiple backends (native ELF, Rust, JS, Python, WASM).
 
-**NEW in v4.0:** Includes the BRIK-64 Registry & MCP platform layer — the 2-tool minimalist MCP architecture (`brik64.discover` + `brik64.execute`), inherited certification, domain packs, the Reuse Before Create workflow, and the API/Marketplace reference.
+**NEW in v5.0:** Includes Domain Declaration System, function parameter domains, compile-time warnings, and the BRIK-64 Registry & MCP platform layer — the 2-tool minimalist MCP architecture (`brik64.discover` + `brik64.execute`), inherited certification, domain packs, the Reuse Before Create workflow, and the API/Marketplace reference.
 
 Covers: PCD syntax, all 128 monomers (64 core + 64 extended) with signatures, CMF metrics, known bugs and workarounds, brikc CLI commands, auto-generated test suites, policy circuit templates, Registry MCP tools, domain packs, composition API.
 
@@ -105,6 +105,17 @@ The BRIK-64 MCP server follows 2026 best practices: **2 tools, not 10.**
 **~800 tokens** total schema (vs 12K+ for 10 tools). Preserves **98% of context window** for reasoning.
 
 Procedural knowledge lives in **skills** loaded on-demand, not in tool schemas.
+
+---
+
+## v5.0 Features
+
+BRIK-64 v5.0.0-beta.1 introduces the **Domain Declaration System** — compile-time domain verification for every value in a PCD program.
+
+- **Domain declarations:** Annotate variables with their valid ranges using `domain` blocks. The compiler proves at compile time that values stay within declared domains, eliminating an entire class of runtime errors.
+- **Function parameter domains:** Function signatures now accept `domain` annotations on parameters, enabling callers and callees to share verified contracts without runtime checks.
+- **Compile-time warnings:** `brikc` emits warnings when domain narrowing occurs implicitly (e.g., passing a wider domain into a narrower parameter), giving developers visibility into potential precision loss before code ships.
+- **Test suite:** 15,424 tests across all backends (native, Rust, JS, Python, WASM).
 
 ---
 
