@@ -9,10 +9,10 @@ triggers:
   - compiling to BIR/Rust/JS/Python/native/wasm32
   - lifting source code to PCD
   - managing PCD packages
-version: 4.0.0-beta.2
+version: 5.0.0-beta.1
 ---
 
-# PCD System — BRIK-64 BETA 4.0.0-beta.2
+# PCD System — BRIK-64 BETA 5.0.0-beta.1
 
 Complete reference for writing PCD programs, using the brikc compiler, and working with the BRIK-64 Registry platform.
 
@@ -348,8 +348,17 @@ brikc self-verify                           # Verify all 128 monomers
 brikc catalog list
 brikc catalog show <N>
 
-# lift — reverse compile source to PCD (10 languages)
-brikc lift <file>            # JS, TS, TSX, JSX, Python, Rust, C, C++, Go, COBOL
+# lift — reverse compile source to PCD (10 languages, SSA transform)
+brikc lift <file>            # JS, TS, TSX, JSX, Python, Rust, C, C++, Go, COBOL, PHP, Java
+brikc lift app.tsx           # TSX/JSX supported
+# SSA transform: variable reassignment (total = total + x) → SSA form automatically
+# Two-tier certification: CORE (Phi_c=1) for core monomers, CONTRACT for extended
+
+# Full roundtrip: lift → check → build → execute
+brikc lift calcPrice.js -o calcPrice.pcd
+brikc check calcPrice.pcd
+brikc build calcPrice.pcd -t python -o dist/
+python3 dist/calcPrice.py
 
 # policy — AI safety policy circuits
 brikc policy new --template <TEMPLATE>   # no_network, no_filesystem, memory_bound, sandbox, allow_all
