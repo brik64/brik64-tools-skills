@@ -1,6 +1,6 @@
 ---
 name: brik64-python
-description: "Use the brik64 Python package (v4.0.0-beta.1) to apply Digital Circuitality in Python projects. Covers installation, all 128 monomers (64 core + 64 extended), EVA composition, and integration patterns. Use when writing Python code with BRIK-64 libraries."
+description: "Use the brik64 Python package (v4.0.0-beta.1) to apply Digital Circuitality in Python projects. Covers installation, all 128 monomers (64 core + 64 extended), EVA composition, and integration patterns. Wrapping arithmetic. Use when writing Python code with BRIK-64 libraries."
 version: 4.0.0-beta.1
 ---
 
@@ -36,14 +36,18 @@ from brik64.eva import seq, par, cond, pipeline
 
 ---
 
-## Arithmetic (saturating — never raises, never overflows)
+## 128 Monomers (64 core + 64 extended)
+
+The SDK exports all 128 monomers across 8 families (core) plus 8 extended families.
+
+## Arithmetic (wrapping — never raises, wraps at 256)
 
 ```python
 from brik64.mc import arithmetic
 
-total     = arithmetic.add8(200, 100)      # 255 (saturating)
-diff      = arithmetic.sub8(10, 20)        # 0 (saturating)
-product   = arithmetic.mul8(20, 20)        # 255 (saturating)
+total     = arithmetic.add8(200, 100)      # 44 (wrapping: 300 % 256)
+diff      = arithmetic.sub8(10, 20)        # 246 (wrapping)
+product   = arithmetic.mul8(20, 20)        # 144 (wrapping: 400 % 256)
 q, r      = arithmetic.div8(17, 5)         # (3, 2) — always tuple
 remainder = arithmetic.mod8(17, 5)         # 2
 neg       = arithmetic.neg8(1)             # 255

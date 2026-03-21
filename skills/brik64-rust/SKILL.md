@@ -1,6 +1,6 @@
 ---
 name: brik64-rust
-description: "Use the brik64 Rust crate (v4.0.0-beta.1) to apply Digital Circuitality in Rust projects. Covers installation, all 128 monomers (64 core + 64 extended), EVA composition, integration patterns, and the methodology vs. certification distinction. Use when writing Rust code with BRIK-64 libraries."
+description: "Use the brik64 Rust crate (v4.0.0-beta.1) to apply Digital Circuitality in Rust projects. Covers installation, all 128 monomers (64 core + 64 extended), EVA composition, integration patterns, and the methodology vs. certification distinction. Wrapping arithmetic. Use when writing Rust code with BRIK-64 libraries."
 version: 4.0.0-beta.1
 ---
 
@@ -53,14 +53,18 @@ use brik64::{mc, eva};
 
 ---
 
-## Arithmetic (saturating — never panics, never overflows)
+## 128 Monomers (64 core + 64 extended)
+
+The crate exports all 128 monomers across 8 families (core) plus 8 extended families.
+
+## Arithmetic (wrapping — never panics, wraps at 256)
 
 ```rust
 use brik64::mc::arithmetic::*;
 
-let sum   = add8(200, 100);      // 255 (saturating)
-let diff  = sub8(10, 20);        // 0 (saturating)
-let prod  = mul8(20, 20);        // 255 (saturating)
+let sum   = add8(200, 100);      // 44 (wrapping: 300 % 256)
+let diff  = sub8(10, 20);        // 246 (wrapping)
+let prod  = mul8(20, 20);        // 144 (wrapping: 400 % 256)
 let (q,r) = div8(17, 5);         // (3, 2) — always returns tuple
 let rem   = mod8(17, 5);         // 2
 let n     = neg8(1);             // 255

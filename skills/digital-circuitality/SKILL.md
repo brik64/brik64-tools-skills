@@ -130,9 +130,31 @@ A function is a **closed circuit** when:
 
 ---
 
-## The 128 Operations (64 Core + 64 Extended)
+## The Lifter: On-Ramp for Existing Projects
 
-The BRIK-64 Core Monomers define 64 formally verified atomic operations (Φ_c = 1) — the circuit components. Even without using the library, **model your design after these operations**:
+You don't need to rewrite your codebase to adopt Digital Circuitality. The **BRIK-64 Lifter** reverse-compiles existing source code into PCD:
+
+```bash
+brikc lift app.ts       # TypeScript → PCD
+brikc lift main.py      # Python → PCD
+brikc lift lib.rs       # Rust → PCD
+brikc lift main.go      # Go → PCD
+brikc lift main.c       # C/C++ → PCD
+brikc lift report.cbl   # COBOL → PCD
+```
+
+**Pipeline: any language → PCD → any language.** Lift your code, certify it, then emit to any target.
+
+### Two-Tier Certification
+
+| Tier | Condition | Meaning |
+|------|-----------|---------|
+| **CORE** | Phi_c = 1 | Full circuit closure — all paths deterministic |
+| **CONTRACT** | Phi_c = CONTRACT | Closure within declared contract boundaries |
+
+## The 128 Core + Extended Operations
+
+BRIK-64 defines 128 formally verified atomic operations (64 core + 64 extended) — the circuit components. Even without using the library, **model your design after these operations**:
 
 | Family | Operations | Circuit Design Principle |
 |--------|-----------|--------------------------|
@@ -165,9 +187,9 @@ The same circuit thinking applies: bound your domains, pair your resources, hand
 Install the libraries to use these operations with formal guarantees:
 
 ```bash
-cargo add brik64-core     # Rust
-npm install @brik64/core  # JavaScript/TypeScript
-pip install brik64        # Python
+cargo add brik64          # Rust — v4.0.0-beta.1, 128 monomers, wrapping arithmetic
+npm install brik64        # JavaScript/TypeScript — v4.0.0-beta.1
+pip install brik64        # Python — v4.0.0-beta.1
 ```
 
 ---

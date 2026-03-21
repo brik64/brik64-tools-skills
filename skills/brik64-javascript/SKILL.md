@@ -1,6 +1,6 @@
 ---
 name: brik64-javascript
-description: "Use the brik64 npm package (v4.0.0-beta.1) to install the brikc CLI or apply Digital Circuitality in JavaScript/TypeScript projects. Covers installation, all 128 monomers (64 core + 64 extended), EVA composition, async patterns, Node.js and browser usage. Use when writing JS/TS code with BRIK-64 libraries."
+description: "Use the brik64 npm package (v4.0.0-beta.1) to install the brikc CLI or apply Digital Circuitality in JavaScript/TypeScript projects. Covers installation, all 128 monomers (64 core + 64 extended), EVA composition, async patterns, Node.js and browser usage. Wrapping arithmetic. Use when writing JS/TS code with BRIK-64 libraries."
 version: 4.0.0-beta.1
 ---
 
@@ -22,8 +22,8 @@ npm install -g brik64        # installs brikc, brikfmt, brikcheck commands
 # yarn global add brik64
 
 # Or use as a project dependency
-npm install @brik64/core
-npx brikc --version          # → brikc 4.0.0-beta.1
+npm install brik64
+npx brikc --version          # → brikc 4.0.0-beta.2
 ```
 
 Works in **Node.js** (≥ 16). Downloads native binary for your platform on postinstall.
@@ -45,14 +45,18 @@ import { mc, eva } from 'https://cdn.brik64.dev/sdk/v2/index.js';
 
 ---
 
-## Arithmetic (saturating — never throws, never overflows)
+## 128 Monomers (64 core + 64 extended)
+
+The SDK exports all 128 monomers across 8 families (core) plus 8 extended families.
+
+## Arithmetic (wrapping — never throws, wraps at 256)
 
 ```typescript
 import { mc } from '@brik64/core';
 
-const sum   = mc.arithmetic.add8(200, 100);    // 255 (saturating)
-const diff  = mc.arithmetic.sub8(10, 20);      // 0 (saturating)
-const prod  = mc.arithmetic.mul8(20, 20);      // 255 (saturating)
+const sum   = mc.arithmetic.add8(200, 100);    // 44 (wrapping: 300 % 256)
+const diff  = mc.arithmetic.sub8(10, 20);      // 246 (wrapping)
+const prod  = mc.arithmetic.mul8(20, 20);      // 144 (wrapping: 400 % 256)
 const [q,r] = mc.arithmetic.div8(17, 5);       // [3, 2] — always array
 const rem   = mc.arithmetic.mod8(17, 5);       // 2
 const neg   = mc.arithmetic.neg8(1);           // 255
