@@ -1,12 +1,12 @@
 ---
 name: pcd-system
-description: Complete PCD language reference + brikc CLI for BRIK-64 BETA 4.0.0-beta.2. Covers syntax, all 128 monomers (64 core + 64 extended), CMF debug, policy circuits, package manager, Lifter (10 languages), and multi-target compilation. Use when writing .pcd files or using the brikc compiler.
+description: Complete PCD language reference + brikc CLI for BRIK-64 BETA 5.0.0-beta.1. Covers syntax, all 128 monomers (64 core + 64 extended), CMF debug, policy circuits, package manager, Lifter (12 languages, 100% liftability, SSA transform), two-tier certification (CORE + CONTRACT), and 13-target compilation. Use when writing .pcd files or using the brikc compiler.
 triggers:
   - writing PCD programs
   - using brikc CLI
   - building AI safety policy circuits
   - debugging CMF errors
-  - compiling to BIR/Rust/JS/Python/native/wasm32
+  - compiling to BIR/Rust/JS/TS/Python/C/C++/Go/COBOL/PHP/Java/Swift/WASM/native
   - lifting source code to PCD
   - managing PCD packages
 version: 5.0.0-beta.1
@@ -33,13 +33,15 @@ brikc check program.pcd                    # validate circuit
 brikc compile --input program.pcd --target bir --output program.bir  # build
 brikc run program.pcd                      # execute via BIR
 
-# Lift source code to PCD (10 languages)
+# Lift source code to PCD (12 languages, 100% liftability)
 brikc lift app.js          # JS, TS, TSX, JSX
 brikc lift main.py         # Python
 brikc lift lib.rs          # Rust
 brikc lift main.c          # C, C++
 brikc lift main.go         # Go
 brikc lift report.cbl      # COBOL
+brikc lift index.php       # PHP
+brikc lift Main.java       # Java
 
 # Policy circuits (5 templates)
 brikc policy new --template no_network      # no_network, no_filesystem, memory_bound, sandbox, allow_all
@@ -326,7 +328,16 @@ let result = if (check) { path_a(x) } else { path_b(x) };
 brikc compile --target bir program.pcd      # BIR bytecode (default)
 brikc compile --target rust program.pcd     # Rust source
 brikc compile --target js program.pcd       # JavaScript
+brikc compile --target typescript program.pcd # TypeScript
 brikc compile --target python program.pcd   # Python
+brikc compile --target c program.pcd        # C
+brikc compile --target cpp program.pcd      # C++
+brikc compile --target go program.pcd       # Go
+brikc compile --target cobol program.pcd    # COBOL
+brikc compile --target php program.pcd      # PHP
+brikc compile --target java program.pcd     # Java
+brikc compile --target swift program.pcd    # Swift
+brikc compile --target wasm program.pcd     # WASM
 brikc compile --target native program.pcd   # ELF x86-64
 
 # Run directly
@@ -348,7 +359,7 @@ brikc self-verify                           # Verify all 128 monomers
 brikc catalog list
 brikc catalog show <N>
 
-# lift — reverse compile source to PCD (10 languages, SSA transform)
+# lift — reverse compile source to PCD (12 languages, SSA transform, 100% liftability)
 brikc lift <file>            # JS, TS, TSX, JSX, Python, Rust, C, C++, Go, COBOL, PHP, Java
 brikc lift app.tsx           # TSX/JSX supported
 # SSA transform: variable reassignment (total = total + x) → SSA form automatically
