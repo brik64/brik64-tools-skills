@@ -1,9 +1,9 @@
 ---
 name: pcd-system
-description: Complete PCD language reference + brikc CLI for BRIK-64 BETA 5.0.0-beta.1. Covers syntax, all 128 monomers (64 core + 64 extended), CMF debug, policy circuits, package manager, Lifter (12 languages, 100% liftability, SSA transform), two-tier certification (CORE + CONTRACT), and 13-target compilation. Use when writing .pcd files or using the brikc compiler.
+description: Complete PCD language reference + brik64 CLI for BRIK-64 BETA 5.0.0-beta.1. Covers syntax, all 128 monomers (64 core + 64 extended), CMF debug, policy circuits, package manager, Lifter (12 languages, 100% liftability, SSA transform), two-tier certification (CORE + CONTRACT), and 13-target compilation. Use when writing .pcd files or using the public brik64 CLI.
 triggers:
   - writing PCD programs
-  - using brikc CLI
+  - using brik64 CLI
   - building AI safety policy circuits
   - debugging CMF errors
   - compiling to BIR/Rust/JS/TS/Python/C/C++/Go/COBOL/PHP/Java/Swift/WASM/native
@@ -14,45 +14,49 @@ version: 5.0.0-beta.1
 
 # PCD System — BRIK-64 BETA 5.0.0-beta.1
 
-Complete reference for writing PCD programs, using the brikc compiler, and working with the BRIK-64 Registry platform.
+Complete reference for writing PCD programs, using the public `brik64` CLI, and working with the BRIK-64 Registry platform.
+
+`brik64` is the public CLI name. If your current alpha install still exposes
+`brikc`, treat it as a temporary compatibility shim and substitute it in the
+same commands below.
 
 ---
 
 ## Quick Start
 
 ```bash
-# Install brikc (recommended)
+# Install brik64 (recommended)
 curl -fsSL https://brik64.dev/install | sh
 
 # Interactive banner (no args)
-brikc
+brik64
 
 # Full pipeline: lift → check → build → execute
-brikc lift app.ts                          # any language → PCD
-brikc check program.pcd                    # validate circuit
-brikc compile --input program.pcd --target bir --output program.bir  # build
-brikc run program.pcd                      # execute via BIR
+brik64 lift app.ts                          # any language → PCD
+brik64 check program.pcd                    # validate circuit
+brik64 compile --input program.pcd --target bir --output program.bir  # build
+brik64 run program.pcd                      # execute via BIR
 
 # Lift source code to PCD (12 languages, 100% liftability)
-brikc lift app.js          # JS, TS, TSX, JSX
-brikc lift main.py         # Python
-brikc lift lib.rs          # Rust
-brikc lift main.c          # C, C++
-brikc lift main.go         # Go
-brikc lift report.cbl      # COBOL
-brikc lift index.php       # PHP
-brikc lift Main.java       # Java
+brik64 lift app.js          # JS, TS, TSX, JSX
+brik64 lift main.py         # Python
+brik64 lift lib.rs          # Rust
+brik64 lift main.c          # C, C++
+brik64 lift main.go         # Go
+brik64 lift report.cbl      # COBOL
+brik64 lift index.php       # PHP
+brik64 lift Main.java       # Java
 
 # Policy circuits (5 templates)
-brikc policy new --template no_network      # no_network, no_filesystem, memory_bound, sandbox, allow_all
-brikc policy verify policy.pcd
-brikc policy list
+brik64 policy new --template no_network      # no_network, no_filesystem, memory_bound, sandbox, allow_all
+brik64 policy verify policy.pcd
+brik64 policy list
 
 # Package manager
-brikc pkg init                              # creates brik.toml
-brikc pkg add some-package
-brikc pkg publish                           # publish to registry.brik64.dev
-brikc pkg deps                              # show dependency tree
+brik64 pkg init                              # creates brik.toml
+brik64 pkg add some-package
+brik64 pkg publish                           # publish to registry.brik64.dev
+brik64 pkg deps                              # show dependency tree
 
 # Registry API
 # Live at registry.brik64.dev/v1
@@ -61,7 +65,7 @@ brikc pkg deps                              # show dependency tree
 pip install brik64
 
 # Verify
-brikc --version
+brik64 --version
 ```
 
 // Usage:
@@ -249,7 +253,7 @@ Stdlib location on ECO: `~/brik64/software/examples/stdlib/`
 
 ## CMF Error Reference
 
-CMF (Circuit Metric Failure) errors appear during `brikc check` or `brikc run`:
+CMF (Circuit Metric Failure) errors appear during `brik64 check` or `brik64 run`:
 
 | Code | Meaning | Fix |
 |------|---------|-----|
@@ -260,8 +264,8 @@ CMF (Circuit Metric Failure) errors appear during `brikc check` or `brikc run`:
 | CMF-005x | Import not found | Check path relative to .pcd file location |
 | CMF-006x | Circular import | Remove circular dependency |
 
-> `brikc check` validates syntax and circuit structure but does NOT validate monomer arity.
-> Arity errors only appear at `brikc run` (BIR interpreter) or compile time.
+> `brik64 check` validates syntax and circuit structure but does NOT validate monomer arity.
+> Arity errors only appear at `brik64 run` (BIR interpreter) or compile time.
 
 ---
 
@@ -321,70 +325,70 @@ let result = if (check) { path_a(x) } else { path_b(x) };
 
 ---
 
-## brikc CLI Reference — Verified Flags (4.0.0-beta.2)
+## brik64 CLI Reference — Verified Flags (4.0.0-beta.2)
 
 ```bash
 # Compile to target
-brikc compile --target bir program.pcd      # BIR bytecode (default)
-brikc compile --target rust program.pcd     # Rust source
-brikc compile --target js program.pcd       # JavaScript
-brikc compile --target typescript program.pcd # TypeScript
-brikc compile --target python program.pcd   # Python
-brikc compile --target c program.pcd        # C
-brikc compile --target cpp program.pcd      # C++
-brikc compile --target go program.pcd       # Go
-brikc compile --target cobol program.pcd    # COBOL
-brikc compile --target php program.pcd      # PHP
-brikc compile --target java program.pcd     # Java
-brikc compile --target swift program.pcd    # Swift
-brikc compile --target wasm program.pcd     # WASM
-brikc compile --target native program.pcd   # ELF x86-64
+brik64 compile --target bir program.pcd      # BIR bytecode (default)
+brik64 compile --target rust program.pcd     # Rust source
+brik64 compile --target js program.pcd       # JavaScript
+brik64 compile --target typescript program.pcd # TypeScript
+brik64 compile --target python program.pcd   # Python
+brik64 compile --target c program.pcd        # C
+brik64 compile --target cpp program.pcd      # C++
+brik64 compile --target go program.pcd       # Go
+brik64 compile --target cobol program.pcd    # COBOL
+brik64 compile --target php program.pcd      # PHP
+brik64 compile --target java program.pcd     # Java
+brik64 compile --target swift program.pcd    # Swift
+brik64 compile --target wasm program.pcd     # WASM
+brik64 compile --target native program.pcd   # ELF x86-64
 
 # Run directly
-brikc run program.pcd                       # Compile + execute BIR
+brik64 run program.pcd                       # Compile + execute BIR
 
 # Check without compiling
-brikc check program.pcd                     # Type check + CMF
+brik64 check program.pcd                     # Type check + CMF
 
 # Format
-brikc fmt program.pcd                       # Format PCD source
+brik64 fmt program.pcd                       # Format PCD source
 
 # REPL
-brikc repl                                  # Interactive mode
+brik64 repl                                  # Interactive mode
 
 # Self-verify
-brikc self-verify                           # Verify all 128 monomers
+brik64 self-verify                           # Verify all 128 monomers
 
 # catalog — list monomers
-brikc catalog list
-brikc catalog show <N>
+brik64 catalog list
+brik64 catalog show <N>
 
 # lift — reverse compile source to PCD (12 languages, SSA transform, 100% liftability)
-brikc lift <file>            # JS, TS, TSX, JSX, Python, Rust, C, C++, Go, COBOL, PHP, Java
-brikc lift app.tsx           # TSX/JSX supported
+brik64 lift <file>            # JS, TS, TSX, JSX, Python, Rust, C, C++, Go, COBOL, PHP, Java
+brik64 lift app.tsx           # TSX/JSX supported
 # SSA transform: variable reassignment (total = total + x) → SSA form automatically
 # Two-tier certification: CORE (Phi_c=1) for core monomers, CONTRACT for extended
 
 # Full roundtrip: lift → check → build → execute
-brikc lift calcPrice.js -o calcPrice.pcd
-brikc check calcPrice.pcd
-brikc build calcPrice.pcd -t python -o dist/
+brik64 lift calcPrice.js -o calcPrice.pcd
+brik64 check calcPrice.pcd
+brik64 build calcPrice.pcd -t python -o dist/
 python3 dist/calcPrice.py
 
 # policy — AI safety policy circuits
-brikc policy new --template <TEMPLATE>   # no_network, no_filesystem, memory_bound, sandbox, allow_all
-brikc policy verify <file.pcd>
-brikc policy list
+brik64 policy new --template <TEMPLATE>   # no_network, no_filesystem, memory_bound, sandbox, allow_all
+brik64 policy verify <file.pcd>
+brik64 policy list
 
 # pkg — package manager
-brikc pkg init               # creates brik.toml
-brikc pkg add <package>
-brikc pkg publish            # publishes to registry.brik64.dev
-brikc pkg deps               # dependency tree
+brik64 pkg init               # creates brik.toml
+brik64 pkg add <package>
+brik64 pkg publish            # publishes to registry.brik64.dev
+brik64 pkg deps               # dependency tree
 
 # self-hosting
-brikc self-host-status
-brikc self-certify-pcd-cli   # verify PCD CLI fixed-point (gen1==gen2)
+brik64 self-host-status
+brik64 self-certify-pcd-cli   # verify PCD CLI fixed-point (gen1==gen2)
 ```
 
 ---
@@ -436,7 +440,7 @@ python3 -c "import brik64; print(dir(brik64.mc))"
 
 # npm / Node.js
 npm install brik64          # v4.0.0-beta.1 — 128 monomers, wrapping arithmetic
-npx brikc --version
+npx brik64 --version
 
 # Rust
 cargo add brik64            # v4.0.0-beta.1 — 128 monomers, wrapping arithmetic
@@ -458,16 +462,16 @@ npm install -g brik64
 # pip
 pip install brik64
 
-# Manual — Linux x86-64
-curl -L https://github.com/brik64/brik64-dist-releases/releases/download/beta-4.0.0-beta.2/brikc-beta-linux-x86_64 -o brikc && chmod +x brikc
+# Manual — Linux x86-64 (legacy artifact name during alpha transition)
+curl -L https://github.com/brik64/brik64-dist-releases/releases/download/beta-4.0.0-beta.2/brikc-beta-linux-x86_64 -o brik64 && chmod +x brik64
 
-# Manual — macOS Apple Silicon (M1/M2/M3/M4)
-curl -L .../brikc-beta-macos-arm64 -o brikc && chmod +x brikc
-xattr -d com.apple.quarantine brikc   # Remove macOS quarantine
+# Manual — macOS Apple Silicon (M1/M2/M3/M4), legacy artifact name during alpha transition
+curl -L .../brikc-beta-macos-arm64 -o brik64 && chmod +x brik64
+xattr -d com.apple.quarantine brik64   # Remove macOS quarantine
 
-# Manual — macOS Intel
-curl -L .../brikc-beta-macos-intel -o brikc && chmod +x brikc
-xattr -d com.apple.quarantine brikc
+# Manual — macOS Intel, legacy artifact name during alpha transition
+curl -L .../brikc-beta-macos-intel -o brik64 && chmod +x brik64
+xattr -d com.apple.quarantine brik64
 ```
 
 **Platform support in BETA 4.0.0-beta.2:**
@@ -487,7 +491,7 @@ xattr -d com.apple.quarantine brikc
 5. **native target generates ELF x86-64** — Not usable directly on macOS arm64
 6. **wasm32 target generates WAT text** — Needs wat2wasm to convert to binary
 7. **while loops broken in native ELF** — SSA bug; use `loop(N) { if(cond){...} }` instead
-8. **LSP protocol incomplete** — `brikc lsp` starts but doesn't respond to JSON-RPC
+8. **LSP protocol incomplete** — `brik64 lsp` starts but doesn't respond to JSON-RPC
 9. **ENV in native ELF reads argv[1]** — In BIR interpreter reads actual env var
 10. **Python backend**: variable `hex` renamed to `_brik_hex`; list indexing uses `[i]` not `.get(i)` (fixed beta.3)
 11. **JS backend**: generated code requires `node file.js` to produce output (fixed in beta.3 — adds `execute()` call)

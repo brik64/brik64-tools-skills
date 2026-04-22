@@ -15,7 +15,7 @@ Are you using brik64 libraries in an existing codebase?
   ├─ JavaScript / TypeScript → install: brik64-javascript
   └─ Python             → install: brik64-python
 
-Are you writing PCD programs, using brikc CLI, or building policy circuits?
+Are you writing PCD programs, using brik64 CLI, or building policy circuits?
   └─ YES → install: pcd-system
 
 Are you working with the BRIK-64 Registry, MCP, or Marketplace?
@@ -23,6 +23,13 @@ Are you working with the BRIK-64 Registry, MCP, or Marketplace?
 ```
 
 Install all 5 for full coverage. Each skill is independent.
+
+Public naming contract:
+
+- public CLI name: `brik64`
+- internal compiler/testing name: `brikc`
+- during alpha transition some engineering artifacts may still carry `brikc` as
+  a compatibility or legacy identifier
 
 ---
 
@@ -38,20 +45,20 @@ Install when: you are designing a system, reviewing architecture, or want to und
 ---
 
 ### `pcd-system`
-**The complete PCD + brikc + Registry environment.**
+**The complete PCD + brik64 CLI + Registry environment.**
 
-Full reference for writing PCD programs, compiling with `brikc`, certifying circuits (Φ_c = 1), debugging CMF errors, building AI safety policy circuits, and targeting multiple backends (native ELF, Rust, JS, Python, WASM).
+Full reference for writing PCD programs, compiling with `brik64`, certifying circuits (Φ_c = 1), debugging CMF errors, building AI safety policy circuits, and targeting multiple backends (native ELF, Rust, JS, Python, WASM).
 
 **NEW in v5.0:** Includes Domain Declaration System, function parameter domains, compile-time warnings, and the BRIK-64 Registry & MCP platform layer — the 2-tool minimalist MCP architecture (`brik64.discover` + `brik64.execute`), inherited certification, domain packs, the Reuse Before Create workflow, and the API/Marketplace reference.
 
-Covers: PCD syntax, all 128 monomers (64 core + 64 extended) with signatures, CMF metrics, known bugs and workarounds, brikc CLI commands, auto-generated test suites, policy circuit templates, Registry MCP tools, domain packs, composition API.
+Covers: PCD syntax, all 128 monomers (64 core + 64 extended) with signatures, CMF metrics, known bugs and workarounds, brik64 CLI commands, auto-generated test suites, policy circuit templates, Registry MCP tools, domain packs, composition API.
 
-Install when: you are writing `.pcd` files, using the brikc compiler, building ALLOW/BLOCK guardrails for AI agents, or working with the BRIK-64 Registry/MCP/Marketplace.
+Install when: you are writing `.pcd` files, using the brik64 compiler, building ALLOW/BLOCK guardrails for AI agents, or working with the BRIK-64 Registry/MCP/Marketplace.
 
 ---
 
 ### `brik64-rust`
-**Use brik64-core in Rust — no brikc needed.**
+**Use brik64-core in Rust — no public CLI needed.**
 
 The `brik64-core` crate brings all 128 monomers (64 core + 64 extended) and EVA algebra operators to native Rust. Use saturating arithmetic, verified crypto, and composable pipelines directly in your Rust code. No PCD files, no compiler invocation.
 
@@ -60,7 +67,7 @@ Install when: you are working in a Rust project and want verified, formally-prov
 ---
 
 ### `brik64-javascript`
-**Use @brik64/core in JavaScript / TypeScript — no brikc needed.**
+**Use @brik64/core in JavaScript / TypeScript — no public CLI needed.**
 
 The `@brik64/core` npm package brings 128 monomers (64 core + 64 extended) to Node.js and browsers. Works with Web Crypto API. Full EVA algebra pipeline composition in TypeScript.
 
@@ -69,7 +76,7 @@ Install when: you are working in a JS/TS project and want Digital Circuitality p
 ---
 
 ### `brik64-python`
-**Use brik64 in Python — no brikc needed.**
+**Use brik64 in Python — no public CLI needed.**
 
 The `brik64` PyPI package brings 128 monomers (64 core + 64 extended) to Python 3.10+. Identical semantics to the Rust and JS versions. Pipeline composition via `eva.pipeline()`.
 
@@ -114,7 +121,7 @@ BRIK-64 v5.0.0-beta.1 introduces the **Domain Declaration System** — compile-t
 
 - **Domain declarations:** Annotate variables with their valid ranges using `domain` blocks. The compiler proves at compile time that values stay within declared domains, eliminating an entire class of runtime errors.
 - **Function parameter domains:** Function signatures now accept `domain` annotations on parameters, enabling callers and callees to share verified contracts without runtime checks.
-- **Compile-time warnings:** `brikc` emits warnings when domain narrowing occurs implicitly (e.g., passing a wider domain into a narrower parameter), giving developers visibility into potential precision loss before code ships.
+- **Compile-time warnings:** `brik64` emits warnings when domain narrowing occurs implicitly (e.g., passing a wider domain into a narrower parameter), giving developers visibility into potential precision loss before code ships.
 - **Test suite:** 15,424 tests across all backends (native, Rust, JS, Python, WASM).
 
 ---
@@ -142,5 +149,5 @@ All language SDKs (Rust, JavaScript, Python) expose extended monomers in v4.0.0-
 
 `brik64/brik64-tools-skills` — maintained by BRIK-64 Inc.
 
-Documentation: https://docs.brik64.dev
+Documentation: https://docs.brik64.com
 Contact: info@brik64.com

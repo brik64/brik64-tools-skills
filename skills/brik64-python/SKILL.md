@@ -8,7 +8,7 @@ version: 4.0.0-beta.1
 
 Apply Digital Circuitality in your Python projects.
 
-**Docs:** https://docs.brik64.dev/installation
+**Docs:** https://docs.brik64.com/installation
 **Package:** https://pypi.org/project/brik64/
 
 ---
@@ -185,8 +185,8 @@ It does **not** give you:
 - ❌ Auto-generated test suites
 - ❌ Registry certification
 
-For formal certification → write in PCD and compile to Python: `brikc compile src/main.pcd --target py --emit-tests`
-→ https://docs.brik64.dev/pcd/tutorial
+For formal certification → write in PCD and compile to Python: `brik64 compile src/main.pcd --target py --emit-tests`
+→ https://docs.brik64.com/pcd/tutorial
 
 ---
 

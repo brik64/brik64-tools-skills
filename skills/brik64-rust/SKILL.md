@@ -8,7 +8,7 @@ version: 4.0.0-beta.1
 
 Apply Digital Circuitality inside your existing Rust projects using the `brik64` crate.
 
-**Docs:** https://brik64.dev/docs
+**Docs:** https://docs.brik64.com
 **Crate:** https://crates.io/crates/brik64
 
 ---
@@ -227,7 +227,7 @@ It does **not** give you:
 - ❌ Registry certification badge
 - ❌ Φ_c = 1 compiler enforcement
 
-For formal certification → write in PCD: https://docs.brik64.dev/pcd/tutorial
+For formal certification → write in PCD: https://docs.brik64.com/pcd/tutorial
 
 ---
 

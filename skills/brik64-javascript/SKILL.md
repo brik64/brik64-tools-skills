@@ -1,6 +1,6 @@
 ---
 name: brik64-javascript
-description: "Use the brik64 npm package (v4.0.0-beta.1) to install the brikc CLI or apply Digital Circuitality in JavaScript/TypeScript projects. Covers installation, all 128 monomers (64 core + 64 extended), EVA composition, async patterns, Node.js and browser usage. Wrapping arithmetic. Use when writing JS/TS code with BRIK-64 libraries."
+description: "Use the brik64 npm package (v4.0.0-beta.1) to install the public brik64 CLI or apply Digital Circuitality in JavaScript/TypeScript projects. Covers installation, all 128 monomers (64 core + 64 extended), EVA composition, async patterns, Node.js and browser usage. Wrapping arithmetic. Use when writing JS/TS code with BRIK-64 libraries."
 version: 4.0.0-beta.1
 ---
 
@@ -8,7 +8,7 @@ version: 4.0.0-beta.1
 
 Apply Digital Circuitality in your JavaScript and TypeScript projects.
 
-**Docs:** https://brik64.dev/docs
+**Docs:** https://docs.brik64.com
 **Package:** https://www.npmjs.com/package/brik64
 
 ---
@@ -16,14 +16,14 @@ Apply Digital Circuitality in your JavaScript and TypeScript projects.
 ## Installation
 
 ```bash
-# Install CLI + SDK (downloads brikc native binary)
-npm install -g brik64        # installs brikc, brikfmt, brikcheck commands
+# Install CLI + SDK
+npm install -g brik64
 # pnpm add -g brik64
 # yarn global add brik64
 
 # Or use as a project dependency
 npm install brik64
-npx brikc --version          # → brikc 4.0.0-beta.2
+npx brik64 --version
 ```
 
 Works in **Node.js** (≥ 16). Downloads native binary for your platform on postinstall.
@@ -205,8 +205,8 @@ It does **not** give you:
 - ❌ Auto-generated test suites from formal proof
 - ❌ Registry certification badge
 
-For formal certification → write in PCD and compile to JS: `brikc compile src/main.pcd --target js --emit-tests`
-→ https://docs.brik64.dev/pcd/tutorial
+For formal certification → write in PCD and compile to JS: `brik64 compile src/main.pcd --target js --emit-tests`
+→ https://docs.brik64.com/pcd/tutorial
 
 ---
 
