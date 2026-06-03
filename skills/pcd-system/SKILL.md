@@ -22,7 +22,7 @@ Current public surface:
 
 - `brik` CLI public beta
 - `.brik` local traceability metadata
-- PCD 1.0 working surface in preparation
+- PCD 1.0 public standard: https://github.com/brik64/pcd-standard
 - agent workflows that point to docs.brik64.com
 
 Roadmap or non-current surface unless separately published:
@@ -44,16 +44,15 @@ npm install -g @brik64/cli@beta
 brik --version
 brik help
 brik init
-brik pcd generate order-risk
-brik skill diff --target AGENTS.md
+brik certify path/to/program.pcd
+brik emit path/to/program.pcd
 ```
 
 ## PCD Orientation
 
-Treat PCD as a circuit description format for bounded logic. In public beta
-writing, describe it as a working surface in preparation, not as a completed
-public standard until `brik64/pcd-standard` and docs.brik64.com publish the
-versioned standard.
+Treat PCD as Program Circuit Description: a circuit description format for
+bounded logic. In public beta writing, point to `brik64/pcd-standard` and
+docs.brik64.com for the current versioned standard.
 
 Current agent posture:
 

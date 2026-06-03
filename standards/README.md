@@ -14,7 +14,7 @@ Current maturity:
 
 ### `brik64/pcd-standard`
 
-Purpose: define the public Polymer Circuit Description format as a versioned
+Purpose: define the public Program Circuit Description format as a versioned
 standard.
 
 Required artifacts:

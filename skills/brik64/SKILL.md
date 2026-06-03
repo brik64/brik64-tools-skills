@@ -69,7 +69,7 @@ brik help
 Current version boundary:
 
 - Public package/release version: `0.1.0-beta.2`
-- Runtime banner may still report: `0.1.0-beta.0`
+- Runtime banner should be checked with `brik --version` or `brik version`.
 
 Treat runtime output as observed evidence. Treat package metadata and GitHub
 Release as the public package surface. If they disagree, report the drift instead
@@ -94,7 +94,7 @@ Rules:
 
 ## PCD 1.0 Working Model
 
-PCD means Polymer Circuit Description. In public beta work, treat PCD as a
+PCD means Program Circuit Description. In public beta work, treat PCD as a
 reviewable structural description for logic, not as a free-form script.
 
 Agent checklist for PCD work:
@@ -116,65 +116,40 @@ Use docs before writing PCD:
 
 ## CLI Workflow
 
-Useful public beta commands:
+Current public beta commands:
 
 ```bash
 brik help
 brik version
 brik --version
-brik doctor
 brik init
-brik pcd generate order-risk
-brik certify
-brik polymerize
-brik compile all
-brik test all
-brik update check
-brik update install --manifest manifest.json
-brik engine status
+brik certify <file.pcd>
+brik emit <file.pcd>
+brik emit <file.pcd> --target ts --out out-ts --tests
+brik emit <file.pcd> --target rust --out out-rust --tests
+brik emit <file.pcd> --target python --out out-python --tests
 ```
 
-Use commands only within their documented scope. If a command is missing or
-behaves differently in the installed beta, report the observed output and the
-installed package version.
+Use commands only within their documented scope. If docs mention a command that
+is missing from the installed beta, report the observed output and installed
+package version before continuing. Advanced PCD generation, polymerization,
+compiler, update, engine, and platform commands require current docs and release
+evidence before an agent treats them as available.
 
 ## Agent Instructions In `AGENTS.md`
 
-BRIK64 agent instructions are written only with explicit user consent.
+BRIK64 agent instructions are written only with explicit user consent. The
+current CLI beta does not expose `brik skill` subcommands, so agents must install
+or update skills through their host agent environment or by reviewing the public
+skills repository directly:
 
-Preview first:
-
-```bash
-brik skill diff --target AGENTS.md
-```
-
-Install:
-
-```bash
-brik skill install --target AGENTS.md
-```
-
-Update:
-
-```bash
-brik skill update --target AGENTS.md
-```
-
-Remove:
-
-```bash
-brik skill remove --target AGENTS.md
-```
-
-Check:
-
-```bash
-brik skill doctor
+```text
+https://github.com/brik64/brik64-tools-skills
 ```
 
 Rules:
 
-- `--target AGENTS.md` is the explicit write target.
+- `AGENTS.md` writes must be explicit, reviewable, and user-approved.
 - Preserve human-authored content outside the managed BRIK64 section.
 - Report exactly what changed.
 - The managed section is guidance for agents. It is not a certificate for the

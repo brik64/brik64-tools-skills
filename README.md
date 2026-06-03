@@ -133,18 +133,19 @@ patterns without adopting PCD.
 
 ---
 
-## Public Standards In Preparation
+## Public Standards
 
-BRIK64 needs dedicated public standards for:
+BRIK64 public standards are maintained in dedicated repositories:
 
-- PCD 1.0: the public Polymer Circuit Description format.
-- `.skill` 1.0: the public agent-skill package/instruction format.
+- PCD 1.0: the public Program Circuit Description format:
+  https://github.com/brik64/pcd-standard
+- `.brik` 1.0: the public BRIK64 workspace standard:
+  https://github.com/brik64/brik-standard
 
-Until those standards are published in dedicated repos and docs, use the current
-`brik64` skill plus https://docs.brik64.com as the active public guidance. Keep
-platform integrations, domain-system drafts, extended-operation drafts, and
-older major-version notes out of current public release instructions until they
-are published as versioned docs and repos.
+Use the current `brik64` skill plus https://docs.brik64.com as the active public
+guidance for agent work. Keep platform integrations, domain-system drafts,
+extended-operation drafts, and older major-version notes out of current public
+release instructions until they are published as versioned docs and repos.
 
 Planning checklist: [`standards/README.md`](standards/README.md).
 
