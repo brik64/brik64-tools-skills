@@ -1,7 +1,7 @@
 ---
 name: brik64-javascript
 description: "Historical JavaScript/TypeScript Digital Circuitality patterns for BRIK64 work. Check docs.brik64.com and the current public brik64 skill before installing packages or making SDK, certification, catalog, or extended-operation claims."
-version: 0.1.0-beta.2-public-reference
+version: 0.1.0-beta.3-public-reference
 ---
 
 # BRIK-64 for JavaScript / TypeScript

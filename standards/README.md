@@ -1,16 +1,16 @@
 # BRIK64 Public Standards Roadmap
 
 This repository hosts public agent skills. It does not replace the dedicated
-standard repositories that BRIK64 should publish for PCD 1.0 and `.skill` 1.0.
+standard repositories for PCD 1.0 and `.brik` 1.0.
 
 Current maturity:
 
-- PCD 1.0: public standard in preparation.
-- `.skill` 1.0: public agent-instruction standard in preparation.
+- PCD 1.0: public standard repository at https://github.com/brik64/pcd-standard.
+- `.brik` 1.0: public workspace standard repository at https://github.com/brik64/brik-standard.
 - docs.brik64.com: primary public documentation surface.
 - `brik64/brik64-tools-skills`: current public skill source for agents.
 
-## Planned Repositories
+## Public Standard Repositories
 
 ### `brik64/pcd-standard`
 
@@ -27,24 +27,26 @@ Required artifacts:
 - `LICENSE` or terms file appropriate for a public standard.
 - `AGENTS.md`: agent-readable usage and claim boundary.
 
-### `brik64/skill-standard`
+### `brik64/brik-standard`
 
-Purpose: define the public `.skill` packaging and instruction format for AI
-agents consuming BRIK64 workflows.
+Purpose: define the public `.brik` workspace format for local BRIK64 project
+metadata, traceability, evidence references, and agent-readable project state.
 
 Required artifacts:
 
 - `README.md`: standard overview, maturity label, and docs links.
-- `SPEC.md`: file layout, metadata, triggers, versioning, and validation rules.
+- `SPEC.md`: workspace layout, metadata, ledger, references, versioning, and
+  validation rules.
 - `VERSIONING.md`: compatibility, deprecation, and migration policy.
-- `EXAMPLES.md`: minimal skill, product skill, and claim-sensitive skill examples.
+- `EXAMPLES.md`: minimal workspace, evidence reference, and agent workflow examples.
 - `NOTICE`: BRIK64 Inc. ownership and attribution.
 - `LICENSE` or terms file appropriate for a public standard.
 - `AGENTS.md`: agent-readable usage and claim boundary.
 
 ## Publication Rule
 
-Do not present PCD 1.0 or `.skill` 1.0 as finalized public standards until:
+Do not present PCD 1.0 or `.brik` 1.0 as stronger than their current public
+repositories and docs support. Before using either as a public authority, verify:
 
 1. the dedicated repository exists;
 2. the standard has a versioned `SPEC.md`;

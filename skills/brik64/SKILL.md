@@ -1,7 +1,7 @@
 ---
 name: brik64
 description: Public BRIK64 operating skill for AI agents using the brik CLI, .brik traceability, PCD 1.0, local evidence, and claim-safe workflows. Use when working with BRIK64 projects, PCD files, agent instructions, CLI commands, evidence reports, or public BRIK64 documentation.
-version: 0.1.0-beta.2
+version: 0.1.0-beta.3
 triggers:
   - using brik CLI
   - BRIK64 project workflow
@@ -20,13 +20,13 @@ helping a user adopt the public BRIK64 CLI beta.
 
 BRIK64 is a local-first workflow for making critical software logic easier to
 inspect, describe, compose, and review with bounded evidence. The current public
-CLI package is `@brik64/cli@0.1.0-beta.2`.
+CLI package is `@brik64/cli@0.1.0-beta.3`.
 
 Primary documentation:
 
 - Docs: https://docs.brik64.com
 - CLI install: https://docs.brik64.com/cli/install
-- GitHub Release: https://github.com/brik64/brik64-cli/releases/tag/v0.1.0-beta.2
+- GitHub Release: https://github.com/brik64/brik64-cli/releases/tag/v0.1.0-beta.3
 - npm package: https://www.npmjs.com/package/@brik64/cli
 - Public skills repo: https://github.com/brik64/brik64-tools-skills
 
@@ -68,7 +68,7 @@ brik help
 
 Current version boundary:
 
-- Public package/release version: `0.1.0-beta.2`
+- Public package/release version: `0.1.0-beta.3`
 - Runtime banner should be checked with `brik --version` or `brik version`.
 
 Treat runtime output as observed evidence. Treat package metadata and GitHub

@@ -1,7 +1,7 @@
 ---
 name: brik64-python
 description: "Historical Python Digital Circuitality patterns for BRIK64 work. Check docs.brik64.com and the current public brik64 skill before installing packages or making SDK, certification, catalog, or extended-operation claims."
-version: 0.1.0-beta.2-public-reference
+version: 0.1.0-beta.3-public-reference
 ---
 
 # BRIK-64 for Python
@@ -10,7 +10,7 @@ Apply Digital Circuitality patterns in Python projects. Check
 https://docs.brik64.com and the current `brik64` skill before presenting package
 availability, SDK exports, or CLI behavior as current public truth.
 
-**Docs:** https://docs.brik64.com/installation
+**Docs:** https://docs.brik64.com
 **Package:** https://pypi.org/project/brik64/
 
 ---

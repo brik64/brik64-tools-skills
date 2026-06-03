@@ -6,7 +6,7 @@ triggers:
   - using brik CLI public beta
   - reviewing PCD examples
   - checking current docs before public claims
-version: 0.1.0-beta.2-public-reference
+version: 0.1.0-beta.3-public-reference
 ---
 
 # PCD System — Public Beta Reference Notes
@@ -16,7 +16,7 @@ public agent operation, install and use the `brik64` skill first, then check
 https://docs.brik64.com before making release, command, or capability claims.
 
 Current public CLI command: `brik`.
-Current public package: `@brik64/cli@0.1.0-beta.2`.
+Current public package: `@brik64/cli@0.1.0-beta.3`.
 
 Current public surface:
 
@@ -132,20 +132,15 @@ When you need command details, check docs.brik64.com and the installed CLI
 itself. Do not copy older `brik64` command examples into public instructions
 unless the current release proves that exact command.
 
-## Standards Work Needed
+## Standards Boundary
 
-PCD 1.0 should be promoted into a dedicated public standard repository and docs
-section before this skill presents a complete grammar or normative catalog.
+PCD 1.0 is maintained in the public standard repository:
 
-Required public-standard artifacts:
+```text
+https://github.com/brik64/pcd-standard
+```
 
-- `README.md`: human summary and current maturity label
-- `SPEC.md`: grammar, envelope, hashes, canonicalization, examples, and invalid cases
-- `VERSIONING.md`: compatibility rules and deprecation policy
-- `EXAMPLES.md`: minimal, realistic, tested examples
-- `NOTICE`: BRIK64 Inc. ownership and attribution
-- license or terms file appropriate for a public standard
-- agent-readable summary for tools that consume the standard
-
-Until then, this skill should orient agents and point them to docs, not define
-PCD 1.0 by itself.
+Use that repository and docs.brik64.com for current PCD 1.0 file format,
+authoring, examples, compatibility, and claim boundary. This skill orients
+agents; it should not replace the standard repository or present historical PCD
+notes as current normative grammar.

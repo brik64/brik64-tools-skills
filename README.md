@@ -36,7 +36,7 @@ independent.
 Public naming contract:
 
 - current public CLI command: `brik`
-- current public npm package: `@brik64/cli@0.1.0-beta.2`
+- current public npm package: `@brik64/cli@0.1.0-beta.3`
 - current docs: https://docs.brik64.com
 - internal or older engineering artifacts may still carry `brik64` or `brikc`
   identifiers; report drift instead of presenting legacy names as current truth
