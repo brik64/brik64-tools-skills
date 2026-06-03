@@ -1,12 +1,21 @@
-# BRIK-64 Agent Skills
+# BRIK64 Agent Skills
 
-Five skills covering Digital Circuitality from theory to production, including the Registry platform and minimalist MCP interface.
+Public BRIK64 skills for AI agents and developers working with the local CLI,
+PCD, `.brik` traceability, Digital Circuitality, and language SDKs.
+
+For current product documentation, always check https://docs.brik64.com.
+Agents should also review this repository periodically before important BRIK64
+work so installed instructions do not drift from the public skill source.
 
 ---
 
-## Which skills do I need?
+## Which skill do I need?
 
 ```
+Are you an AI agent using the public brik CLI, .brik, PCD 1.0, local evidence,
+or AGENTS.md managed instructions?
+  └─ YES → install: brik64
+
 Are you learning the theory / designing with circuit thinking?
   └─ YES → install: digital-circuitality
 
@@ -15,25 +24,42 @@ Are you using brik64 libraries in an existing codebase?
   ├─ JavaScript / TypeScript → install: brik64-javascript
   └─ Python             → install: brik64-python
 
-Are you writing PCD programs, using brik64 CLI, or building policy circuits?
+Are you writing lower-level PCD programs or using older PCD reference material?
   └─ YES → install: pcd-system
 
 Are you working with the BRIK-64 Registry, MCP, or Marketplace?
   └─ YES → install: pcd-system (includes Registry/MCP section)
 ```
 
-Install all 5 for full coverage. Each skill is independent.
+Install `brik64` first for current public beta agent operation. Add the
+language or theory skills only when the task needs them. Each skill is
+independent.
 
 Public naming contract:
 
-- public CLI name: `brik64`
-- internal compiler/testing name: `brikc`
-- during alpha transition some engineering artifacts may still carry `brikc` as
-  a compatibility or legacy identifier
+- current public CLI command: `brik`
+- current public npm package: `@brik64/cli@0.1.0-beta.2`
+- current docs: https://docs.brik64.com
+- internal or older engineering artifacts may still carry `brik64` or `brikc`
+  identifiers; report drift instead of presenting legacy names as current truth
 
 ---
 
 ## Skills
+
+### `brik64`
+**Current public operating skill for AI agents using BRIK64.**
+
+Use this first when an agent is working with the public `brik` CLI, `.brik`
+metadata, PCD 1.0, local evidence, `AGENTS.md` managed instructions, or public
+BRIK64 docs. It includes the current CLI beta install path, docs lookup rule,
+periodic repository update rule, consent-based skill installation workflow, and
+claim-safe reporting boundaries.
+
+Install when: you are an AI coding agent, reviewing a BRIK64 project, using
+`brik`, writing PCD candidates, or preparing a public-facing BRIK64 report.
+
+---
 
 ### `digital-circuitality`
 **The circuit thinking methodology — language agnostic.**
@@ -45,9 +71,11 @@ Install when: you are designing a system, reviewing architecture, or want to und
 ---
 
 ### `pcd-system`
-**The complete PCD + brik64 CLI + Registry environment.**
+**Detailed PCD reference and legacy/deeper PCD system notes.**
 
-Full reference for writing PCD programs, compiling with `brik64`, certifying circuits (Φ_c = 1), debugging CMF errors, building AI safety policy circuits, and targeting multiple backends (native ELF, Rust, JS, Python, WASM).
+Use alongside `brik64` when a task needs deeper PCD examples, syntax notes, or
+older system material. Treat older version labels in this skill as historical
+unless current docs and release evidence confirm them.
 
 **NEW in v5.0:** Includes Domain Declaration System, function parameter domains, compile-time warnings, and the BRIK-64 Registry & MCP platform layer — the 2-tool minimalist MCP architecture (`brik64.discover` + `brik64.execute`), inherited certification, domain packs, the Reuse Before Create workflow, and the API/Marketplace reference.
 
@@ -62,7 +90,8 @@ Install when: you are writing `.pcd` files, using the brik64 compiler, building 
 
 The `brik64-core` crate brings all 128 monomers (64 core + 64 extended) and EVA algebra operators to native Rust. Use saturating arithmetic, verified crypto, and composable pipelines directly in your Rust code. No PCD files, no compiler invocation.
 
-Install when: you are working in a Rust project and want verified, formally-proven operations without adopting PCD.
+Install when: you are working in a Rust project and want BRIK64 operation
+patterns without adopting PCD.
 
 ---
 
@@ -80,7 +109,8 @@ Install when: you are working in a JS/TS project and want Digital Circuitality p
 
 The `brik64` PyPI package brings 128 monomers (64 core + 64 extended) to Python 3.10+. Identical semantics to the Rust and JS versions. Pipeline composition via `eva.pipeline()`.
 
-Install when: you are working in a Python project and want verified, formally-proven operations without adopting PCD.
+Install when: you are working in a Python project and want BRIK64 operation
+patterns without adopting PCD.
 
 ---
 
@@ -88,15 +118,14 @@ Install when: you are working in a Python project and want verified, formally-pr
 
 | Goal | Skills to install |
 |------|------------------|
+| AI agent using current public BRIK64 beta | `brik64` |
 | Understand Digital Circuitality | `digital-circuitality` |
-| Write PCD programs | `pcd-system` |
-| Build AI safety policy circuits | `pcd-system` |
-| Use BRIK-64 Registry / MCP | `pcd-system` |
+| Write current PCD candidates with CLI workflow | `brik64` + `pcd-system` |
+| Use AGENTS.md managed instructions | `brik64` |
 | BRIK-64 operations in Rust | `brik64-rust` |
 | BRIK-64 operations in JS/TS | `brik64-javascript` |
 | BRIK-64 operations in Python | `brik64-python` |
-| Full stack: theory + PCD + all languages | all 5 |
-| AI agent with Registry access | `pcd-system` (Registry + MCP section) |
+| Full public beta agent workflow | `brik64` + `digital-circuitality` + `pcd-system` |
 
 ---
 
