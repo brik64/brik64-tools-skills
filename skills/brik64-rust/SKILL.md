@@ -1,12 +1,14 @@
 ---
 name: brik64-rust
-description: "Use the brik64 Rust crate (v4.0.0-beta.1) to apply Digital Circuitality in Rust projects. Covers installation, all 128 monomers (64 core + 64 extended), EVA composition, integration patterns, and the methodology vs. certification distinction. Wrapping arithmetic. Use when writing Rust code with BRIK-64 libraries."
-version: 4.0.0-beta.1
+description: "Historical Rust Digital Circuitality patterns for BRIK64 work. Check docs.brik64.com and the current public brik64 skill before installing crates or making SDK, certification, catalog, or extended-operation claims."
+version: 0.1.0-beta.2-public-reference
 ---
 
 # BRIK-64 for Rust
 
-Apply Digital Circuitality inside your existing Rust projects using the `brik64` crate.
+Apply Digital Circuitality patterns inside Rust projects. Check
+https://docs.brik64.com and the current `brik64` skill before presenting crate
+availability, SDK exports, or CLI behavior as current public truth.
 
 **Docs:** https://docs.brik64.com
 **Crate:** https://crates.io/crates/brik64
@@ -17,16 +19,17 @@ Apply Digital Circuitality inside your existing Rust projects using the `brik64`
 
 ```toml
 [dependencies]
-brik64 = "4.0.0-beta.1"
+# Historical SDK examples below may reference older packages or APIs.
+# Verify current crate availability before using them in public instructions.
 ```
 
 Or via CLI:
 ```bash
-cargo add brik64
+brik --version
 ```
 
 ```bash
-cargo add brik64
+npm install -g @brik64/cli@beta
 ```
 
 ---
@@ -53,9 +56,11 @@ use brik64::{mc, eva};
 
 ---
 
-## 128 Monomers (64 core + 64 extended)
+## Historical SDK Operation Patterns
 
-The crate exports all 128 monomers across 8 families (core) plus 8 extended families.
+The examples below are design patterns for bounded operations. Treat package
+exports and operation names as historical reference unless current docs confirm
+them.
 
 ## Arithmetic (wrapping — never panics, wraps at 256)
 
@@ -216,18 +221,18 @@ fn process(input: &str) -> Result<String, String> {
 Using `brik64` applies Digital Circuitality **as a methodology** inside your Rust code. This gives you:
 
 - ✅ Saturating arithmetic (no panics, no overflow)
-- ✅ Formally specified crypto operations
-- ✅ EVA composition patterns
+- ✅ explicit crypto operation boundaries
+- ✅ composition patterns
 - ✅ Better code structure and determinism
 
 It does **not** give you:
 
-- ❌ CMF verification (Φ_c computation)
-- ❌ Auto-generated test suites from formal proof
-- ❌ Registry certification badge
-- ❌ Φ_c = 1 compiler enforcement
+- CMF verification claims
+- auto-generated proof/test claims
+- catalog or certification badge claims
+- compiler-enforced closure claims
 
-For formal certification → write in PCD: https://docs.brik64.com/pcd/tutorial
+For PCD guidance, use the current `brik64` skill and docs.brik64.com.
 
 ---
 
@@ -242,8 +247,8 @@ This is what makes Φ_c = 1 possible.
 - **Bounded**: predicate on finite domain (e.g., even numbers in [0,100])
 - **Product**: cartesian product for multi-input operations
 
-Without bounded domains, the circuit is open and cannot be certified.
-The domain IS the circuit boundary.
+Without bounded domains, the design remains open-ended. Treat domain notes here
+as methodology guidance, not as a public certification claim.
 
 ### You Are the Circuit Designer
 
@@ -252,7 +257,8 @@ The programmer defines domain bounds based on their problem context:
 - Banking: transaction amount `[0.01, 1000000]`, account balance `[0, MAX_I64]`
 - Temperature sensor: reading `[-273, 1000]` °C (absolute zero to furnace)
 
-If a result falls outside the declared domain, the circuit does not close (Φ_c ≠ 1) and the program does not compile. This is not a bug — it is physics.
+If a result falls outside the intended domain, the design needs a tighter
+boundary or an explicit fallback.
 
 **Normal software:** calculates velocity = 100,000 km/s, stores it, crashes later.
 **Digital Circuitality:** the program does not compile. The circuit is open.
@@ -266,9 +272,11 @@ Domains are numeric ranges, not physical units. Precision depends on monomer cho
 
 Choose the right type for each calculation. If the result exceeds the range, the circuit doesn't close.
 
-## Extended Monomers (MC_64–MC_127) — v4.0.0-beta.1+
+## Historical Extended Operation Notes
 
-Extended monomers add 64 new operations across 8 families: Float64, Math, Network, Graphics, Audio, Filesystem+, Concurrency, and Interop/FFI. They operate under **CONTRACT closure (Φ_c = CONTRACT)** rather than static Coq proofs.
+Older drafts referenced extended operation families. Treat those notes as
+roadmap or historical material unless a current public release and docs page
+publish the exact SDK surface.
 
 ### Float64 & Math
 
@@ -306,4 +314,5 @@ let json = interop::json_encode(value);
 let obj  = interop::json_decode(r#"{"key": 42}"#);
 ```
 
-> **Note:** Core monomers (MC_00–MC_63) have Φ_c = 1 (Coq-proven). Extended monomers (MC_64–MC_127) use Φ_c = CONTRACT — runtime contracts enforce correctness for external-facing operations.
+> Current public agent guidance lives in the `brik64` skill and
+> https://docs.brik64.com.

@@ -1,11 +1,13 @@
 ---
 name: digital-circuitality
-description: "Teaches the Digital Circuitality methodology — how to think and design programs as closed circuits in ANY language (Rust, Python, JS, Go...). No PCD or public CLI required. Use when designing software with circuit thinking, applying monomer-based operations, or structuring programs for maximum determinism and correctness."
+description: "Teaches the Digital Circuitality methodology — how to think and design programs as bounded, inspectable circuits in any language. No PCD or public CLI required. Check the current brik64 skill and docs.brik64.com before making CLI, SDK, catalog, certification, or formal-proof claims."
 ---
 
 # Digital Circuitality — Circuit Thinking for Any Language
 
-Apply the engineering discipline of Digital Circuitality to your code — regardless of language. This skill transforms how you design programs: from open, unbounded systems to closed, deterministic circuits.
+Apply the engineering discipline of Digital Circuitality to your code regardless
+of language. This skill is methodology guidance: it helps agents design bounded,
+inspectable logic. It is not itself a certification surface.
 
 **Full reference:** https://docs.brik64.com/theory/digital-circuitality
 
@@ -23,7 +25,7 @@ Hardware engineer designs:      You design:
 Logic gate (NAND, AND, OR)  →   Monomer (add8, hash, concat)
 Circuit board               →   Function (polymer)
 Signal integrity            →   Φ_c = 1 (circuit closed)
-Spec-driven, proof-checked  →   Deterministic, bounded, complete
+Spec-driven review          →   Deterministic, bounded, inspectable
 ```
 
 ---
@@ -130,31 +132,40 @@ A function is a **closed circuit** when:
 
 ---
 
-## The Lifter: On-Ramp for Existing Projects
+## Public Beta Boundary
 
-You don't need to rewrite your codebase to adopt Digital Circuitality. The **BRIK-64 Lifter** reverse-compiles existing source code into PCD:
+Current public agent guidance lives in the `brik64` skill and
+https://docs.brik64.com. Do not present lifter, multi-target compilation,
+distribution catalog, formal certification, or SDK package behavior as current public
+capabilities unless current release evidence supports the exact statement.
+
+Use this skill for design review and code-structure discipline. Use the
+`brik64` skill for current CLI workflows.
+
+## Historical Lifter Notes
+
+Older drafts described a source-to-PCD lifter workflow:
 
 ```bash
-brik64 lift app.ts       # TypeScript → PCD
-brik64 lift main.py      # Python → PCD
-brik64 lift lib.rs       # Rust → PCD
-brik64 lift main.go      # Go → PCD
-brik64 lift main.c       # C/C++ → PCD
-brik64 lift report.cbl   # COBOL → PCD
+brik lift app.ts
+brik lift main.py
+brik lift lib.rs
 ```
 
-**Pipeline: any language → PCD → any language.** Lift your code, certify it, then emit to any target.
+Treat these as roadmap/reference notes until the current public CLI and docs
+publish the exact commands.
 
-### Two-Tier Certification
+### Historical Closure Language
 
 | Tier | Condition | Meaning |
 |------|-----------|---------|
-| **CORE** | Phi_c = 1 | Full circuit closure — all paths deterministic |
-| **CONTRACT** | Phi_c = CONTRACT | Closure within declared contract boundaries |
+| **Core closure** | bounded local logic | deterministic review target |
+| **Contract boundary** | external dependency | explicit runtime assumption |
 
-## The 128 Core + Extended Operations
+## Operation Families As Design Vocabulary
 
-BRIK-64 defines 128 formally verified atomic operations (64 core + 64 extended) — the circuit components. Even without using the library, **model your design after these operations**:
+Use operation families as a vocabulary for design review. Do not treat this
+table as the current public SDK catalog or a formal-proof claim.
 
 | Family | Operations | Circuit Design Principle |
 |--------|-----------|--------------------------|
@@ -167,30 +178,14 @@ BRIK-64 defines 128 formally verified atomic operations (64 core + 64 extended) 
 | F6: Crypto | hash, hmac, aes_enc, aes_dec, sha256, rand, sign, verify | Typed inputs/outputs, no silent failures |
 | F7: System | time, sleep, env, exit, pid, signal, mmap, sysinfo | Explicit system calls, typed results |
 
-### Extended Families (Φ_c = CONTRACT)
+### External Operation Families
 
-In v4.0.0-beta.1, BRIK-64 adds 64 extended monomers (MC_64–MC_127) across 8 new families that interact with external systems. These operate under **CONTRACT closure** — runtime contracts enforce correctness rather than static proofs, since external I/O cannot be statically verified.
-
-| Family | Operations | Circuit Design Principle |
-|--------|-----------|--------------------------|
-| F8: Float64 | FADD, FSUB, FMUL, FDIV, FABS, FNEG, FSQRT, FMOD | IEEE 754 — defined behavior for NaN/Inf |
-| F9: Math | SIN, COS, TAN, EXP, LN, LOG2, POW, CEIL | Bounded transcendentals, defined domain |
-| F10: Network | TCP_CONN, TCP_SEND, TCP_RECV, TCP_CLOSE, UDP_*, DNS, HTTP | Explicit handles, paired connect/close |
-| F11: Graphics | FB_CREATE, FB_SET_PX, FB_GET_PX, FB_CLEAR, FB_BLIT, FB_LINE, FB_RECT, FB_DIMS | Bounded framebuffers, explicit lifecycle |
-| F12: Audio | AUD_CREATE, AUD_WRITE, AUD_READ, AUD_MIX, AUD_GAIN, AUD_LEN, AUD_RATE, AUD_CHANS | Typed buffers, explicit sample rates |
-| F13: Filesystem+ | FS_STAT, FS_MKDIR, FS_RMDIR, FS_DELETE, FS_RENAME, FS_LIST, FS_EXISTS, FS_COPY | Explicit existence checks, typed results |
-| F14: Concurrency | SPAWN, JOIN, CHAN_NEW, CHAN_SEND, CHAN_RECV, MUTEX_NEW, MUTEX_LOCK, MUTEX_UNLOCK | Structured concurrency, paired lock/unlock |
-| F15: Interop/FFI | JSON_ENCODE, JSON_DECODE, FFI_CALL, FFI_LOAD, FFI_FREE, WASM_LOAD, WASM_CALL, WASM_FREE | Explicit load/free lifecycle |
+External operations such as filesystem, network, graphics, audio, concurrency,
+and interop need explicit contracts. In public writing, describe them as
+contract-bound design areas unless a current standard or release publishes a
+stronger statement.
 
 The same circuit thinking applies: bound your domains, pair your resources, handle all branches.
-
-Install the libraries to use these operations with formal guarantees:
-
-```bash
-cargo add brik64          # Rust — v4.0.0-beta.1, 128 monomers, wrapping arithmetic
-npm install brik64        # JavaScript/TypeScript — v4.0.0-beta.1
-pip install brik64        # Python — v4.0.0-beta.1
-```
 
 ---
 
@@ -303,8 +298,8 @@ This is what makes Φ_c = 1 possible.
 - **Bounded**: predicate on finite domain (e.g., even numbers in [0,100])
 - **Product**: cartesian product for multi-input operations
 
-Without bounded domains, the circuit is open and cannot be certified.
-The domain IS the circuit boundary.
+Without bounded domains, the design remains open-ended. The domain is the
+design boundary.
 
 ### You Are the Circuit Designer
 
@@ -313,7 +308,8 @@ The programmer defines domain bounds based on their problem context:
 - Banking: transaction amount `[0.01, 1000000]`, account balance `[0, MAX_I64]`
 - Temperature sensor: reading `[-273, 1000]` °C (absolute zero to furnace)
 
-If a result falls outside the declared domain, the circuit does not close (Φ_c ≠ 1) and the program does not compile. This is not a bug — it is physics.
+If a result falls outside the intended domain, the design needs a tighter
+boundary or an explicit fallback.
 
 **Normal software:** calculates velocity = 100,000 km/s, stores it, crashes later.
 **Digital Circuitality:** the program does not compile. The circuit is open.
@@ -321,15 +317,16 @@ If a result falls outside the declared domain, the circuit does not close (Φ_c 
 ### Precision Engineering
 
 Domains are numeric ranges, not physical units. Precision depends on monomer choice:
-- **U8/I64 (core):** exact integer arithmetic, no rounding, Φ_c = 1
-- **F64 (extended):** IEEE 754 floats, has rounding errors, Φ_c = CONTRACT
+- **Integer arithmetic:** exact within declared bounds
+- **Float arithmetic:** requires explicit rounding and NaN/Inf handling
 - **Fixed-point pattern:** scale to integers (3.14 → 3140), compute exactly, scale back
 
 Choose the right type for each calculation. If the result exceeds the range, the circuit doesn't close.
 
-### Certified Math at Any Precision
+### Fixed-Point Math Pattern
 
-Any mathematical function — logarithms, trigonometry, square roots — can be implemented as a certified polymer (Φ_c = 1) using only core monomers with scaled integers.
+Mathematical functions can often be represented with fixed-point patterns when
+precision is declared explicitly.
 
 The designer declares the precision:
 ```
@@ -340,20 +337,17 @@ domain pi_15: Range [3141592653589793, ...]; // π with 15 decimals
 
 Like choosing a 12-bit vs 16-bit ADC — the engineer decides the resolution. The "error" is not accidental IEEE 754 rounding. It's the precision you declared in your domain.
 
-**Result:** ln(), sin(), cos(), sqrt() — all certifiable. All deterministic. Same input → same output on every platform, every time.
+Result: precision becomes a visible engineering choice instead of an accidental
+runtime side effect.
 
-## Methodology vs. Formal Certification
+## Methodology vs. Product Evidence
 
-| | Digital Circuitality (this skill) | BRIK-64 Formal Certification |
+| | Digital Circuitality (this skill) | BRIK64 product evidence |
 |---|---|---|
-| **Language** | Any (Rust, Python, JS, Go...) | PCD only |
-| **Verification** | Your discipline + code review | Compiler-enforced (CMF) |
-| **Φ_c proof** | Not provable — design discipline | Mathematically proven |
-| **Test suite** | You write | Auto-generated by `brik64 --emit-tests` |
-| **Registry badge** | Not available | Published to BRIK-64 Registry |
-| **Value** | Better design, fewer bugs | Structural impossibility of logic errors |
+| **Language** | Any (Rust, Python, JS, Go...) | Current docs and release artifacts |
+| **Verification** | discipline + code review + tests | bounded CLI reports or evidence packs when available |
+| **Public claims** | methodology only | exact artifact/version scope |
+| **Value** | clearer boundaries and fewer hidden assumptions | traceable operational evidence |
 
-> **Use circuit thinking everywhere. Get formal proof through PCD.**
->
-> If you need formal certification (safety-critical systems, AI policy enforcement, compliance):
-> → [docs.brik64.com/pcd/tutorial](https://docs.brik64.com/pcd/tutorial)
+> Use circuit thinking everywhere. Use current BRIK64 docs and release evidence
+> when a public claim needs product support.

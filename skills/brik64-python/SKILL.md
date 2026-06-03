@@ -1,12 +1,14 @@
 ---
 name: brik64-python
-description: "Use the brik64 Python package (v4.0.0-beta.1) to apply Digital Circuitality in Python projects. Covers installation, all 128 monomers (64 core + 64 extended), EVA composition, and integration patterns. Wrapping arithmetic. Use when writing Python code with BRIK-64 libraries."
-version: 4.0.0-beta.1
+description: "Historical Python Digital Circuitality patterns for BRIK64 work. Check docs.brik64.com and the current public brik64 skill before installing packages or making SDK, certification, catalog, or extended-operation claims."
+version: 0.1.0-beta.2-public-reference
 ---
 
 # BRIK-64 for Python
 
-Apply Digital Circuitality in your Python projects.
+Apply Digital Circuitality patterns in Python projects. Check
+https://docs.brik64.com and the current `brik64` skill before presenting package
+availability, SDK exports, or CLI behavior as current public truth.
 
 **Docs:** https://docs.brik64.com/installation
 **Package:** https://pypi.org/project/brik64/
@@ -16,12 +18,16 @@ Apply Digital Circuitality in your Python projects.
 ## Installation
 
 ```bash
-pip install brik64
-# uv add brik64
-# poetry add brik64
+# Current public CLI beta
+npm install -g @brik64/cli@beta
+brik --version
+
+# Historical SDK examples below may reference older packages or APIs.
+# Verify current package availability before using them in public instructions.
 ```
 
-Python 3.10+. Zero dependencies.
+Do not assume dependency or runtime behavior unless the current package proves
+it.
 
 ---
 
@@ -36,9 +42,11 @@ from brik64.eva import seq, par, cond, pipeline
 
 ---
 
-## 128 Monomers (64 core + 64 extended)
+## Historical SDK Operation Patterns
 
-The SDK exports all 128 monomers across 8 families (core) plus 8 extended families.
+The examples below are design patterns for bounded operations. Treat package
+exports and operation names as historical reference unless current docs confirm
+them.
 
 ## Arithmetic (wrapping — never raises, wraps at 256)
 
@@ -181,12 +189,11 @@ Using `brik64` applies Digital Circuitality **as a methodology** in your Python 
 
 It does **not** give you:
 
-- ❌ CMF verification (Φ_c)
-- ❌ Auto-generated test suites
-- ❌ Registry certification
+- CMF verification claims
+- auto-generated proof/test claims
+- catalog or certification badge claims
 
-For formal certification → write in PCD and compile to Python: `brik64 compile src/main.pcd --target py --emit-tests`
-→ https://docs.brik64.com/pcd/tutorial
+For PCD guidance, use the current `brik64` skill and docs.brik64.com.
 
 ---
 
@@ -201,8 +208,8 @@ This is what makes Φ_c = 1 possible.
 - **Bounded**: predicate on finite domain (e.g., even numbers in [0,100])
 - **Product**: cartesian product for multi-input operations
 
-Without bounded domains, the circuit is open and cannot be certified.
-The domain IS the circuit boundary.
+Without bounded domains, the design remains open-ended. Treat domain notes here
+as methodology guidance, not as a public certification claim.
 
 ### You Are the Circuit Designer
 
@@ -211,7 +218,8 @@ The programmer defines domain bounds based on their problem context:
 - Banking: transaction amount `[0.01, 1000000]`, account balance `[0, MAX_I64]`
 - Temperature sensor: reading `[-273, 1000]` °C (absolute zero to furnace)
 
-If a result falls outside the declared domain, the circuit does not close (Φ_c ≠ 1) and the program does not compile. This is not a bug — it is physics.
+If a result falls outside the intended domain, the design needs a tighter
+boundary or an explicit fallback.
 
 **Normal software:** calculates velocity = 100,000 km/s, stores it, crashes later.
 **Digital Circuitality:** the program does not compile. The circuit is open.
@@ -225,9 +233,11 @@ Domains are numeric ranges, not physical units. Precision depends on monomer cho
 
 Choose the right type for each calculation. If the result exceeds the range, the circuit doesn't close.
 
-## Extended Monomers (MC_64–MC_127) — v4.0.0-beta.1+
+## Historical Extended Operation Notes
 
-Extended monomers add 64 new operations across 8 families: Float64, Math, Network, Graphics, Audio, Filesystem+, Concurrency, and Interop/FFI. They operate under **CONTRACT closure (Φ_c = CONTRACT)** rather than static Coq proofs.
+Older drafts referenced extended operation families. Treat those notes as
+roadmap or historical material unless a current public release and docs page
+publish the exact SDK surface.
 
 ### Float64 & Math
 
@@ -265,4 +275,5 @@ json_str = interop.json_encode(value)
 obj      = interop.json_decode('{"key": 42}')
 ```
 
-> **Note:** Core monomers (MC_00–MC_63) have Φ_c = 1 (Coq-proven). Extended monomers (MC_64–MC_127) use Φ_c = CONTRACT — runtime contracts enforce correctness for external-facing operations.
+> Current public agent guidance lives in the `brik64` skill and
+> https://docs.brik64.com.
