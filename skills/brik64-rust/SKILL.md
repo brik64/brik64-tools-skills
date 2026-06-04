@@ -11,7 +11,7 @@ https://docs.brik64.com and the current `brik64` skill before presenting crate
 availability, SDK exports, or CLI behavior as current public truth.
 
 **Docs:** https://docs.brik64.com
-**Crate:** https://crates.io/crates/brik64
+**Crate:** https://crates.io/crates/brik64-core
 
 ---
 
@@ -19,8 +19,7 @@ availability, SDK exports, or CLI behavior as current public truth.
 
 ```toml
 [dependencies]
-# Historical SDK examples below may reference older packages or APIs.
-# Verify current crate availability before using them in public instructions.
+brik64-core = "0.1.0-beta.4"
 ```
 
 Or via CLI:
@@ -59,13 +58,13 @@ use brik64::{mc, eva};
 ## Historical SDK Operation Patterns
 
 The examples below are design patterns for bounded operations. Treat package
-exports and operation names as historical reference unless current docs confirm
-them.
+exports and operation names as current only when docs and the installed crate
+confirm them.
 
 ## Arithmetic (wrapping — never panics, wraps at 256)
 
 ```rust
-use brik64::mc::arithmetic::*;
+use brik64_core::mc::arithmetic::*;
 
 let sum   = add8(200, 100);      // 44 (wrapping: 300 % 256)
 let diff  = sub8(10, 20);        // 246 (wrapping)
@@ -76,7 +75,10 @@ let n     = neg8(1);             // 255
 let p     = pow8(2, 7);          // 128 (saturating)
 ```
 
-> `div8` never panics — returns (0, 0) for division by zero.
+> In beta4, confirm division-by-zero behavior against the installed crate before
+> using it as public documentation. Package installation does not establish
+> certification, N5/L5+N5 status, self-hosting, fixpoint, production approval,
+> or CLI installation.
 
 ---
 
@@ -210,7 +212,7 @@ fn process(input: &str) -> Result<String, String> {
     if trimmed.len() > 256 {        // bounded output
         return Err("too long".into());
     }
-    Ok(trimmed.to_uppercase())      // all paths covered — Φ_c = 1
+    Ok(trimmed.to_uppercase())      // all paths covered with explicit fallback above
 }
 ```
 
@@ -220,14 +222,14 @@ fn process(input: &str) -> Result<String, String> {
 
 Using `brik64` applies Digital Circuitality **as a methodology** inside your Rust code. This gives you:
 
-- ✅ Saturating arithmetic (no panics, no overflow)
+- ✅ Bounded arithmetic examples
 - ✅ explicit crypto operation boundaries
 - ✅ composition patterns
 - ✅ Better code structure and determinism
 
 It does **not** give you:
 
-- CMF verification claims
+- formal verification claims
 - auto-generated proof/test claims
 - catalog or certification badge claims
 - compiler-enforced closure claims
@@ -239,8 +241,8 @@ For PCD guidance, use the current `brik64` skill and docs.brik64.com.
 
 ## Closure Domains
 
-Every monomer declares its domain — the bounded set of valid inputs and outputs.
-This is what makes Φ_c = 1 possible.
+Every monomer declares its domain: the bounded set of valid inputs and outputs.
+This is methodology guidance for keeping examples explicit and reviewable.
 
 - **Range**: `[0, 255]` for u8 operations
 - **Set**: `{true, false}` for boolean operations  
@@ -266,8 +268,8 @@ boundary or an explicit fallback.
 ### Precision Engineering
 
 Domains are numeric ranges, not physical units. Precision depends on monomer choice:
-- **U8/I64 (core):** exact integer arithmetic, no rounding, Φ_c = 1
-- **F64 (extended):** IEEE 754 floats, has rounding errors, Φ_c = CONTRACT
+- **U8/I64-style examples:** exact integer arithmetic, no rounding
+- **F64-style examples:** IEEE 754 floats, with normal floating-point rounding
 - **Fixed-point pattern:** scale to integers (3.14 → 3140), compute exactly, scale back
 
 Choose the right type for each calculation. If the result exceeds the range, the circuit doesn't close.

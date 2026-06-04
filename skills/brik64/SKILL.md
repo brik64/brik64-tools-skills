@@ -23,7 +23,8 @@ inspect, describe, compose, and review with bounded evidence. The current public
 CLI release is `0.1.0-beta.4`. The CLI install channel is curl-only:
 `curl -fsSL https://brik64.com/cli/install.sh | bash`. npm is reserved for
 release-backed SDK packages, including the JS/TS SDK
-`@brik64/core@0.1.0-beta.4`.
+`@brik64/core@0.1.0-beta.4`, Python SDK `brik64==0.1.0b4`, and
+Rust SDK `brik64-core@0.1.0-beta.4`.
 
 Primary documentation:
 
@@ -31,6 +32,8 @@ Primary documentation:
 - CLI install: https://docs.brik64.com/cli/install
 - GitHub Release: https://github.com/brik64/brik64-cli/releases/tag/v0.1.0-beta.4
 - JS/TS SDK package: https://www.npmjs.com/package/@brik64/core
+- Python SDK package: https://pypi.org/project/brik64/0.1.0b4/
+- Rust SDK package: https://crates.io/crates/brik64-core
 - Public skills repo: https://github.com/brik64/brik64-tools-skills
 
 ## Agent Rule
@@ -74,9 +77,11 @@ Current version boundary:
 - Public CLI release version: `0.1.0-beta.4`
 - Runtime banner should be checked with `brik64 --version`.
 - Public JS/TS SDK package: `@brik64/core@0.1.0-beta.4`
+- Public Python SDK package: `brik64==0.1.0b4`
+- Public Rust SDK package: `brik64-core@0.1.0-beta.4`
 
 Treat runtime output as observed evidence. Treat the installer route and GitHub
-Release as the public CLI surface. Treat npm as SDK-only for beta4. If they
+Release as the public CLI surface. Treat npm, PyPI and crates.io as SDK-only for beta4. If they
 disagree, report the drift instead of hiding it.
 
 ## `.brik` Traceability

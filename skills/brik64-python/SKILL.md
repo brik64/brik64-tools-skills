@@ -11,7 +11,7 @@ https://docs.brik64.com and the current `brik64` skill before presenting package
 availability, SDK exports, or CLI behavior as current public truth.
 
 **Docs:** https://docs.brik64.com
-**Package:** https://pypi.org/project/brik64/
+**Package:** https://pypi.org/project/brik64/0.1.0b4/
 
 ---
 
@@ -22,12 +22,12 @@ availability, SDK exports, or CLI behavior as current public truth.
 curl -fsSL https://brik64.com/cli/install.sh | bash
 brik64 --version
 
-# Historical SDK examples below may reference older packages or APIs.
-# Verify current package availability before using them in public instructions.
+# Current public Python SDK beta
+pip install brik64==0.1.0b4
 ```
 
-Do not assume dependency or runtime behavior unless the current package proves
-it.
+Do not treat package installation as certification, N5/L5+N5 status,
+self-hosting, fixpoint, production approval, or CLI installation.
 
 ---
 
@@ -44,9 +44,8 @@ from brik64.eva import seq, par, cond, pipeline
 
 ## Historical SDK Operation Patterns
 
-The examples below are design patterns for bounded operations. Treat package
-exports and operation names as historical reference unless current docs confirm
-them.
+The examples below are design patterns for bounded operations. Check current
+docs and package exports before using them in public instructions.
 
 ## Arithmetic (wrapping — never raises, wraps at 256)
 
@@ -62,7 +61,7 @@ neg       = arithmetic.neg8(1)             # 255
 power     = arithmetic.pow8(2, 7)          # 128 (saturating)
 ```
 
-> `div8` never raises — returns `(0, 0)` for division by zero.
+> In beta4, `div8` raises `ZeroDivisionError` for division by zero.
 
 ---
 
@@ -165,7 +164,7 @@ def classify(score: int) -> str:
     if score >= 90: return "A"
     if score >= 80: return "B"
     if score >= 70: return "C"
-    return "F"                 # wildcard — Φ_c = 1
+    return "F"                 # wildcard branch, explicit fallback
 
 # No silent None returns — explicit Result pattern
 from typing import Union
@@ -183,13 +182,13 @@ def safe_divide(a: int, b: int) -> Union[int, str]:
 
 Using `brik64` applies Digital Circuitality **as a methodology** in your Python code:
 
-- ✅ Saturating arithmetic (no overflow surprises)
-- ✅ Formally specified crypto operations
+- ✅ Bounded arithmetic examples
+- ✅ Explicit crypto operation boundaries
 - ✅ EVA composition patterns
 
 It does **not** give you:
 
-- CMF verification claims
+- formal verification claims
 - auto-generated proof/test claims
 - catalog or certification badge claims
 
@@ -200,8 +199,8 @@ For PCD guidance, use the current `brik64` skill and docs.brik64.com.
 
 ## Closure Domains
 
-Every monomer declares its domain — the bounded set of valid inputs and outputs.
-This is what makes Φ_c = 1 possible.
+Every monomer declares its domain: the bounded set of valid inputs and outputs.
+This is methodology guidance for keeping examples explicit and reviewable.
 
 - **Range**: `[0, 255]` for u8 operations
 - **Set**: `{true, false}` for boolean operations  
@@ -227,8 +226,8 @@ boundary or an explicit fallback.
 ### Precision Engineering
 
 Domains are numeric ranges, not physical units. Precision depends on monomer choice:
-- **U8/I64 (core):** exact integer arithmetic, no rounding, Φ_c = 1
-- **F64 (extended):** IEEE 754 floats, has rounding errors, Φ_c = CONTRACT
+- **U8/I64-style examples:** exact integer arithmetic, no rounding
+- **F64-style examples:** IEEE 754 floats, with normal floating-point rounding
 - **Fixed-point pattern:** scale to integers (3.14 → 3140), compute exactly, scale back
 
 Choose the right type for each calculation. If the result exceeds the range, the circuit doesn't close.
