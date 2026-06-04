@@ -175,7 +175,8 @@ Do not claim any of the following unless the current public evidence proves the
 exact scope:
 
 - formal certification of an application;
-- N4/N5, L5+/L6+, self-hosting, Rust independence, fixpoint, or proof;
+- assurance levels, runtime capabilities, reproducibility claims, independence
+  claims, or proof statements that are not listed in public release notes;
 - universal correctness;
 - complete platform support;
 - bundled runtime motor, unless the release artifact shows it.

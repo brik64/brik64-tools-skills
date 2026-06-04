@@ -40,8 +40,8 @@ Public naming contract:
 - current public CLI install path: `curl -fsSL https://brik64.com/cli/install.sh | bash`
 - current JS/TS SDK npm package: `@brik64/core@0.1.0-beta.4`
 - current docs: https://docs.brik64.com
-- internal or older engineering artifacts may still carry `brik64` or `brikc`
-  identifiers; report drift instead of presenting legacy names as current truth
+- older public examples may still carry compatibility aliases; report drift
+  instead of presenting legacy names as current truth
 
 ---
 
