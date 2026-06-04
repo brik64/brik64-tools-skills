@@ -1,7 +1,7 @@
 ---
 name: brik64-javascript
 description: "Historical JavaScript/TypeScript Digital Circuitality patterns for BRIK64 work. Check docs.brik64.com and the current public brik64 skill before installing packages or making SDK, certification, catalog, or extended-operation claims."
-version: 0.1.0-beta.3-public-reference
+version: 0.1.0-beta.4-public-reference
 ---
 
 # BRIK-64 for JavaScript / TypeScript
@@ -11,7 +11,7 @@ Check https://docs.brik64.com and the current `brik64` skill before presenting
 package availability, SDK exports, or CLI behavior as current public truth.
 
 **Docs:** https://docs.brik64.com
-**Package:** https://www.npmjs.com/package/brik64
+**Package:** https://www.npmjs.com/package/@brik64/core
 
 ---
 
@@ -19,8 +19,8 @@ package availability, SDK exports, or CLI behavior as current public truth.
 
 ```bash
 # Current public CLI beta
-npm install -g @brik64/cli@beta
-brik --version
+npm install @brik64/core@0.1.0-beta.4
+node --version
 
 # Historical SDK examples below may reference older packages or APIs.
 # Verify current package availability before using them in public instructions.

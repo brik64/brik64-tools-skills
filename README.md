@@ -35,8 +35,10 @@ independent.
 
 Public naming contract:
 
-- current public CLI command: `brik`
-- current public npm package: `@brik64/cli@0.1.0-beta.3`
+- current public CLI command: `brik64`
+- compatibility CLI aliases may exist: `brik`, `brikc`, `brikfmt`, `brikcheck`
+- current public CLI install path: `curl -fsSL https://brik64.com/cli/install.sh | bash`
+- current JS/TS SDK npm package: `@brik64/core@0.1.0-beta.4`
 - current docs: https://docs.brik64.com
 - internal or older engineering artifacts may still carry `brik64` or `brikc`
   identifiers; report drift instead of presenting legacy names as current truth
@@ -48,14 +50,14 @@ Public naming contract:
 ### `brik64`
 **Current public operating skill for AI agents using BRIK64.**
 
-Use this first when an agent is working with the public `brik` CLI, `.brik`
+Use this first when an agent is working with the public `brik64` CLI, `.brik`
 metadata, PCD 1.0, local evidence, `AGENTS.md` managed instructions, or public
 BRIK64 docs. It includes the current CLI beta install path, docs lookup rule,
 periodic repository update rule, consent-based skill installation workflow, and
 claim-safe reporting boundaries.
 
 Install when: you are an AI coding agent, reviewing a BRIK64 project, using
-`brik`, writing PCD candidates, or preparing a public-facing BRIK64 report.
+`brik64`, writing PCD candidates, or preparing a public-facing BRIK64 report.
 
 ---
 

@@ -1,9 +1,9 @@
 ---
 name: brik64
-description: Public BRIK64 operating skill for AI agents using the brik CLI, .brik traceability, PCD 1.0, local evidence, and claim-safe workflows. Use when working with BRIK64 projects, PCD files, agent instructions, CLI commands, evidence reports, or public BRIK64 documentation.
-version: 0.1.0-beta.3
+description: Public BRIK64 operating skill for AI agents using the brik64 CLI, .brik traceability, PCD 1.0, local evidence, and claim-safe workflows. Use when working with BRIK64 projects, PCD files, agent instructions, CLI commands, evidence reports, or public BRIK64 documentation.
+version: 0.1.0-beta.4
 triggers:
-  - using brik CLI
+  - using brik64 CLI
   - BRIK64 project workflow
   - writing or reviewing PCD 1.0
   - creating .brik traceability
@@ -20,14 +20,17 @@ helping a user adopt the public BRIK64 CLI beta.
 
 BRIK64 is a local-first workflow for making critical software logic easier to
 inspect, describe, compose, and review with bounded evidence. The current public
-CLI package is `@brik64/cli@0.1.0-beta.3`.
+CLI release is `0.1.0-beta.4`. The CLI install channel is curl-only:
+`curl -fsSL https://brik64.com/cli/install.sh | bash`. npm is reserved for
+release-backed SDK packages, including the JS/TS SDK
+`@brik64/core@0.1.0-beta.4`.
 
 Primary documentation:
 
 - Docs: https://docs.brik64.com
 - CLI install: https://docs.brik64.com/cli/install
-- GitHub Release: https://github.com/brik64/brik64-cli/releases/tag/v0.1.0-beta.3
-- npm package: https://www.npmjs.com/package/@brik64/cli
+- GitHub Release: https://github.com/brik64/brik64-cli/releases/tag/v0.1.0-beta.4
+- JS/TS SDK package: https://www.npmjs.com/package/@brik64/core
 - Public skills repo: https://github.com/brik64/brik64-tools-skills
 
 ## Agent Rule
@@ -58,22 +61,23 @@ reporting evidence, or describing release status.
 
 ## Install And Verify The CLI
 
-Use npm for the current public beta:
+Use the curl installer for the current public CLI beta:
 
 ```bash
-npm install -g @brik64/cli@beta
-brik --version
-brik help
+curl -fsSL https://brik64.com/cli/install.sh | bash
+brik64 --version
+brik64 help
 ```
 
 Current version boundary:
 
-- Public package/release version: `0.1.0-beta.3`
-- Runtime banner should be checked with `brik --version` or `brik version`.
+- Public CLI release version: `0.1.0-beta.4`
+- Runtime banner should be checked with `brik64 --version`.
+- Public JS/TS SDK package: `@brik64/core@0.1.0-beta.4`
 
-Treat runtime output as observed evidence. Treat package metadata and GitHub
-Release as the public package surface. If they disagree, report the drift instead
-of hiding it.
+Treat runtime output as observed evidence. Treat the installer route and GitHub
+Release as the public CLI surface. Treat npm as SDK-only for beta4. If they
+disagree, report the drift instead of hiding it.
 
 ## `.brik` Traceability
 
@@ -86,8 +90,8 @@ Use `.brik` as local project metadata for BRIK64 work:
 
 Rules:
 
-- `brik init` prepares local BRIK64 metadata.
-- `brik init` must not create or modify `AGENTS.md`.
+- `brik64 init` prepares local BRIK64 metadata.
+- `brik64 init` must not create or modify `AGENTS.md`.
 - Do not store secrets, raw tokens, private keys, or private source snapshots in
   `.brik`.
 - Treat `.brik` metadata as operational traceability, not as certification.
@@ -119,15 +123,15 @@ Use docs before writing PCD:
 Current public beta commands:
 
 ```bash
-brik help
-brik version
-brik --version
-brik init
-brik certify <file.pcd>
-brik emit <file.pcd>
-brik emit <file.pcd> --target ts --out out-ts --tests
-brik emit <file.pcd> --target rust --out out-rust --tests
-brik emit <file.pcd> --target python --out out-python --tests
+brik64 help
+brik64 --version
+brik64 doctor
+brik64 init
+brik64 certify <file.pcd>
+brik64 emit <file.pcd>
+brik64 emit <file.pcd> --target ts --out out-ts --tests
+brik64 emit <file.pcd> --target rust --out out-rust --tests
+brik64 emit <file.pcd> --target python --out out-python --tests
 ```
 
 Use commands only within their documented scope. If docs mention a command that

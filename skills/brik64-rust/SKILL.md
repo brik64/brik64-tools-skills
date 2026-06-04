@@ -1,7 +1,7 @@
 ---
 name: brik64-rust
 description: "Historical Rust Digital Circuitality patterns for BRIK64 work. Check docs.brik64.com and the current public brik64 skill before installing crates or making SDK, certification, catalog, or extended-operation claims."
-version: 0.1.0-beta.3-public-reference
+version: 0.1.0-beta.4-public-reference
 ---
 
 # BRIK-64 for Rust
@@ -25,11 +25,11 @@ availability, SDK exports, or CLI behavior as current public truth.
 
 Or via CLI:
 ```bash
-brik --version
+brik64 --version
 ```
 
 ```bash
-npm install -g @brik64/cli@beta
+curl -fsSL https://brik64.com/cli/install.sh | bash
 ```
 
 ---

@@ -1,7 +1,7 @@
 ---
 name: brik64-python
 description: "Historical Python Digital Circuitality patterns for BRIK64 work. Check docs.brik64.com and the current public brik64 skill before installing packages or making SDK, certification, catalog, or extended-operation claims."
-version: 0.1.0-beta.3-public-reference
+version: 0.1.0-beta.4-public-reference
 ---
 
 # BRIK-64 for Python
@@ -19,8 +19,8 @@ availability, SDK exports, or CLI behavior as current public truth.
 
 ```bash
 # Current public CLI beta
-npm install -g @brik64/cli@beta
-brik --version
+curl -fsSL https://brik64.com/cli/install.sh | bash
+brik64 --version
 
 # Historical SDK examples below may reference older packages or APIs.
 # Verify current package availability before using them in public instructions.

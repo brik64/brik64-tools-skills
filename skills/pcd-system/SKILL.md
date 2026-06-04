@@ -6,7 +6,7 @@ triggers:
   - using brik CLI public beta
   - reviewing PCD examples
   - checking current docs before public claims
-version: 0.1.0-beta.3-public-reference
+version: 0.1.0-beta.4-public-reference
 ---
 
 # PCD System — Public Beta Reference Notes
@@ -16,7 +16,10 @@ public agent operation, install and use the `brik64` skill first, then check
 https://docs.brik64.com before making release, command, or capability claims.
 
 Current public CLI command: `brik`.
-Current public package: `@brik64/cli@0.1.0-beta.3`.
+Current public CLI release: `0.1.0-beta.4`.
+Current public CLI install path: `curl -fsSL https://brik64.com/cli/install.sh | bash`.
+Do not use npm to install the CLI. npm is reserved for SDK packages such as
+`@brik64/core@0.1.0-beta.4`.
 
 Current public surface:
 
@@ -40,8 +43,8 @@ Roadmap or non-current surface unless separately published:
 ## Quick Start
 
 ```bash
-npm install -g @brik64/cli@beta
-brik --version
+curl -fsSL https://brik64.com/cli/install.sh | bash
+brik64 --version
 brik help
 brik init
 brik certify path/to/program.pcd
@@ -123,7 +126,7 @@ let result = if (check) { path_a(x) } else { path_b(x) };
 Use the current public command name in examples:
 
 ```bash
-brik --version
+brik64 --version
 brik help
 brik init
 ```
