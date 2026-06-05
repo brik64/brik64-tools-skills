@@ -6,7 +6,7 @@ triggers:
   - using brik CLI public beta
   - reviewing PCD examples
   - checking current docs before public claims
-version: 0.1.0-beta.6-public-reference
+version: 0.1.0-beta.7-public-reference
 ---
 
 # PCD System — Public Beta Reference Notes
@@ -17,14 +17,14 @@ https://docs.brik64.com before making release, command, or capability claims.
 
 Current public CLI command: `brik64`.
 Compatibility alias: `brik`.
-Current public CLI version: `0.1.0-beta.6`; verify public release status
+Current public CLI version: `0.1.0-beta.7`; verify public release status
 against docs and GitHub before presenting it as published.
 Current public CLI install path: `curl -fsSL https://brik64.com/cli/install.sh | bash`.
 Do not use npm to install the CLI. npm is reserved for SDK packages.
 
 Current public surface:
 
-- `brik` CLI public beta
+- `brik64` CLI public beta
 - `.brik` local traceability metadata
 - PCD 1.0 public standard: https://github.com/brik64/pcd-standard
 - agent workflows that point to docs.brik64.com
@@ -46,10 +46,12 @@ Roadmap or non-current surface unless separately published:
 ```bash
 curl -fsSL https://brik64.com/cli/install.sh | bash
 brik64 --version
-brik help
-brik init
-brik certify path/to/program.pcd
-brik emit path/to/program.pcd
+brik64 help
+brik64 init
+brik64 certify path/to/program.pcd
+brik64 verify path/to/program.pcd
+brik64 emit path/to/program.pcd
+brik64 polymerize path/to/program.pcd --out polymer.pcd
 ```
 
 ## PCD Orientation
