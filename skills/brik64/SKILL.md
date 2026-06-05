@@ -89,9 +89,9 @@ Current version boundary:
 
 - Public CLI version: `0.1.0-beta.6`
 - Runtime banner should be checked with `brik64 --version`.
-- JS/TS SDK package: `@brik64/core@0.1.0-beta.6`
-- Python SDK package: `brik64==0.1.0b6`
-- Rust SDK package: `brik64-core@0.1.0-beta.6`
+- JS/TS SDK package: `@brik64/core@0.1.0-beta.6.1`
+- Python SDK package: `brik64==0.1.0b6.post1`
+- Rust SDK package: `brik64-core@0.1.0-beta.6.1`
 
 Treat runtime output as observed evidence. Treat the installer route and GitHub
 Release as the public CLI surface. Treat npm, PyPI and crates.io as SDK-only
@@ -192,7 +192,6 @@ Use precise language:
 Do not claim any of the following unless the current public evidence proves the
 exact scope:
 
-- formal certification of an application;
 - assurance levels, runtime capabilities, reproducibility claims, independence
   claims, or proof statements that are not listed in public release notes;
 - universal correctness;

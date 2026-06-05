@@ -19,7 +19,7 @@ package availability, SDK exports, or CLI behavior as current public truth.
 
 ```bash
 # Current public CLI beta
-npm install @brik64/core@0.1.0-beta.6
+npm install @brik64/core@0.1.0-beta.6.1
 node --version
 
 # Historical SDK examples below may reference older packages or APIs.

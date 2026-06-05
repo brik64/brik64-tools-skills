@@ -19,7 +19,7 @@ availability, SDK exports, or CLI behavior as current public truth.
 
 ```toml
 [dependencies]
-brik64-core = "0.1.0-beta.6"
+brik64-core = "0.1.0-beta.6.1"
 ```
 
 Or via CLI:
@@ -77,8 +77,7 @@ let p     = pow8(2, 7);          // 128 (saturating)
 
 > In beta6, confirm division-by-zero behavior against the installed crate before
 > using it as public documentation. Package installation does not establish
-> certification, self-hosting, fixpoint, production approval, or CLI
-> installation.
+> CLI installation or workspace workflows.
 
 ---
 
