@@ -1,7 +1,7 @@
 ---
 name: brik64-rust
 description: "Historical Rust Digital Circuitality patterns for BRIK64 work. Check docs.brik64.com and the current public brik64 skill before installing crates or making SDK, certification, catalog, or extended-operation claims."
-version: 0.1.0-beta.4-public-reference
+version: 0.1.0-beta.5-public-reference
 ---
 
 # BRIK-64 for Rust
@@ -19,7 +19,7 @@ availability, SDK exports, or CLI behavior as current public truth.
 
 ```toml
 [dependencies]
-brik64-core = "0.1.0-beta.4"
+brik64-core = "0.1.0-beta.5"
 ```
 
 Or via CLI:
@@ -75,9 +75,9 @@ let n     = neg8(1);             // 255
 let p     = pow8(2, 7);          // 128 (saturating)
 ```
 
-> In beta4, confirm division-by-zero behavior against the installed crate before
+> In beta5, confirm division-by-zero behavior against the installed crate before
 > using it as public documentation. Package installation does not establish
-> certification, N5/L5+N5 status, self-hosting, fixpoint, production approval,
+> certification, assurance-tier or managed-runtime status, self-hosting, fixpoint, production approval,
 > or CLI installation.
 
 ---

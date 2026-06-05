@@ -36,9 +36,9 @@ independent.
 Public naming contract:
 
 - current public CLI command: `brik64`
-- compatibility CLI aliases may exist: `brik`, `brikc`, `brikfmt`, `brikcheck`
+- compatibility CLI alias: `brik`
 - current public CLI install path: `curl -fsSL https://brik64.com/cli/install.sh | bash`
-- current JS/TS SDK npm package: `@brik64/core@0.1.0-beta.4`
+- current JS/TS SDK package: `@brik64/core@0.1.0-beta.5`
 - current docs: https://docs.brik64.com
 - older public examples may still carry compatibility aliases; report drift
   instead of presenting legacy names as current truth

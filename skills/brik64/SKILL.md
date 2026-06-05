@@ -1,7 +1,7 @@
 ---
 name: brik64
 description: Public BRIK64 operating skill for AI agents using the brik64 CLI, .brik traceability, PCD 1.0, local evidence, and claim-safe workflows. Use when working with BRIK64 projects, PCD files, agent instructions, CLI commands, evidence reports, or public BRIK64 documentation.
-version: 0.1.0-beta.4
+version: 0.1.0-beta.5
 triggers:
   - using brik64 CLI
   - BRIK64 project workflow
@@ -20,19 +20,17 @@ helping a user adopt the public BRIK64 CLI beta.
 
 BRIK64 is a local-first workflow for making critical software logic easier to
 inspect, describe, compose, and review with bounded evidence. The current public
-CLI release is `0.1.0-beta.4`. The CLI install channel is curl-only:
-`curl -fsSL https://brik64.com/cli/install.sh | bash`. npm is reserved for
-release-backed SDK packages, including the JS/TS SDK
-`@brik64/core@0.1.0-beta.4`, Python SDK `brik64==0.1.0b4`, and
-Rust SDK `brik64-core@0.1.0-beta.4`.
+beta surface is `0.1.0-beta.5`. The CLI install channel is curl-only:
+`curl -fsSL https://brik64.com/cli/install.sh | bash`. npm, PyPI and crates.io
+are reserved for release-backed SDK packages.
 
 Primary documentation:
 
 - Docs: https://docs.brik64.com
 - CLI install: https://docs.brik64.com/cli/install
-- GitHub Release: https://github.com/brik64/brik64-cli/releases/tag/v0.1.0-beta.4
+- GitHub Release: https://github.com/brik64/brik64-cli/releases
 - JS/TS SDK package: https://www.npmjs.com/package/@brik64/core
-- Python SDK package: https://pypi.org/project/brik64/0.1.0b4/
+- Python SDK package: https://pypi.org/project/brik64/0.1.0b5/
 - Rust SDK package: https://crates.io/crates/brik64-core
 - Public skills repo: https://github.com/brik64/brik64-tools-skills
 
@@ -62,6 +60,21 @@ For recurring or long-running projects, re-check docs and the skills repository
 periodically, especially before publishing, installing agent instructions,
 reporting evidence, or describing release status.
 
+## Public Changelog Rule
+
+Public changelog entries must describe user-visible product changes only:
+commands added or changed, local workflow behavior, SDK API changes, supported
+formats, compatibility improvements, install behavior, and user-facing fixes.
+
+Do not write public changelog bullets about internal release decisions,
+coordination process, unpublished readiness states, approval flow, evidence
+collection mechanics, rollback planning, unpublished engineering names, or
+cross-repository synchronization. Put that information in internal release
+reports, manifests, gates, or evidence files instead.
+
+If a public changelog reads like an operations report, classify it as drift and
+rewrite it into functional release notes before treating the surface as ready.
+
 ## Install And Verify The CLI
 
 Use the curl installer for the current public CLI beta:
@@ -74,15 +87,15 @@ brik64 help
 
 Current version boundary:
 
-- Public CLI release version: `0.1.0-beta.4`
+- Public CLI version: `0.1.0-beta.5`
 - Runtime banner should be checked with `brik64 --version`.
-- Public JS/TS SDK package: `@brik64/core@0.1.0-beta.4`
-- Public Python SDK package: `brik64==0.1.0b4`
-- Public Rust SDK package: `brik64-core@0.1.0-beta.4`
+- JS/TS SDK package: `@brik64/core@0.1.0-beta.5`
+- Python SDK package: `brik64==0.1.0b5`
+- Rust SDK package: `brik64-core@0.1.0-beta.5`
 
 Treat runtime output as observed evidence. Treat the installer route and GitHub
-Release as the public CLI surface. Treat npm, PyPI and crates.io as SDK-only for beta4. If they
-disagree, report the drift instead of hiding it.
+Release as the public CLI surface. Treat npm, PyPI and crates.io as SDK-only
+channels. If they disagree, report the drift instead of hiding it.
 
 ## `.brik` Traceability
 
