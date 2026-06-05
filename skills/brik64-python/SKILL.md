@@ -1,7 +1,7 @@
 ---
 name: brik64-python
 description: "Historical Python Digital Circuitality patterns for BRIK64 work. Check docs.brik64.com and the current public brik64 skill before installing packages or making SDK, certification, catalog, or extended-operation claims."
-version: 0.1.0-beta.5-public-reference
+version: 0.1.0-beta.6-public-reference
 ---
 
 # BRIK-64 for Python
@@ -11,7 +11,7 @@ https://docs.brik64.com and the current `brik64` skill before presenting package
 availability, SDK exports, or CLI behavior as current public truth.
 
 **Docs:** https://docs.brik64.com
-**Package:** https://pypi.org/project/brik64/0.1.0b5/
+**Package:** https://pypi.org/project/brik64/0.1.0b6/
 
 ---
 
@@ -23,11 +23,11 @@ curl -fsSL https://brik64.com/cli/install.sh | bash
 brik64 --version
 
 # Current public Python SDK beta
-pip install brik64==0.1.0b5
+pip install brik64==0.1.0b6
 ```
 
-Do not treat package installation as certification, assurance-tier or managed-runtime status,
-self-hosting, fixpoint, production approval, or CLI installation.
+Do not treat package installation as certification, self-hosting, fixpoint,
+production approval, or CLI installation.
 
 ---
 
@@ -61,7 +61,7 @@ neg       = arithmetic.neg8(1)             # 255
 power     = arithmetic.pow8(2, 7)          # 128 (saturating)
 ```
 
-> In beta5, `div8` raises `ZeroDivisionError` for division by zero.
+> In beta6, `div8` raises `ZeroDivisionError` for division by zero.
 
 ---
 
