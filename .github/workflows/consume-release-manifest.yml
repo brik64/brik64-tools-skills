@@ -1,0 +1,68 @@
+name: Consume BRIK64 release manifest
+
+on:
+  repository_dispatch:
+    types:
+      - brik64-release-manifest
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version to verify"
+        required: true
+        default: "0.1.0-beta.5"
+
+permissions:
+  contents: read
+
+jobs:
+  verify-public-skill:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Resolve release payload
+        id: release
+        shell: bash
+        env:
+          EVENT_PATH: ${{ github.event_path }}
+          WORKFLOW_VERSION: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          VERSION="$(node - "$EVENT_PATH" "$WORKFLOW_VERSION" <<'NODE'
+          const fs = require('fs');
+          const [eventPath, fallback] = process.argv.slice(2);
+          const event = JSON.parse(fs.readFileSync(eventPath, 'utf8'));
+          const release = event.client_payload?.release || event.client_payload || {};
+          process.stdout.write(release.version || fallback || '');
+          NODE
+          )"
+          if [ -z "$VERSION" ]; then
+            echo "release_version_missing" >&2
+            exit 1
+          fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Verify public skill contract
+        shell: bash
+        env:
+          VERSION: ${{ steps.release.outputs.version }}
+        run: |
+          set -euo pipefail
+          test -f skills/brik64/SKILL.md
+          grep "version: $VERSION" skills/brik64/SKILL.md >/dev/null
+          grep "curl -fsSL https://brik64.com/cli/install.sh | bash" skills/brik64/SKILL.md >/dev/null
+          grep "@brik64/core@$VERSION" skills/brik64/SKILL.md >/dev/null
+          grep "brik64-core@$VERSION" skills/brik64/SKILL.md >/dev/null
+          case "$VERSION" in
+            0.1.0-beta.5) ! grep -R "0.1.0-beta.4\|0.1.0b4\|Beta4\|beta4" skills README.md ;;
+          esac
+          ! grep -RE "\bL[456]\+N5\b|\bN5\b|internalArtifactFactory|l6DistributionAllowed|registeredManagedRuntime" skills/brik64/SKILL.md
+
+      - name: Verify live skill surface
+        shell: bash
+        env:
+          VERSION: ${{ steps.release.outputs.version }}
+        run: |
+          set -euo pipefail
+          curl -fsSL https://raw.githubusercontent.com/brik64/brik64-tools-skills/main/skills/brik64/SKILL.md | grep "$VERSION" >/dev/null
+          curl -fsSL https://raw.githubusercontent.com/brik64/brik64-tools-skills/main/skills/brik64/SKILL.md | grep "curl -fsSL https://brik64.com/cli/install.sh | bash" >/dev/null
