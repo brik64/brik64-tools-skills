@@ -23,7 +23,7 @@ curl -fsSL https://brik64.com/cli/install.sh | bash
 brik64 --version
 
 # Current public Python SDK beta
-pip install brik64==0.1.0b6.post1.post1
+pip install brik64==0.1.0b6.post1
 ```
 
 Do not treat package installation as CLI installation or a workspace workflow.
