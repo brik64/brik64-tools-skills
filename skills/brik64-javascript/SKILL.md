@@ -1,7 +1,7 @@
 ---
 name: brik64-javascript
 description: "Historical JavaScript/TypeScript Digital Circuitality patterns for BRIK64 work. Check docs.brik64.com and the current public brik64 skill before installing packages or making SDK, certification, catalog, or extended-operation claims."
-version: 0.1.0-beta.11-public-reference
+version: 0.1.0-beta.12-public-reference
 ---
 
 # BRIK-64 for JavaScript / TypeScript
@@ -19,7 +19,7 @@ package availability, SDK exports, or CLI behavior as current public truth.
 
 ```bash
 # Current public CLI beta
-npm install @brik64/core@0.1.0-beta.11
+npm install @brik64/core@0.1.0-beta.12
 node --version
 
 # Historical SDK examples below may reference older packages or APIs.
@@ -167,7 +167,7 @@ const digest = mc.string.concat(
 );
 ```
 
-### Circuit-closed function (methodology without library)
+### Circuit-closed function (practice without library)
 
 ```typescript
 // Apply circuit thinking without the library
@@ -195,7 +195,7 @@ function safeParse(json: string): { ok: true; data: unknown } | { ok: false; err
 
 ## Important Distinction
 
-Using these patterns applies Digital Circuitality **as a methodology** in your
+Using these patterns applies Digital Circuitality **as a practice** in your
 JS/TS code:
 
 - ✅ Saturating arithmetic (no overflow bugs in bitwise operations)
@@ -225,7 +225,7 @@ This is what makes Φ_c = 1 possible.
 - **Product**: cartesian product for multi-input operations
 
 Without bounded domains, the design remains open-ended. Treat domain notes here
-as methodology guidance, not as a public certification claim.
+as practice guidance, not as a public certification claim.
 
 ### You Are the Circuit Designer
 

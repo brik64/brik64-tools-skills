@@ -38,7 +38,7 @@ Public naming contract:
 - current public CLI command: `brik64`
 - compatibility CLI alias: `brik`
 - current public CLI install path: `curl -fsSL https://brik64.com/cli/install.sh | bash`
-- current JS/TS SDK package: `@brik64/core@0.1.0-beta.11`
+- current JS/TS SDK package: `@brik64/core@0.1.0-beta.12`
 - current docs: https://docs.brik64.com
 - older public examples may still carry compatibility aliases; report drift
   instead of presenting legacy names as current truth
@@ -62,7 +62,7 @@ Install when: you are an AI coding agent, reviewing a BRIK64 project, using
 ---
 
 ### `digital-circuitality`
-**The circuit thinking methodology — language agnostic.**
+**The circuit thinking practice — language agnostic.**
 
 Teaches you to think in terms of closed circuits: bounded inputs, verified operations, proven output ranges. No undefined behavior by construction. Use this skill to understand WHY Digital Circuitality exists and how to apply circuit design principles to any language or system.
 
