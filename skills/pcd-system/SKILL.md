@@ -6,7 +6,7 @@ triggers:
   - using brik CLI public beta
   - reviewing PCD examples
   - checking current docs before public claims
-version: 0.1.0-beta.12-public-reference
+version: 0.1.0-beta.13-public-reference
 ---
 
 # PCD System — Public Beta Reference Notes
@@ -17,7 +17,7 @@ https://docs.brik64.com before making release, command, or capability claims.
 
 Current public CLI command: `brik64`.
 Compatibility alias: `brik`.
-Current public CLI version: `0.1.0-beta.12`; verify public release status
+Current public CLI version: `0.1.0-beta.13`; verify public release status
 against docs and GitHub before presenting it as published.
 Current public CLI install path: `curl -fsSL https://brik64.com/cli/install.sh | bash`.
 Do not use npm to install the CLI. npm is reserved for SDK packages.
