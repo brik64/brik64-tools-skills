@@ -1,7 +1,7 @@
 ---
 name: brik64-rust
 description: "Historical Rust Digital Circuitality patterns for BRIK64 work. Check docs.brik64.com and the current public brik64 skill before installing crates or making SDK, certification, catalog, or extended-operation claims."
-version: 0.1.0-beta.11-public-reference
+version: 0.1.0-beta.12-public-reference
 ---
 
 # BRIK-64 for Rust
@@ -19,7 +19,7 @@ availability, SDK exports, or CLI behavior as current public truth.
 
 ```toml
 [dependencies]
-brik64-core = "0.1.0-beta.11"
+brik64-core = "0.1.0-beta.12"
 ```
 
 Or via CLI:
@@ -199,7 +199,7 @@ fn hash_and_sign(data: &[u8], key: &PrivateKey) -> (Hash32, Signature) {
 }
 ```
 
-### Circuit-closed function (methodology without library)
+### Circuit-closed function (practice without library)
 
 ```rust
 // Apply circuit thinking without the library
@@ -219,7 +219,7 @@ fn process(input: &str) -> Result<String, String> {
 
 ## Important Distinction
 
-Using `brik64` applies Digital Circuitality **as a methodology** inside your Rust code. This gives you:
+Using `brik64` applies Digital Circuitality **as a practice** inside your Rust code. This gives you:
 
 - ✅ Bounded arithmetic examples
 - ✅ explicit crypto operation boundaries
@@ -241,7 +241,7 @@ For PCD guidance, use the current `brik64` skill and docs.brik64.com.
 ## Closure Domains
 
 Every monomer declares its domain: the bounded set of valid inputs and outputs.
-This is methodology guidance for keeping examples explicit and reviewable.
+This is practice guidance for keeping examples explicit and reviewable.
 
 - **Range**: `[0, 255]` for u8 operations
 - **Set**: `{true, false}` for boolean operations  
@@ -249,7 +249,7 @@ This is methodology guidance for keeping examples explicit and reviewable.
 - **Product**: cartesian product for multi-input operations
 
 Without bounded domains, the design remains open-ended. Treat domain notes here
-as methodology guidance, not as a public certification claim.
+as practice guidance, not as a public certification claim.
 
 ### You Are the Circuit Designer
 

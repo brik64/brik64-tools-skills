@@ -1,12 +1,12 @@
 ---
 name: digital-circuitality
-description: "Teaches the Digital Circuitality methodology — how to think and design programs as bounded, inspectable circuits in any language. No PCD or public CLI required. Check the current brik64 skill and docs.brik64.com before making CLI, SDK, catalog, certification, or formal-proof claims."
+description: "Teaches the Digital Circuitality practice — how to think and design programs as bounded, inspectable circuits in any language. No PCD or public CLI required. Check the current brik64 skill and docs.brik64.com before making CLI, SDK, catalog, certification, or formal-proof claims."
 ---
 
 # Digital Circuitality — Circuit Thinking for Any Language
 
 Apply the engineering discipline of Digital Circuitality to your code regardless
-of language. This skill is methodology guidance: it helps agents design bounded,
+of language. This skill is practice guidance: it helps agents design bounded,
 inspectable logic. It is not itself a certification surface.
 
 **Full reference:** https://docs.brik64.com/theory/digital-circuitality
@@ -340,13 +340,13 @@ Like choosing a 12-bit vs 16-bit ADC — the engineer decides the resolution. Th
 Result: precision becomes a visible engineering choice instead of an accidental
 runtime side effect.
 
-## Methodology vs. Product Evidence
+## Practice vs. Product Evidence
 
 | | Digital Circuitality (this skill) | BRIK64 product evidence |
 |---|---|---|
 | **Language** | Any (Rust, Python, JS, Go...) | Current docs and release artifacts |
 | **Verification** | discipline + code review + tests | bounded CLI reports or evidence packs when available |
-| **Public claims** | methodology only | exact artifact/version scope |
+| **Public claims** | practice only | exact artifact/version scope |
 | **Value** | clearer boundaries and fewer hidden assumptions | traceable operational evidence |
 
 > Use circuit thinking everywhere. Use current BRIK64 docs and release evidence

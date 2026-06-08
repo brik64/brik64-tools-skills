@@ -1,7 +1,7 @@
 ---
 name: brik64-python
 description: "Historical Python Digital Circuitality patterns for BRIK64 work. Check docs.brik64.com and the current public brik64 skill before installing packages or making SDK, certification, catalog, or extended-operation claims."
-version: 0.1.0-beta.11-public-reference
+version: 0.1.0-beta.12-public-reference
 ---
 
 # BRIK-64 for Python
@@ -11,7 +11,7 @@ https://docs.brik64.com and the current `brik64` skill before presenting package
 availability, SDK exports, or CLI behavior as current public truth.
 
 **Docs:** https://docs.brik64.com
-**Package:** https://pypi.org/project/brik64/0.1.0b11/
+**Package:** https://pypi.org/project/brik64/0.1.0b12/
 
 ---
 
@@ -23,7 +23,7 @@ curl -fsSL https://brik64.com/cli/install.sh | bash
 brik64 --version
 
 # Current public Python SDK beta
-pip install brik64==0.1.0b11
+pip install brik64==0.1.0b12
 ```
 
 Do not treat package installation as CLI installation or a workspace workflow.
@@ -154,7 +154,7 @@ label = eva.cond(
 
 ## Integration Patterns
 
-### Circuit-closed function (methodology without library)
+### Circuit-closed function (practice without library)
 
 ```python
 # Apply circuit thinking — every branch returns, domain guarded
@@ -180,7 +180,7 @@ def safe_divide(a: int, b: int) -> Union[int, str]:
 
 ## Important Distinction
 
-Using `brik64` applies Digital Circuitality **as a methodology** in your Python code:
+Using `brik64` applies Digital Circuitality **as a practice** in your Python code:
 
 - ✅ Bounded arithmetic examples
 - ✅ Explicit crypto operation boundaries
@@ -200,7 +200,7 @@ For PCD guidance, use the current `brik64` skill and docs.brik64.com.
 ## Closure Domains
 
 Every monomer declares its domain: the bounded set of valid inputs and outputs.
-This is methodology guidance for keeping examples explicit and reviewable.
+This is practice guidance for keeping examples explicit and reviewable.
 
 - **Range**: `[0, 255]` for u8 operations
 - **Set**: `{true, false}` for boolean operations  
@@ -208,7 +208,7 @@ This is methodology guidance for keeping examples explicit and reviewable.
 - **Product**: cartesian product for multi-input operations
 
 Without bounded domains, the design remains open-ended. Treat domain notes here
-as methodology guidance, not as a public certification claim.
+as practice guidance, not as a public certification claim.
 
 ### You Are the Circuit Designer
 
