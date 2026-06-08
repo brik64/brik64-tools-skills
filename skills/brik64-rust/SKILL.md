@@ -1,7 +1,7 @@
 ---
 name: brik64-rust
 description: "Historical Rust Digital Circuitality patterns for BRIK64 work. Check docs.brik64.com and the current public brik64 skill before installing crates or making SDK, certification, catalog, or extended-operation claims."
-version: 0.1.0-beta.12-public-reference
+version: 0.1.0-beta.13-public-reference
 ---
 
 # BRIK-64 for Rust
@@ -19,7 +19,7 @@ availability, SDK exports, or CLI behavior as current public truth.
 
 ```toml
 [dependencies]
-brik64-core = "0.1.0-beta.12"
+brik64-core = "0.1.0-beta.13"
 ```
 
 Or via CLI:
