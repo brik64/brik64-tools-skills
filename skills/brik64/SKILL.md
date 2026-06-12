@@ -1,7 +1,7 @@
 ---
 name: brik64
 description: Public BRIK64 operating skill for AI agents using the brik64 CLI, .brik traceability, PCD 1.0, local evidence, and claim-safe workflows. Use when working with BRIK64 projects, PCD files, agent instructions, CLI commands, evidence reports, or public BRIK64 documentation.
-version: 0.1.0-beta.14
+version: 0.1.0-beta.14.1
 triggers:
   - using brik64 CLI
   - BRIK64 project workflow
@@ -20,7 +20,7 @@ helping a user adopt the public BRIK64 CLI beta.
 
 BRIK64 is a local-first workflow for making critical software logic easier to
 inspect, describe, compose, and review with bounded evidence. The current public
-beta surface is `0.1.0-beta.14`. The CLI install channel is curl-only:
+beta surface is `0.1.0-beta.14.1`. The CLI install channel is curl-only:
 `curl -fsSL https://brik64.com/cli/install.sh | bash`. npm, PyPI and crates.io
 are reserved for release-backed SDK packages.
 
@@ -30,7 +30,7 @@ Primary documentation:
 - CLI install: https://docs.brik64.com/cli/install
 - GitHub Release: https://github.com/brik64/brik64-cli/releases
 - JS/TS SDK package: https://www.npmjs.com/package/@brik64/core
-- Python SDK package: https://pypi.org/project/brik64/0.1.0b14/
+- Python SDK package: https://pypi.org/project/brik64/0.1.0b14.post1/
 - Rust SDK package: https://crates.io/crates/brik64-core
 - Public skills repo: https://github.com/brik64/brik64-tools-skills
 
@@ -50,9 +50,11 @@ requirement -> inputs and outputs -> fail-closed behavior -> PCD Blueprint
 Before important work, check the live docs and the public skills repository:
 
 1. Read the relevant page on https://docs.brik64.com.
-2. Check the current `brik64-tools-skills` repository or installed skill version.
-3. Prefer the newer public docs/repo state over stale local notes.
-4. If local instructions conflict with live docs, report the drift and follow the
+2. Run `brik64 --version` when the CLI is installed.
+3. Run `brik64 skill check-version` when available to detect local skill drift.
+4. Check the current `brik64-tools-skills` repository or installed skill version.
+5. Prefer the newer public docs/repo state over stale local notes.
+6. If local instructions conflict with live docs, report the drift and follow the
    more authoritative current public source unless the user provides a stricter
    repo-local policy.
 
@@ -82,16 +84,17 @@ Use the curl installer for the current public CLI beta:
 ```bash
 curl -fsSL https://brik64.com/cli/install.sh | bash
 brik64 --version
+brik64 skill check-version
 brik64 help
 ```
 
 Current version boundary:
 
-- Public CLI version: `0.1.0-beta.14`
+- Public CLI version: `0.1.0-beta.14.1`
 - Runtime banner should be checked with `brik64 --version`.
-- JS/TS SDK package: `@brik64/core@0.1.0-beta.14`
-- Python SDK package: `brik64==0.1.0b14`
-- Rust SDK package: `brik64-core@0.1.0-beta.14`
+- JS/TS SDK package: `@brik64/core@0.1.0-beta.14.1`
+- Python SDK package: `brik64==0.1.0b14.post1`
+- Rust SDK package: `brik64-core@0.1.0-beta.14.1`
 
 Treat runtime output as observed evidence. Treat the installer route and GitHub
 Release as the public CLI surface. Treat npm, PyPI and crates.io as SDK-only
