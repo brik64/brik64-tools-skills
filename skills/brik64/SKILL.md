@@ -21,9 +21,8 @@ helping a user adopt the public BRIK64 CLI beta.
 BRIK64 is a local-first workflow for making critical software logic easier to
 inspect, describe, compose, and review with bounded evidence. The current public
 beta surface is `0.1.0-beta.15`. The CLI install channel is curl-only:
-`curl -fsSL https://brik64.com/cli/install.sh | bash`. npm and PyPI carry
-Beta15 SDK packages. crates.io currently remains on the latest Rust SDK
-baseline until the Beta15 crate publish path is repaired.
+`curl -fsSL https://brik64.com/cli/install.sh | bash`. npm, PyPI, and
+crates.io carry Beta15 SDK packages.
 
 Primary documentation:
 
@@ -95,9 +94,7 @@ Current version boundary:
 - Runtime banner should be checked with `brik64 --version`.
 - JS/TS SDK package: `@brik64/core@0.1.0-beta.15`
 - Python SDK package: `brik64==0.1.0b15`
-- Rust SDK package: `brik64-core@0.1.0-beta.14.6` on crates.io; Beta15 crate
-  publication is blocked until the crates.io publish credential or Trusted
-  Publishing path is repaired.
+- Rust SDK package: `brik64-core@0.1.0-beta.15`
 
 Treat runtime output as observed evidence. Treat the installer route and GitHub
 Release as the public CLI surface. Treat npm, PyPI and crates.io as SDK-only
