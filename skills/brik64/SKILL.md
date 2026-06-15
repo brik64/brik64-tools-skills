@@ -1,7 +1,7 @@
 ---
 name: brik64
 description: Public BRIK64 operating skill for AI agents using the brik64 CLI, .brik traceability, PCD 1.0, local evidence, and claim-safe workflows. Use when working with BRIK64 projects, PCD files, agent instructions, CLI commands, evidence reports, or public BRIK64 documentation.
-version: 0.1.0-beta.15
+version: 0.1.0-beta.15.1
 triggers:
   - using brik64 CLI
   - BRIK64 project workflow
@@ -20,9 +20,9 @@ helping a user adopt the public BRIK64 CLI beta.
 
 BRIK64 is a local-first workflow for making critical software logic easier to
 inspect, describe, compose, and review with bounded evidence. The current public
-beta surface is `0.1.0-beta.15`. The CLI install channel is curl-only:
+beta surface is `0.1.0-beta.15.1`. The CLI install channel is curl-only:
 `curl -fsSL https://brik64.com/cli/install.sh | bash`. npm, PyPI, and
-crates.io carry Beta15 SDK packages.
+crates.io carry SDK packages; Beta15.1 does not require an SDK package update.
 
 Primary documentation:
 
@@ -90,7 +90,7 @@ brik64 help
 
 Current version boundary:
 
-- Public CLI version: `0.1.0-beta.15`
+- Public CLI version: `0.1.0-beta.15.1`
 - Runtime banner should be checked with `brik64 --version`.
 - JS/TS SDK package: `@brik64/core@0.1.0-beta.15`
 - Python SDK package: `brik64==0.1.0b15`
@@ -126,6 +126,7 @@ Rules:
 Use `.brik` as local project metadata for BRIK64 work:
 
 - project manifest;
+- local ledger events under `.brik/ledger/`;
 - decisions and evidence references;
 - local candidate artifacts;
 - update and release notes where supported by the CLI.
@@ -134,9 +135,13 @@ Rules:
 
 - `brik64 init` prepares local BRIK64 metadata.
 - `brik64 init` must not create or modify `AGENTS.md`.
+- `brik64 ledger verify --json` checks local event-chain consistency.
+- `brik64 ledger export --redacted` exports local ledger metadata without raw
+  source, raw PCD content, absolute paths, or secrets.
 - Do not store secrets, raw tokens, private keys, or private source snapshots in
   `.brik`.
-- Treat `.brik` metadata as operational traceability, not as certification.
+- Treat `.brik` metadata and `.brik/ledger` as operational traceability, not as
+  certification or as a distributed blockchain.
 
 ## PCD 1.0 Working Model
 
