@@ -60,7 +60,7 @@ neg       = arithmetic.neg8(1)             # 255
 power     = arithmetic.pow8(2, 7)          # 128 (saturating)
 ```
 
-> Check the installed Beta15 candidate package for exact division-by-zero behavior before
+> Check the installed Beta15 public beta package for exact division-by-zero behavior before
 > publishing behavior-sensitive examples.
 
 ---

@@ -75,7 +75,7 @@ let n     = neg8(1);             // 255
 let p     = pow8(2, 7);          // 128 (saturating)
 ```
 
-> In Beta15 candidate, confirm division-by-zero behavior against the installed crate before
+> In Beta15 public beta, confirm division-by-zero behavior against the installed crate before
 > using it as public documentation. Package installation does not establish
 > CLI installation or workspace workflows.
 
