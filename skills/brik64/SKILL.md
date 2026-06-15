@@ -1,7 +1,7 @@
 ---
 name: brik64
 description: Public BRIK64 operating skill for AI agents using the brik64 CLI, .brik traceability, PCD 1.0, local evidence, and claim-safe workflows. Use when working with BRIK64 projects, PCD files, agent instructions, CLI commands, evidence reports, or public BRIK64 documentation.
-version: 0.1.0-beta.15.1
+version: 0.1.0-beta.15.2
 triggers:
   - using brik64 CLI
   - BRIK64 project workflow
@@ -20,9 +20,10 @@ helping a user adopt the public BRIK64 CLI beta.
 
 BRIK64 is a local-first workflow for making critical software logic easier to
 inspect, describe, compose, and review with bounded evidence. The current public
-beta surface is `0.1.0-beta.15.1`. The CLI install channel is curl-only:
+beta candidate surface is `0.1.0-beta.15.2`. The CLI install channel is curl-only:
 `curl -fsSL https://brik64.com/cli/install.sh | bash`. npm, PyPI, and
-crates.io carry SDK packages; Beta15.1 does not require an SDK package update.
+crates.io carry SDK packages. Treat the live installer output as authoritative
+until Beta15.2 public promotion is complete.
 
 Primary documentation:
 
@@ -90,11 +91,11 @@ brik64 help
 
 Current version boundary:
 
-- Public CLI version: `0.1.0-beta.15.1`
+- Public CLI candidate version: `0.1.0-beta.15.2`
 - Runtime banner should be checked with `brik64 --version`.
-- JS/TS SDK package: `@brik64/core@0.1.0-beta.15`
-- Python SDK package: `brik64==0.1.0b15`
-- Rust SDK package: `brik64-core@0.1.0-beta.15`
+- JS/TS SDK package: `@brik64/core@0.1.0-beta.15` unless the release report says Beta15.2 SDK publication is required.
+- Python SDK package: `brik64==0.1.0b15` unless the release report says Beta15.2 SDK publication is required.
+- Rust SDK package: `brik64-core@0.1.0-beta.15` unless the release report says Beta15.2 SDK publication is required.
 
 Treat runtime output as observed evidence. Treat the installer route and GitHub
 Release as the public CLI surface. Treat npm, PyPI and crates.io as SDK-only
@@ -258,6 +259,24 @@ Avoid:
 ```text
 This proves the whole application is correct.
 ```
+
+## User-Facing UI Language Rule
+
+Do not expose PCD, Polymer, monomer, DTL, ledger, certification, or internal
+engine vocabulary in end-user frontend copy unless the UI is explicitly an
+expert developer console.
+
+For product/application frontends, translate internal BRIK64 concepts into
+domain language:
+
+- `PCD` -> bounded logic, domain rule, validation contract, or review artifact.
+- `ledger` / `DTL` -> local trace, trace history, audit trail, or review state.
+- `certified` / `secured` -> checked, validated for this scope, or traceable.
+- `polymer` -> composed rule set or system rule set.
+
+Keep raw PCD names, hashes, `.brik` paths and command output in expandable
+developer diagnostics, logs, reports, or agent-readable evidence, not in primary
+user-facing labels.
 
 ## Source Authority Order
 
