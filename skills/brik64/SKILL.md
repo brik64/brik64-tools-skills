@@ -1,7 +1,7 @@
 ---
 name: brik64
 description: Public BRIK64 operating skill for AI agents using the brik64 CLI, .brik traceability, PCD 1.0, local evidence, and claim-safe workflows. Use when working with BRIK64 projects, PCD files, agent instructions, CLI commands, evidence reports, or public BRIK64 documentation.
-version: 0.1.0-beta.15.3
+version: 0.1.0-beta.15.4
 triggers:
   - using brik64 CLI
   - BRIK64 project workflow
@@ -20,10 +20,10 @@ helping a user adopt the public BRIK64 CLI beta.
 
 BRIK64 is a local-first workflow for making critical software logic easier to
 inspect, describe, compose, and review with bounded evidence. The current public
-beta candidate surface is `0.1.0-beta.15.3`. The CLI install channel is curl-only:
+beta surface is `0.1.0-beta.15.4`. The CLI install channel is curl-only:
 `curl -fsSL https://brik64.com/cli/install.sh | bash`. npm, PyPI, and
 crates.io carry SDK packages. Treat the live installer output as authoritative
-until Beta15.3 public promotion is complete.
+for the current public beta.
 
 Primary documentation:
 
@@ -45,12 +45,6 @@ requirement -> inputs and outputs -> fail-closed behavior -> PCD Blueprint
 -> EVA structure -> Polymer candidate -> .brik traceability -> local evidence
 -> bounded report
 ```
-
-For application generation, every domain behavior that will be treated as
-BRIK64-governed must be present in the generated/certified BRIK64 artifacts.
-Do not hide business logic in hand-written adapters and then describe the result
-as BRIK64-generated. If a hand-written adapter is unavoidable, label it as
-manual application glue and keep it outside the candidate evidence boundary.
 
 ## Keep The Skill Current
 
@@ -97,11 +91,11 @@ brik64 help
 
 Current version boundary:
 
-- Public CLI candidate version: `0.1.0-beta.15.3`
+- Public CLI version: `0.1.0-beta.15.4`
 - Runtime banner should be checked with `brik64 --version`.
-- JS/TS SDK package: `@brik64/core@0.1.0-beta.15` unless the release report says Beta15.3 SDK publication is required.
-- Python SDK package: `brik64==0.1.0b15` unless the release report says Beta15.3 SDK publication is required.
-- Rust SDK package: `brik64-core@0.1.0-beta.15` unless the release report says Beta15.3 SDK publication is required.
+- JS/TS SDK package: `@brik64/core@0.1.0-beta.15.4`.
+- Python SDK package: `brik64==0.1.0b15.post4` unless the release report says Beta15.4 SDK publication is required.
+- Rust SDK package: `brik64-core@0.1.0-beta.15.4`.
 
 Treat runtime output as observed evidence. Treat the installer route and GitHub
 Release as the public CLI surface. Treat npm, PyPI and crates.io as SDK-only
@@ -164,42 +158,6 @@ Agent checklist for PCD work:
 - Preserve generated files and evidence references.
 - Review generated PCD before using it in a larger composition.
 - Do not claim that a PCD candidate certifies an entire application.
-
-### CORE And EXTENDED Classification
-
-Classify every PCD candidate and polymer candidate by its monomer boundary:
-
-- `CORE`: all referenced monomers are `MC_00` through `MC_63`.
-- `EXTENDED`: at least one referenced monomer is `MC_64` through `MC_127`.
-
-When planning an application, maximize deterministic CORE logic first. Keep CORE
-rule sets and EXTENDED boundary rule sets separate as long as practical:
-
-```text
-core PCDs -> core polymer candidate
-extended PCDs -> extended polymer candidate
-application/system candidate -> core polymer + extended polymer
-```
-
-If a generated project uses EXTENDED monomers, state the boundary explicitly and
-do not describe the whole application as CORE. If a candidate mixes CORE and
-EXTENDED logic, the candidate is EXTENDED.
-
-### Generated Project Quality Bar
-
-For non-trivial projects, require the agent to preserve these outputs:
-
-- source PCD candidates and any `.polymer.pcd` files;
-- generated TypeScript, Python or Rust outputs from the CLI;
-- generated tests emitted with those outputs;
-- `.brik` ledger and evidence references;
-- command transcript or walkthrough showing install, version, certify, verify,
-  emit, test, polymerize, lift preview where used, doctor and adversarial checks.
-
-Generated application code is acceptable only when the BRIK64 CLI produced it or
-when it is explicitly marked as non-certified application glue. Do not patch
-generated output manually to make tests pass; fix the PCD/input/generation path
-or report the CLI defect.
 
 Use docs before writing PCD:
 
