@@ -1,7 +1,7 @@
 ---
 name: brik64-python
 description: "Historical Python Digital Circuitality patterns for BRIK64 work. Check docs.brik64.com and the current public brik64 skill before installing packages or making SDK, certification, catalog, or extended-operation claims."
-version: 0.1.0-beta.16-public-reference
+version: 0.1.0-beta.16.1-public-reference
 ---
 
 # BRIK-64 for Python
@@ -11,7 +11,7 @@ https://docs.brik64.com and the current `brik64` skill before presenting package
 availability, SDK exports, or CLI behavior as current public truth.
 
 **Docs:** https://docs.brik64.com
-**Package:** https://pypi.org/project/brik64/0.1.0b16/
+**Package:** https://pypi.org/project/brik64/0.1.0b16.post1/
 
 ---
 
@@ -23,7 +23,7 @@ curl -fsSL https://brik64.com/cli/install.sh | bash
 brik64 --version
 
 # Current public Python SDK beta
-pip install brik64==0.1.0b16
+pip install brik64==0.1.0b16.post1
 ```
 
 Do not treat package installation as CLI installation or a workspace workflow.
@@ -60,7 +60,7 @@ neg       = arithmetic.neg8(1)             # 255
 power     = arithmetic.pow8(2, 7)          # 128 (saturating)
 ```
 
-> Check the installed Beta16 public beta package for exact division-by-zero behavior before
+> Check the installed Beta16.1 public beta package for exact division-by-zero behavior before
 > publishing behavior-sensitive examples.
 
 ---

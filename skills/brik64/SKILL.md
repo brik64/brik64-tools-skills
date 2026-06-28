@@ -1,7 +1,7 @@
 ---
 name: brik64
 description: Public BRIK64 operating skill for AI agents using the brik64 CLI, .brik traceability, PCD 1.0, local evidence, and claim-safe workflows. Use when working with BRIK64 projects, PCD files, agent instructions, CLI commands, evidence reports, or public BRIK64 documentation.
-version: 0.1.0-beta.16
+version: 0.1.0-beta.16.1
 triggers:
   - using brik64 CLI
   - BRIK64 project workflow
@@ -20,7 +20,8 @@ helping a user adopt the public BRIK64 CLI beta.
 
 BRIK64 is a local-first workflow for making critical software logic easier to
 inspect, describe, compose, and review with bounded evidence. The current public
-beta surface is `0.1.0-beta.16`. The local/offline CLI runtime path is `L4+N5`.
+beta surface is `0.1.0-beta.16.1`. The CLI uses a local/offline runtime for
+free command-line workflows.
 The CLI install channel is curl-only:
 `curl -fsSL https://brik64.com/cli/install.sh | bash`. npm, PyPI, and
 crates.io carry SDK packages. Treat the live installer output as authoritative
@@ -32,7 +33,7 @@ Primary documentation:
 - CLI install: https://docs.brik64.com/cli/install
 - GitHub Release: https://github.com/brik64/brik64-cli/releases
 - JS/TS SDK package: https://www.npmjs.com/package/@brik64/core
-- Python SDK package: https://pypi.org/project/brik64/0.1.0b16/
+- Python SDK package: https://pypi.org/project/brik64/0.1.0b16.post1/
 - Rust SDK package: https://crates.io/crates/brik64-core
 - Public skills repo: https://github.com/brik64/brik64-tools-skills
 
@@ -92,11 +93,11 @@ brik64 help
 
 Current version boundary:
 
-- Public CLI version: `0.1.0-beta.16`
+- Public CLI version: `0.1.0-beta.16.1`
 - Runtime banner should be checked with `brik64 --version`.
-- JS/TS SDK package: `@brik64/core@0.1.0-beta.16`.
-- Python SDK package: `brik64==0.1.0b16` unless the release report says Beta16 SDK publication is required.
-- Rust SDK package: `brik64-core@0.1.0-beta.16`.
+- JS/TS SDK package: `@brik64/core@0.1.0-beta.16.1`.
+- Python SDK package: `brik64==0.1.0b16.post1`.
+- Rust SDK package: `brik64-core@0.1.0-beta.16.1`.
 
 Treat runtime output as observed evidence. Treat the installer route and GitHub
 Release as the public CLI surface. Treat npm, PyPI and crates.io as SDK-only
@@ -104,12 +105,12 @@ channels. If they disagree, report the drift instead of hiding it.
 
 Runtime boundary:
 
-- The free/local CLI path uses `L4+N5` and must work without login after
+- The free/local CLI path uses the local/offline runtime and must work without login after
   installation.
-- `L5+N5` is reserved for future paid/cloud platform workflows and must not be
+- Managed cloud runtime is reserved for future paid/cloud platform workflows and must not be
   presented as the local downloadable engine.
 - Do not mention internal generation factories, self-hosting, fixpoint,
-  formal N5, or toolchain independence as public claims unless the current
+  formal certification, or toolchain independence as public claims unless the current
   docs and fresh release evidence explicitly authorize that wording.
 
 ## Source Lift Preview
